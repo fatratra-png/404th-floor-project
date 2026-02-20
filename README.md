@@ -11,9 +11,9 @@ L’utilisateur est coincé dans un ascenseur glitché et doit réparer chaque �
 
 ## 🚀 Stack
 
-* **HTML5**
-* **Tailwind CSS**
-* **Vanilla JavaScript (sans framework)**
+- **HTML5**
+- **Tailwind CSS**
+- **Vanilla JavaScript (sans framework)**
 
 ---
 
@@ -21,19 +21,19 @@ L’utilisateur est coincé dans un ascenseur glitché et doit réparer chaque �
 
 Chaque étage est une énigme indépendante :
 
-* ⚡ **Panneau électrique** : drag & drop de fusibles dans le DOM
-* 💻 **Terminal d’accès** : validation via un objet JavaScript
-* 🚨 **Frein d’urgence** : marteler une touche pour stabiliser l’ascenseur
-* 🐛 **Debug final** : supprimer des bugs générés dynamiquement
+- ⚡ **Panneau électrique** : drag & drop de fusibles dans le DOM
+- 💻 **Terminal d’accès** : validation via un objet JavaScript
+- 🚨 **Frein d’urgence** : marteler une touche pour stabiliser l’ascenseur
+- 🐛 **Debug final** : supprimer des bugs générés dynamiquement
 
 ---
 
 ## 🧠 Techniques utilisées
 
-* Manipulation DOM (`appendChild`, `createElement`, `remove`)
-* Events (`click`, `keydown`, `drag & drop`)
-* `localStorage` pour la progression
-* Animations Tailwind CSS
+- Manipulation DOM (`appendChild`, `createElement`, `remove`)
+- Events (`click`, `keydown`, `drag & drop`)
+- `localStorage` pour la progression
+- Animations Tailwind CSS
 
 ---
 
