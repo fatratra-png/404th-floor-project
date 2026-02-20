@@ -1,3 +1,4 @@
+Parfait 👍 Je te fais **une petite documentation courte, clean et pro pour ton README.md** (pas trop longue, juste efficace).
 
 
 ---
@@ -25,7 +26,6 @@ Chaque étage est une énigme indépendante :
 * 💻 **Terminal d’accès** : validation via un objet JavaScript
 * 🚨 **Frein d’urgence** : marteler une touche pour stabiliser l’ascenseur
 * 🐛 **Debug final** : supprimer des bugs générés dynamiquement
-
 ---
 
 ## 🧠 Techniques utilisées
