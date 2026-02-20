@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Floor 4 // Final Debug</title>
+    <link rel="stylesheet" href="src/styles/output.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ── Root & Variables ── */
+      :root {
+        --red: #ef4444;
+        --red-d: #991b1b;
+        --orange: #f97316;
+        --blue: #3b82f6;
+        --green: #22c55e;
+        --bg: #080b0f;
+        --panel: #0c1018;
+        --border: #1a2030;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Share Tech Mono", monospace;
+        background: var(--bg);
+        color: #94a3b8;
+        height: 100vh;
+        overflow: hidden;
+        cursor: crosshair;
+      }
+
+      /* Scanlines */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 3px,
+          rgba(0, 0, 0, 0.07) 3px,
+          rgba(0, 0, 0, 0.07) 4px
+        );
+        pointer-events: none;
+        z-index: 1000;
+      }
+
+      /* Red vignette glow */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(
+          ellipse 80% 80% at 50% 50%,
+          transparent 60%,
+          rgba(239, 68, 68, 0.06) 100%
+        );
+        pointer-events: none;
+        z-index: 998;
+      }
+
+      /* ── Topbar ── */
+      #floor4-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 52px;
+        padding: 0 1.25rem;
+        background: var(--panel);
+        border-bottom: 1px solid var(--border);
+        position: relative;
+        z-index: 50;
+      }
+
+      .topbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .brand-icon {
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--border);
+        background: rgba(59, 130, 246, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        font-size: 1rem;
+      }
+
+      .brand-name {
+        font-family: "Orbitron", monospace;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #e2e8f0;
+        letter-spacing: 0.05em;
+      }
+
+      .brand-sub {
+        font-size: 0.6rem;
+        color: var(--red);
+        letter-spacing: 0.12em;
+        animation: flicker 2s step-end infinite;
+      }
+
+      /* Progress section */
+      .topbar-progress {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        flex: 1;
+        max-width: 420px;
+        margin: 0 2rem;
+      }
+
+      .progress-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.6rem;
+        letter-spacing: 0.12em;
+      }
+
+      .progress-label-text {
+        color: var(--blue);
+      }
+      .progress-label-pct {
+        color: #475569;
+      }
+
+      .progress-track {
+        height: 4px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      #f4-progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--blue), var(--green));
+        border-radius: 2px;
+        transition: width 0.3s ease;
+      }
+
+      /* Bug counter badge */
+      .bug-counter-badge {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(239, 68, 68, 0.15);
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        padding: 0.4rem 0.85rem;
+        border-radius: 4px;
+      }
+
+      .bug-counter-badge-icon {
+        font-size: 1rem;
+        animation: pulse-red 1s ease-in-out infinite;
+      }
+
+      .bug-counter-badge-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0;
+      }
+
+      .bug-counter-badge-label {
+        font-size: 0.5rem;
+        color: #94a3b8;
+        letter-spacing: 0.15em;
+      }
+
+      #f4-bugs-remaining {
+        font-family: "Orbitron", monospace;
+        font-size: 1.3rem;
+        font-weight: 900;
+        color: var(--red);
+        line-height: 1;
+      }
+
+      .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .icon-btn {
+        width: 34px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: #64748b;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 1rem;
+        transition: all 0.15s;
+      }
+      .icon-btn:hover {
+        border-color: var(--blue);
+        color: var(--blue);
+      }
+
+      /* ── Main Layout ── */
+      #floor4-main {
+        display: grid;
+        grid-template-columns: 220px 1fr 380px;
+        height: calc(100vh - 52px);
+      }
+
+      /* ── LEFT SIDEBAR ── */
+      #f4-controls {
+        border-right: 1px solid var(--border);
+        background: var(--panel);
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .controls-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .controls-title {
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        color: #64748b;
+      }
+
+      .controls-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--red);
+        animation: blink 0.8s step-end infinite;
+      }
+
+      .control-btn-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+      }
+
+      .control-btn {
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.02);
+        padding: 0.6rem;
+        border-radius: 2px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.15s;
+        font-family: "Share Tech Mono", monospace;
+      }
+
+      .control-btn:hover {
+        border-color: var(--blue);
+        background: rgba(59, 130, 246, 0.05);
+      }
+
+      .control-btn-icon {
+        font-size: 1.1rem;
+        display: block;
+        margin-bottom: 0.2rem;
+      }
+      .control-btn-label {
+        font-size: 0.55rem;
+        letter-spacing: 0.1em;
+        color: #64748b;
+      }
+
+      .emergency-btn {
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        background: rgba(239, 68, 68, 0.05);
+        padding: 0.6rem;
+        border-radius: 2px;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.6rem;
+        letter-spacing: 0.15em;
+        color: var(--red);
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .emergency-btn:hover {
+        background: rgba(239, 68, 68, 0.1);
+      }
+
+      .locked-btn {
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.01);
+        padding: 0.5rem;
+        border-radius: 2px;
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        color: #334155;
+        text-align: center;
+        cursor: not-allowed;
+      }
+
+      /* ── ARENA (CENTER) ── */
+      #f4-arena {
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            ellipse 50% 40% at 50% 50%,
+            rgba(239, 68, 68, 0.03) 0%,
+            transparent 70%
+          ),
+          var(--bg);
+      }
+
+      /* Big "404" watermark */
+      .arena-watermark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: "Orbitron", monospace;
+        font-size: 9rem;
+        font-weight: 900;
+        color: rgba(239, 68, 68, 0.06);
+        letter-spacing: 0.05em;
+        pointer-events: none;
+        user-select: none;
+        border: 4px solid rgba(239, 68, 68, 0.06);
+        padding: 0.5rem 1rem;
+        white-space: nowrap;
+      }
+
+      /* "undefined" ghost text */
+      .arena-ghost {
+        position: absolute;
+        bottom: 15%;
+        left: 8%;
+        font-family: "Orbitron", monospace;
+        font-size: 3rem;
+        font-weight: 900;
+        color: rgba(239, 68, 68, 0.04);
+        pointer-events: none;
+        user-select: none;
+      }
+
+      /* Bug elements */
+      .bug-entity {
+        position: absolute;
+        cursor: pointer;
+        user-select: none;
+        z-index: 10;
+      }
+
+      /* Floating animation for bugs */
+      @keyframes bugFloat {
+        from {
+          transform: translateY(0px) rotate(-1deg);
+        }
+        to {
+          transform: translateY(-8px) rotate(1deg);
+        }
+      }
+
+      /* ── RIGHT SIDEBAR — sys monitor ── */
+      #f4-syslog {
+        border-left: 1px solid var(--border);
+        background: var(--panel);
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+      }
+
+      .syslog-window {
+        flex: 1;
+        margin: 1rem;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .syslog-titlebar {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.75rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .syslog-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+
+      .syslog-filename {
+        font-size: 0.6rem;
+        color: #64748b;
+        letter-spacing: 0.1em;
+        margin-left: 0.25rem;
+      }
+
+      .syslog-body {
+        flex: 1;
+        padding: 0.75rem;
+        overflow-y: auto;
+        background: #020406;
+        font-size: 0.65rem;
+        line-height: 1.8;
+      }
+
+      .syslog-body::-webkit-scrollbar {
+        width: 3px;
+      }
+      .syslog-body::-webkit-scrollbar-thumb {
+        background: #1e2530;
+      }
+
+      .log-line {
+        display: block;
+        margin-bottom: 0.15rem;
+      }
+
+      .log-line::before {
+        content: "> ";
+        color: #1e3a5f;
+      }
+
+      .log-normal {
+        color: #64748b;
+      }
+      .log-warning {
+        color: var(--orange);
+      }
+      .log-error {
+        color: var(--red);
+      }
+      .log-success {
+        color: var(--green);
+      }
+      .log-info {
+        color: var(--blue);
+      }
+
+      .log-cursor {
+        display: inline-block;
+        width: 7px;
+        height: 12px;
+        background: var(--blue);
+        vertical-align: middle;
+        animation: blink 1s step-end infinite;
+      }
+
+      /* Syslog bottom stat */
+      .syslog-stats {
+        padding: 0.75rem 1rem;
+        border-top: 1px solid var(--border);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+      }
+
+      .syslog-stat {
+        font-size: 0.55rem;
+        letter-spacing: 0.1em;
+      }
+
+      .syslog-stat-label {
+        color: #334155;
+      }
+      .syslog-stat-value {
+        color: #64748b;
+        margin-top: 0.15rem;
+      }
+
+      /* ── Animations ── */
+      @keyframes pulse-red {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes flicker {
+        0%,
+        96%,
+        100% {
+          opacity: 1;
+        }
+        97% {
+          opacity: 0.2;
+        }
+        98% {
+          opacity: 1;
+        }
+        99% {
+          opacity: 0.5;
+        }
+      }
+
+      @keyframes bugPop {
+        0% {
+          transform: scale(0) rotate(-10deg);
+          opacity: 0;
+        }
+        60% {
+          transform: scale(1.15) rotate(3deg);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1) rotate(0deg);
+          opacity: 1;
+        }
+      }
+
+      @keyframes bugKill {
+        0% {
+          transform: scale(1) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(0) rotate(45deg);
+          opacity: 0;
+        }
+      }
+
+      /* ── Victory Overlay ── */
+      #f4-complete-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.92);
+        z-index: 600;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1.5rem;
+        animation: fadeIn 0.6s ease;
+      }
+
+      #f4-complete-overlay.show {
+        display: flex;
+      }
+
+      .victory-glow {
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(34, 197, 94, 0.15) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      .victory-title {
+        font-family: "Orbitron", monospace;
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: var(--green);
+        letter-spacing: 0.15em;
+        text-shadow:
+          0 0 40px var(--green),
+          0 0 80px rgba(34, 197, 94, 0.3);
+        position: relative;
+      }
+
+      .victory-sub {
+        font-size: 0.7rem;
+        color: #475569;
+        letter-spacing: 0.2em;
+        position: relative;
+      }
+
+      .victory-stats {
+        display: flex;
+        gap: 2rem;
+        position: relative;
+      }
+
+      .victory-stat {
+        text-align: center;
+        border: 1px solid rgba(34, 197, 94, 0.2);
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+      }
+
+      .victory-stat-val {
+        font-family: "Orbitron", monospace;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--green);
+      }
+
+      .victory-stat-label {
+        font-size: 0.55rem;
+        color: #475569;
+        letter-spacing: 0.15em;
+        margin-top: 0.25rem;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ═══════════════════════════════════════════
+       TOPBAR
+  ═══════════════════════════════════════════ -->
+    <div id="floor4-topbar">
+      <!-- Brand -->
+      <div class="topbar-brand">
+        <div class="brand-icon">🖥</div>
+        <div>
+          <div class="brand-name">THE 404TH FLOOR</div>
+          <div class="brand-sub">● CRITICAL_FAILURE</div>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div class="topbar-progress">
+        <div class="progress-label">
+          <span class="progress-label-text">DEBUG SEQUENCE IN PROGRESS</span>
+          <span class="progress-label-pct" id="f4-pct-label">0% Cleared</span>
+        </div>
+        <div class="progress-track">
+          <div id="f4-progress-bar"></div>
+        </div>
+      </div>
+
+      <!-- Bug counter -->
+      <div style="display: flex; align-items: center; gap: 0.75rem">
+        <div class="bug-counter-badge">
+          <span class="bug-counter-badge-icon">🐛</span>
+          <div class="bug-counter-badge-info">
+            <span class="bug-counter-badge-label">BUGS REMAINING</span>
+            <span id="f4-bugs-remaining">20</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <button class="icon-btn" onclick="Sounds && Sounds.toggleMute()">
+            🔊
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+       MAIN GRID
+  ═══════════════════════════════════════════ -->
+    <div id="floor4-main">
+      <!-- ───────── LEFT: CONTROLS ───────── -->
+      <div id="f4-controls">
+        <div class="controls-header">
+          <span class="controls-title">CONTROLS</span>
+          <div class="controls-dot"></div>
+        </div>
+
+        <div class="control-btn-row">
+          <div class="control-btn">
+            <span class="control-btn-icon">📂</span>
+            <span class="control-btn-label">OPEN</span>
+          </div>
+          <div class="control-btn">
+            <span class="control-btn-icon">✖</span>
+            <span class="control-btn-label">CLOSE</span>
+          </div>
+        </div>
+
+        <div class="emergency-btn">
+          <span>✳</span>
+          EMERGENCY
+        </div>
+
+        <div class="locked-btn">🔒 SYSTEM_LOCKED</div>
+      </div>
+
+      <!-- ───────── CENTER: ARENA ───────── -->
+      <div id="f4-arena">
+        <!-- Watermark 404 -->
+        <div class="arena-watermark">404</div>
+        <!-- Ghost text -->
+        <div class="arena-ghost">undefined</div>
+        <!-- Bugs injected here by floor4.js via appendChild -->
+      </div>
+
+      <!-- ───────── RIGHT: SYS MONITOR ───────── -->
+      <div id="f4-syslog">
+        <div class="syslog-window">
+          <div class="syslog-titlebar">
+            <div class="syslog-dot" style="background: #ef4444"></div>
+            <div class="syslog-dot" style="background: #eab308"></div>
+            <div class="syslog-dot" style="background: #22c55e"></div>
+            <span class="syslog-filename">sys_monitor.log</span>
+          </div>
+
+          <div class="syslog-body" id="f4-syslog-body">
+            <span class="log-line log-normal"
+              >Initiating purge sequence...</span
+            >
+            <span class="log-line log-normal">Scanning sector 4...</span>
+            <span class="log-line log-error"
+              >ERROR: Multiple entities detected.</span
+            >
+            <span class="log-line log-warning"
+              >WARNING: Memory corruption at 0x004F.</span
+            >
+            <span class="log-line log-info"
+              >Waiting for user input... <span class="log-cursor"></span
+            ></span>
+          </div>
+        </div>
+
+        <div class="syslog-stats">
+          <div class="syslog-stat">
+            <div class="syslog-stat-label">SECTOR</div>
+            <div class="syslog-stat-value">0x004F</div>
+          </div>
+          <div class="syslog-stat">
+            <div class="syslog-stat-label">ENTITIES</div>
+            <div class="syslog-stat-value" id="f4-stat-entities">20</div>
+          </div>
+          <div class="syslog-stat">
+            <div class="syslog-stat-label">PURGED</div>
+            <div class="syslog-stat-value" id="f4-stat-purged">0</div>
+          </div>
+          <div class="syslog-stat">
+            <div class="syslog-stat-label">STATUS</div>
+            <div
+              class="syslog-stat-value"
+              style="color: var(--red)"
+              id="f4-stat-status"
+            >
+              ACTIVE
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+       VICTORY OVERLAY
+  ═══════════════════════════════════════════ -->
+    <div id="f4-complete-overlay">
+      <div class="victory-glow"></div>
+      <div class="victory-title">SYSTEM PURGED</div>
+      <div class="victory-sub">ALL ENTITIES ELIMINATED — ELEVATOR RESTORED</div>
+      <div class="victory-stats">
+        <div class="victory-stat">
+          <div class="victory-stat-val" id="victory-killed">0</div>
+          <div class="victory-stat-label">BUGS KILLED</div>
+        </div>
+        <div class="victory-stat">
+          <div class="victory-stat-val">404</div>
+          <div class="victory-stat-label">FLOOR ID</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════════ -->
+    <script src="src/audio/sounds.js"></script>
+    <script src="src/floors/floor4.js"></script>
+
+    <script>
+      // ── Boot ──
+      document.addEventListener("DOMContentLoaded", () => {
+        Floor4.init();
+        startSyslogTicker();
+      });
+
+      // ── Écoute complétion ──
+      document.addEventListener("floor:complete", (e) => {
+        if (e.detail.floor === 4) {
+          document.getElementById("victory-killed").textContent = 20;
+          const overlay = document.getElementById("f4-complete-overlay");
+          overlay.classList.add("show");
+          console.log("[M4] Floor 4 complete → GAME OVER (victoire)");
+        }
+      });
+
+      // ── Syslog ticker dynamique ──
+      function startSyslogTicker() {
+        const logBody = document.getElementById("f4-syslog-body");
+        const messages = [
+          { cls: "log-error", text: "ALERT: Entity spawned at random node." },
+          { cls: "log-warning", text: "WARNING: DOM integrity compromised." },
+          { cls: "log-info", text: "Purge protocol active..." },
+          { cls: "log-normal", text: "Scanning memory sectors..." },
+          { cls: "log-error", text: "ERROR: NaN detected at Elevator.js:404" },
+          { cls: "log-success", text: "Entity removed from tree." },
+          { cls: "log-warning", text: "WARNING: Stack overflow imminent." },
+          { cls: "log-info", text: "Awaiting manual debug..." },
+        ];
+
+        let i = 0;
+        setInterval(() => {
+          const cursor = logBody.querySelector(".log-cursor");
+          if (cursor) cursor.closest(".log-line")?.remove();
+
+          const msg = messages[i % messages.length];
+          const line = document.createElement("span");
+          line.className = `log-line ${msg.cls}`;
+          line.textContent = msg.text;
+          logBody.appendChild(line);
+
+          // Curseur
+          const cursorLine = document.createElement("span");
+          cursorLine.className = "log-line log-info";
+          cursorLine.innerHTML =
+            'Awaiting user action... <span class="log-cursor"></span>';
+          logBody.appendChild(cursorLine);
+
+          logBody.scrollTop = logBody.scrollHeight;
+          i++;
+        }, 2200);
+      }
+
+      // ── Sync stats sidebar depuis floor4.js ──
+      // On override updateCounter pour sync les stats
+      const _origInit = Floor4.init;
+
+      // Patch : MutationObserver sur l'arène pour sync le sidebar
+      const observer = new MutationObserver(() => {
+        const arena = document.getElementById("f4-arena");
+        const remaining = arena.querySelectorAll('[id^="bug-"]').length;
+        const total = 20;
+        const purged = total - remaining;
+
+        const elEntities = document.getElementById("f4-stat-entities");
+        const elPurged = document.getElementById("f4-stat-purged");
+        const elStatus = document.getElementById("f4-stat-status");
+
+        if (elEntities) elEntities.textContent = remaining;
+        if (elPurged) elPurged.textContent = purged;
+        if (elStatus) {
+          if (remaining === 0) {
+            elStatus.textContent = "PURGED";
+            elStatus.style.color = "#22c55e";
+          } else if (purged > 10) {
+            elStatus.textContent = "CRITICAL";
+          } else {
+            elStatus.textContent = "ACTIVE";
+          }
+        }
+      });
+
+      const arena = document.getElementById("f4-arena");
+      if (arena) {
+        observer.observe(arena, { childList: true, subtree: false });
+      }
+    </script>
+  </body>
+</html>
