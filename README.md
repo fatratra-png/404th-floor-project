@@ -26,3 +26,4 @@ L'Objectif UX : Créer une expérience "tactile" et intuitive où chaque action 
  * M2 : Le Designer (Tailwind & Motion) : S'occupe de l'aspect visuel de l'ascenseur, des vibrations (shake) et de la cohérence UI.
  * M3 : Le Dev A (Logique Drag/Drop) : Code l'étage 1 (Fusibles) et l'étage 2 (Terminal/Profils).
  * M4 : Le Dev B (Logique Events/Audio) : Code l'étage 3 (Frein), l'étage 4 (Bugs) et intègre les effets sonores (clics, dings).
+Test PR badge
