@@ -91,7 +91,7 @@ dropZones.forEach(zone => {
     zone.classList.add(
       "border-primary",
       "bg-slate-900/80",
-      "shadow-[0_0_20px_rgba(19,91,236,0.3)]"
+      "shadow-[0_0_20px_rgba(19,91,236,0.3)]",
     );
   });
 
@@ -99,7 +99,7 @@ dropZones.forEach(zone => {
     zone.classList.remove(
       "border-primary",
       "bg-slate-900/80",
-      "shadow-[0_0_20px_rgba(19,91,236,0.3)]"
+      "shadow-[0_0_20px_rgba(19,91,236,0.3)]",
     );
   });
 
