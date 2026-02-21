@@ -1,4 +1,4 @@
-Parfait 👍 Je te fais **une petite documentation courte, clean et pro pour ton README.md** (pas trop longue, juste efficace).
+
 
 ---
 
