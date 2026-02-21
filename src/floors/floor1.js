@@ -1,5 +1,5 @@
 /*compteur*/
-let s = 4*3600 + 59*60 + 2;
+let s = 4 * 3600 + 59 * 60 + 2;
 const el = document.getElementById("counter");
 
 setInterval(() => {
@@ -15,21 +15,20 @@ const dropZones = document.querySelectorAll(".border-dashed"); // TOUTES les zon
 let dragged = null;
 
 // Drag start
-fuses.forEach(f => {
+fuses.forEach((f) => {
   f.addEventListener("dragstart", () => {
     dragged = f;
   });
 });
 
 // Drag & drop
-dropZones.forEach(zone => {
-
-  zone.addEventListener("dragover", e => {
+dropZones.forEach((zone) => {
+  zone.addEventListener("dragover", (e) => {
     e.preventDefault();
     zone.classList.add(
       "border-primary",
       "bg-slate-900/80",
-      "shadow-[0_0_20px_rgba(19,91,236,0.3)]"
+      "shadow-[0_0_20px_rgba(19,91,236,0.3)]",
     );
   });
 
@@ -37,13 +36,14 @@ dropZones.forEach(zone => {
     zone.classList.remove(
       "border-primary",
       "bg-slate-900/80",
-      "shadow-[0_0_20px_rgba(19,91,236,0.3)]"
+      "shadow-[0_0_20px_rgba(19,91,236,0.3)]",
     );
-  });});
+  });
+});
 
-    // Drag & drop sans clone
-dropZones.forEach(zone => {
-  zone.addEventListener("drop", e => {
+// Drag & drop sans clone
+dropZones.forEach((zone) => {
+  zone.addEventListener("drop", (e) => {
     e.preventDefault();
     if (!dragged) return;
 
@@ -69,19 +69,21 @@ dropZones.forEach(zone => {
       "justify-center",
       "relative",
       "overflow-hidden",
-      "group-hover:brightness-110"
+      "group-hover:brightness-110",
     );
 
     // Scan line
     const scanLine = document.createElement("div");
-    scanLine.className = "absolute w-full h-1 top-0 left-0 animate-[scan_2s_ease-in-out_infinite] bg-white/30";
+    scanLine.className =
+      "absolute w-full h-1 top-0 left-0 animate-[scan_2s_ease-in-out_infinite] bg-white/30";
     fuseDropped.appendChild(scanLine);
 
     // Sparks
     const sparkContainer = document.createElement("div");
     sparkContainer.className = "absolute -right-2 -top-2";
     const spark = document.createElement("span");
-    spark.className = "material-symbols-outlined text-accent-yellow text-sm animate-ping opacity-75";
+    spark.className =
+      "material-symbols-outlined text-accent-yellow text-sm animate-ping opacity-75";
     spark.textContent = "flash_on";
     sparkContainer.appendChild(spark);
     fuseDropped.appendChild(sparkContainer);
@@ -93,7 +95,7 @@ dropZones.forEach(zone => {
     zone.classList.remove(
       "border-primary",
       "bg-slate-900/80",
-      "shadow-[0_0_20px_rgba(19,91,236,0.3)]"
+      "shadow-[0_0_20px_rgba(19,91,236,0.3)]",
     );
 
     // Mettre à jour la barre et le status
@@ -119,15 +121,14 @@ function updateVoltage() {
     if (statusEl) {
       statusEl.textContent = "ONLINE";
       statusEl.classList.add("text-green-500", "font-bold"); // optionnel : couleur verte
-    }}
+    }
+  }
 }
 
 // Exemple : ajouter une fuse
 
-
-
-dropZones.forEach(zone => {
-  zone.addEventListener("drop", e => {
+dropZones.forEach((zone) => {
+  zone.addEventListener("drop", (e) => {
     e.preventDefault();
     if (!dragged) return;
 
@@ -153,19 +154,21 @@ dropZones.forEach(zone => {
       "justify-center",
       "relative",
       "overflow-hidden",
-      "group-hover:brightness-110"
+      "group-hover:brightness-110",
     );
 
     // Scan line
     const scanLine = document.createElement("div");
-    scanLine.className = "absolute w-full h-1 top-0 left-0 animate-[scan_2s_ease-in-out_infinite] bg-white/30";
+    scanLine.className =
+      "absolute w-full h-1 top-0 left-0 animate-[scan_2s_ease-in-out_infinite] bg-white/30";
     fuseClone.appendChild(scanLine);
 
     // Sparks
     const sparkContainer = document.createElement("div");
     sparkContainer.className = "absolute -right-2 -top-2";
     const spark = document.createElement("span");
-    spark.className = "material-symbols-outlined text-accent-yellow text-sm animate-ping opacity-75";
+    spark.className =
+      "material-symbols-outlined text-accent-yellow text-sm animate-ping opacity-75";
     spark.textContent = "flash_on";
     sparkContainer.appendChild(spark);
     fuseClone.appendChild(sparkContainer);
@@ -181,7 +184,7 @@ dropZones.forEach(zone => {
     zone.classList.remove(
       "border-primary",
       "bg-slate-900/80",
-      "shadow-[0_0_20px_rgba(19,91,236,0.3)]"
+      "shadow-[0_0_20px_rgba(19,91,236,0.3)]",
     );
   });
 });
