@@ -107,7 +107,7 @@
         </div>
 
         <button
-          class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-blue-600 transition-colors shadow-[0_0_15px_rgba(19,91,236,0.5)]"
+          class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-blue-600 transition-colors shadow-[0_0_15px_rgba(19,91,236,0.5)]" id="rebootButton"
         >
           <span class="material-symbols-outlined mr-2 text-[18px]"
             >engineering</span
@@ -131,7 +131,7 @@
       <aside
         class="w-80 flex-shrink-0 border-r border-border-dark bg-panel-dark/50 backdrop-blur-sm p-6 flex flex-col z-10"
       >
-        <div class="mb-6">
+        <div class="mb-6 cursor-pointer" id="inventory">
           <h3 class="text-white text-xl font-bold mb-1 flex items-center gap-2">
             <span class="material-symbols-outlined text-primary"
               >inventory_2</span
@@ -144,7 +144,7 @@
         </div>
 
         <!-- Fuse Container -->
-        <div class="flex-1 overflow-y-auto pr-2 space-y-4">
+        <div class="flex-1 overflow-y-auto pr-2 space-y-4 hidden" id="inventoryContainer">
           <!-- Fuse Item: Type A -->
           <div
             draggable="true"
@@ -324,8 +324,11 @@
 
         <!-- Circuit Board Container -->
         <div
-          class="relative w-full max-w-4xl aspect-[16/9] bg-[#1a1f2c] rounded-xl border-2 border-slate-600 shadow-2xl p-8 overflow-hidden group"
+          class="relative w-full max-w-4xl aspect-[16/9] bg-[#1a1f2c] rounded-xl border-2 border-slate-600 shadow-2xl p-8 overflow-hidden group" id="panel"
         >
+        <!-- Rideaux métalliques -->
+        <div id="curtainTop" class="absolute top-0 left-0 w-full h-0 bg-slate-800 z-50"></div>
+        <div id="curtainBottom" class="absolute bottom-0 left-0 w-full h-0 bg-slate-800 z-50"></div>
           <!-- Circuit Background Image/Pattern -->
           <div
             class="absolute inset-0 opacity-20 pointer-events-none"
@@ -483,19 +486,19 @@
               class="mt-8 border-t border-slate-700 pt-4 flex justify-between items-center"
             >
               <div class="flex gap-4">
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 NODE_A">
                   <div class="w-2 h-2 rounded-full bg-slate-600"></div>
                   <span class="text-xs text-slate-400 font-mono">NODE_A</span>
                 </div>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 NODE_B">
                   <div
-                    class="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_5px_#135bec]"
+                    class="w-2 h-2 rounded-full bg-slate-600"
                   ></div>
-                  <span class="text-xs text-primary font-bold font-mono"
+                  <span class="text-xs text-slate-400 font-mono"
                     >NODE_B</span
                   >
                 </div>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 NODE_C">
                   <div class="w-2 h-2 rounded-full bg-slate-600"></div>
                   <span class="text-xs text-slate-400 font-mono">NODE_C</span>
                 </div>
