@@ -1,30 +1,61 @@
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("technician-id");
   const buttons = document.querySelectorAll("button");
-
+  const terminal = document.querySelector(".terminal");
+  const elevator = document.querySelector(".elevator");
+  const elevator1 = document.querySelector(".elevatorIndicator");
+  const overlay = document.querySelector("#black-overlay");
   const system = {
     validId: "8492",
     diagnosticOverride: false,
     validate(id) {
-      if (this.diagnosticOverride) return true; // override actif : toujours correct
       return id === this.validId;
     },
   };
-  function updateStatus(success) {
+
+function playElevator() {
+  elevator.classList.add("elevator-start");
+
+  setTimeout(() => {
+    elevator.classList.remove("elevator-start");
+    elevator.classList.add("elevator-moving");
+    elevator1.classList.remove("elevator-start");
+    elevator1.classList.add("elevator-moving");
+    
+  }, 400);
+  setTimeout(() => {
+    overlay.classList.add("fade-black");
+  }, 2500);
+  setTimeout(() => {
+    elevator1.classList.remove("elevator-moving");
+    elevator1.classList.add("elevator-stop");
+  }, 4000);
+  
+  setTimeout(() => {
+    elevator1.classList.remove("elevator-stop");
+  }, 300);
+  
+}
+  function updateStatus() {
     const lockIcon = document.getElementById("lock-icon");
     const indicator = document.getElementById("status-light");
 
-    if (success) {
+    if (input.value === system.validId) {
       input.value = "ACCESS_GRANTED";
       input.classList.remove("text-red-500");
       input.classList.add("text-green-500", "font-bold");
-      lockIcon.textContent = "lock_open";   // icône cadenas ouvert
+      lockIcon.textContent = "lock_open"; 
     lockIcon.classList.remove("text-slate-600");
-    lockIcon.classList.add("text-green-500"); // vert
-
+    lockIcon.classList.add("text-green-500");
       indicator.classList.remove("bg-red-500");
       indicator.classList.add("bg-green-500");
       localStorage.setItem("floor2", "completed");
+      setTimeout(() => {
+        terminal.classList.add("scale-0");
+      },1000);
+      setTimeout(() => {
+        playElevator();
+      }, 2000);
     } else {
       input.value = "ACCESS_DENIED";
       input.classList.remove("text-green-500");
@@ -42,8 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      // Récupère le texte pertinent du bouton.
-      // Priorité : span qui contient un chiffre, sinon premier span non-icône, sinon texte du bouton.
       let value = "";
       const spans = btn.querySelectorAll("span");
       if (spans.length) {
@@ -56,30 +85,32 @@ document.addEventListener("DOMContentLoaded", () => {
         value = btn.textContent.trim();
       }
 
-      // Si on a trouvé un chiffre quelque part dans la valeur, on l'ajoute (seulement 1 caractère)
       const digitMatch = value.match(/\d/);
       if (digitMatch) {
         if (input.value.length < 4) input.value += digitMatch[0];
       }
 
-      // Backspace (icône) — on teste aussi le texte 'backspace' dans le contenu
       if (btn.innerHTML.includes("backspace") || value.toLowerCase().includes("backspace")) {
         input.value = input.value.slice(0, -1);
       }
 
-      // Enter / submit
       if (btn.innerHTML.includes("keyboard_return") || value.toLowerCase().includes("keyboard_return") || value.toLowerCase().includes("enter")) {
         updateStatus(system.validate(input.value));
       }
       const passwdBtn = document.getElementById("password");
-      // Diagnostic override (texte sur le bouton)
       if (value.toLowerCase().includes("diagnostic override")) {
         system.diagnosticOverride = !system.diagnosticOverride;
-        btn.classList.toggle("bg-yellow-500");
-        btn.classList.toggle("bg-gray-300");
         btn.textContent = system.diagnosticOverride ? "Diagnostic Override: ON" : "Diagnostic Override: OFF";
-        btn.style.pointerEvents = "none"; // Empêche les clics rapides de causer des problèmes
-        passwdBtn.style.display = system.diagnosticOverride ? "block" : "none"; // Affiche le bouton de mot de passe si override activé
+        passwdBtn.style.display = system.diagnosticOverride ? "block" : "none";
+        btn.classList.remove("bg-slate-800", "hover:bg-slate-700", "bg-gray-300");
+        if (system.diagnosticOverride) {
+          btn.classList.add("bg-yellow-500");
+          btn.classList.remove("text-slate-300");
+          btn.classList.add("text-black");
+        } else {
+          btn.classList.remove("bg-yellow-500");
+          btn.classList.add("bg-slate-800", "text-slate-300");
+        }
         }
     });
   });
@@ -94,4 +125,4 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Enter") updateStatus(system.validate(input.value));
   });
 });
-// Exemple : status peut changer dynamiquement
+

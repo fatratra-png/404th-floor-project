@@ -18,7 +18,7 @@
       rel="stylesheet"
     />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link rel="stylesheet" href="/src/styles/floor2.css" />
+    <link rel="stylesheet" href="src/styles/floor2.css" />
     <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -55,13 +55,15 @@
     class="bg-background-dark text-slate-100 font-display min-h-screen overflow-x-hidden overflow-y-auto selection:bg-primary selection:text-white"
   >
     <!-- Ambient Background Layer -->
-    <div
-      class="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 grayscale-[20%]"
+    <div 
+      class="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 grayscale-[20%] elevator"
       data-alt="Dark industrial elevator interior with metal walls and exposed wires"
       style="
         background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCI_0Gr8f4QFrbt9r_VT5AmJdQ-uNAyJA4FsTi-ucmzZlub1rRy-U7X1B3qaIFimAh4IIlpvkXojzvOO0wsXyJSrLSRwXvm_G8tCDsxwCFixGHwc5uvgWIEVAJ9XjughEvUiZWb_htR9naldJ9VsUAz4GHLxFMY1UTCaBLaPRtMMIQjeBHyVg-DAWLwOVZ7vCA3fi_wz_nSVB9nIZvzNdzzyBYw9fQFegodhOl1Bjm42oo7s5elr51E9asmc2D7kGWtE6FHjpfboA5t&quot;);
       "
-    ></div>
+    >
+    <div id="black-overlay" class="absolute inset-0 bg-black opacity-0 pointer-events-none"></div>
+  </div>
     
     <!-- Clue Element (Hidden in background) -->
     <!-- DOM Puzzle: The true ID is hidden in the data-attribute of this element -->
@@ -94,7 +96,7 @@
       class="relative z-20 flex min-h-screen flex-col items-center justify-center p-4"
     >
       <!-- Floor Indicator -->
-      <div class="absolute top-8 left-8 flex flex-col gap-1 opacity-70">
+      <div class="absolute top-8 left-8 flex flex-col gap-1 opacity-70 elevatorIndicator">
         <h1 class="text-4xl font-black tracking-tighter text-white">
           THE 404TH FLOOR
         </h1>
@@ -107,7 +109,7 @@
       </div>
       <!-- Terminal Modal -->
       <div
-  class="w-full max-w-[480px] rounded-xl overflow-hidden shadow-2xl animate-fade-in border border-primary/30 scale-60 origin-top"
+  class="w-full max-w-[480px] rounded-xl overflow-hidden shadow-2xl animate-fade-in border border-primary/30 scale-60 origin-center terminal transition-transform duration-500 scale-100"
 >
   <!-- Modal Header -->
   <div class="bg-surface/80 border-b border-slate-700/50 p-3 flex justify-between items-center">
