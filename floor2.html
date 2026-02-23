@@ -1,389 +1,523 @@
 <!doctype html>
 
 <html class="dark" lang="en">
-
-<head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Floor 2: Access Terminal - The 404th Floor</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
-    rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link rel="stylesheet" href="src/styles/floor2.css" />
-  <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            primary: "#135bec",
-            "background-light": "#f6f6f8",
-            "background-dark": "#0a0f16",
-            "terminal-green": "#0f0",
-            surface: "#192233",
-            "surface-highlight": "#232d42",
-          },
-          fontFamily: {
-            display: ["Space Grotesk", "sans-serif"],
-            mono: ["Courier New", "Courier", "monospace"],
-          },
-          borderRadius: {
-            DEFAULT: "0.25rem",
-            lg: "0.5rem",
-            xl: "0.75rem",
-            full: "9999px",
-          },
-          backgroundImage: {
-            "glitch-pattern":
-              "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMDAwIiBmaWxsLW9wYWNpdHk9IjAuMSIvPgo8cGF0aCBkPSJNMSAzdjFIMVYzTTEgMXYxSDFWMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjApIi8+Cjwvc3ZnPg==')",
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Floor 2: Access Terminal - The 404th Floor</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="src/styles/floor2.css" />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#135bec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#0a0f16",
+              "terminal-green": "#0f0",
+              surface: "#192233",
+              "surface-highlight": "#232d42",
+            },
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+              mono: ["Courier New", "Courier", "monospace"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            backgroundImage: {
+              "glitch-pattern":
+                "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMDAwIiBmaWxsLW9wYWNpdHk9IjAuMSIvPgo8cGF0aCBkPSJNMSAzdjFIMVYzTTEgMXYxSDFWMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjApIi8+Cjwvc3ZnPg==')",
+            },
           },
         },
-      },
-    };
-  </script>
+      };
+    </script>
 
-  <style>
-    /* Classes manquantes venues du thème 404 */
-    .bg-panel-dark {
-      background-color: #1a1f2e;
-    }
+    <style>
+      /* Classes manquantes venues du thème 404 */
+      .bg-panel-dark {
+        background-color: #1a1f2e;
+      }
 
-    .bg-metal-dark {
-      background-color: #151a25;
-    }
+      .bg-metal-dark {
+        background-color: #151a25;
+      }
 
-    .shadow-neon {
-      box-shadow:
-        0 0 10px rgba(19, 91, 236, 0.5),
-        0 0 20px rgba(19, 91, 236, 0.3);
-    }
+      .shadow-neon {
+        box-shadow:
+          0 0 10px rgba(19, 91, 236, 0.5),
+          0 0 20px rgba(19, 91, 236, 0.3);
+      }
 
-    .shadow-neon-strong {
-      box-shadow:
-        0 0 15px rgba(19, 91, 236, 0.8),
-        0 0 30px rgba(19, 91, 236, 0.5);
-    }
+      .shadow-neon-strong {
+        box-shadow:
+          0 0 15px rgba(19, 91, 236, 0.8),
+          0 0 30px rgba(19, 91, 236, 0.5);
+      }
 
-    .shadow-button-normal {
-      box-shadow:
-        5px 5px 10px rgba(0, 0, 0, 0.5),
-        -1px -1px 2px rgba(255, 255, 255, 0.05);
-    }
+      .shadow-button-normal {
+        box-shadow:
+          5px 5px 10px rgba(0, 0, 0, 0.5),
+          -1px -1px 2px rgba(255, 255, 255, 0.05);
+      }
 
-    .shadow-button-pressed {
-      box-shadow:
-        inset 2px 2px 5px rgba(0, 0, 0, 0.5),
-        inset -1px -1px 2px rgba(255, 255, 255, 0.1);
-    }
+      .shadow-button-pressed {
+        box-shadow:
+          inset 2px 2px 5px rgba(0, 0, 0, 0.5),
+          inset -1px -1px 2px rgba(255, 255, 255, 0.1);
+      }
 
-    /* Brushed metal background */
-    .bg-brushed-metal {
-      background-image: linear-gradient(135deg,
+      /* Brushed metal background */
+      .bg-brushed-metal {
+        background-image: linear-gradient(
+          135deg,
           rgba(255, 255, 255, 0.02) 25%,
           transparent 25%,
           transparent 50%,
           rgba(255, 255, 255, 0.02) 50%,
           rgba(255, 255, 255, 0.02) 75%,
           transparent 75%,
-          transparent);
-      background-size: 20px 20px;
-    }
-  </style>
-</head>
+          transparent
+        );
+        background-size: 20px 20px;
+      }
+    </style>
+  </head>
 
-<body
-  class="bg-background-dark text-slate-100 font-display min-h-screen overflow-x-hidden overflow-y-auto selection:bg-primary selection:text-white">
-  <!-- Ambient Background Layer -->
-  <div class="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 grayscale-[20%] elevator"
-    data-alt="Dark industrial elevator interior with metal walls and exposed wires" style="
-        background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCI_0Gr8f4QFrbt9r_VT5AmJdQ-uNAyJA4FsTi-ucmzZlub1rRy-U7X1B3qaIFimAh4IIlpvkXojzvOO0wsXyJSrLSRwXvm_G8tCDsxwCFixGHwc5uvgWIEVAJ9XjughEvUiZWb_htR9naldJ9VsUAz4GHLxFMY1UTCaBLaPRtMMIQjeBHyVg-DAWLwOVZ7vCA3fi_wz_nSVB9nIZvzNdzzyBYw9fQFegodhOl1Bjm42oo7s5elr51E9asmc2D7kGWtE6FHjpfboA5t&quot;);
-      ">
-    <div id="black-overlay" class="absolute inset-0 bg-black opacity-0 pointer-events-none"></div>
-  </div>
-
-  <!-- Clue Element (Hidden in background) -->
-  <!-- DOM Puzzle: The true ID is hidden in the data-attribute of this element -->
-  <div id="password"
-    class="absolute top-[20%] right-[10%] hidden md:right-[20%] z-10 transform rotate-6 hover:scale-105 transition-transform duration-300 cursor-help group"
-    data-technician-id="TECH-882-X">
+  <body
+    class="bg-background-dark text-slate-100 font-display min-h-screen overflow-x-hidden overflow-y-auto selection:bg-primary selection:text-white"
+  >
+    <!-- Ambient Background Layer -->
     <div
-      class="relative w-32 h-32 bg-yellow-200/90 shadow-lg rounded-sm p-3 flex flex-col items-center justify-center font-handwriting text-slate-800 rotate-2">
-      <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-8 h-8 bg-slate-800/20 rounded-full blur-sm"></div>
-      <p class="text-xs font-bold uppercase border-b border-slate-800/20 w-full text-center pb-1 mb-1">
-        Reminder
-      </p>
-      <p class="text-sm font-mono font-bold leading-tight text-center">
-        Update ID:<br /><span class="blur-[1.5px] group-hover:blur-none transition-all duration-500">8492</span>
-      </p>
-      <p class="text-[10px] mt-2 opacity-60">Don't forget!</p>
-    </div>
-  </div>
-  <!-- Main Content Container -->
-  <main class="relative z-20 flex min-h-screen flex-col md:flex-row">
-
-    <!-- GAUCHE : Terminal -->
-    <div class="flex-1 flex items-center justify-center p-4 md:p-8 bg-black/10 md:bg-transparent">
-
-      <!-- Floor Indicator -->
-      <div class="absolute top-8 left-8 flex flex-col gap-1 opacity-70 elevatorIndicator z-30">
-        <h1 class="text-4xl md:text-5xl font-black tracking-tighter text-white">
-          THE 404TH FLOOR
-        </h1>
-        <div class="flex items-center gap-2 text-primary">
-          <span class="material-symbols-outlined text-sm">meeting_room</span>
-          <span class="text-sm font-mono tracking-widest">FLOOR 02 // ACCESS TERMINAL</span>
-        </div>
-      </div>
-
-      <!-- Terminal complet avec KEYPAD -->
+      class="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 grayscale-[20%] elevator"
+      data-alt="Dark industrial elevator interior with metal walls and exposed wires"
+      style="
+        background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCI_0Gr8f4QFrbt9r_VT5AmJdQ-uNAyJA4FsTi-ucmzZlub1rRy-U7X1B3qaIFimAh4IIlpvkXojzvOO0wsXyJSrLSRwXvm_G8tCDsxwCFixGHwc5uvgWIEVAJ9XjughEvUiZWb_htR9naldJ9VsUAz4GHLxFMY1UTCaBLaPRtMMIQjeBHyVg-DAWLwOVZ7vCA3fi_wz_nSVB9nIZvzNdzzyBYw9fQFegodhOl1Bjm42oo7s5elr51E9asmc2D7kGWtE6FHjpfboA5t&quot;);
+      "
+    >
       <div
-        class="w-full max-w-[480px] rounded-xl overflow-hidden shadow-2xl animate-fade-in border border-primary/30 terminal transition-transform duration-500 scale-100">
+        id="black-overlay"
+        class="absolute inset-0 bg-black opacity-0 pointer-events-none"
+      ></div>
+    </div>
 
-        <!-- Header -->
-        <div class="bg-surface/80 border-b border-slate-700/50 p-3 flex justify-between items-center">
-          <div class="flex items-center gap-1.5">
-            <div class="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.6)]"></div>
-            <span class="text-[9px] font-bold tracking-[0.18em] text-slate-300">SYSTEM LOCKDOWN</span>
+    <!-- Clue Element (Hidden in background) -->
+    <!-- DOM Puzzle: The true ID is hidden in the data-attribute of this element -->
+    <div
+      id="password"
+      class="absolute top-[20%] right-[10%] hidden md:right-[20%] z-10 transform rotate-6 hover:scale-105 transition-transform duration-300 cursor-help group"
+      data-technician-id="TECH-882-X"
+    >
+      <div
+        class="relative w-32 h-32 bg-yellow-200/90 shadow-lg rounded-sm p-3 flex flex-col items-center justify-center font-handwriting text-slate-800 rotate-2"
+      >
+        <div
+          class="absolute -top-3 left-1/2 -translate-x-1/2 w-8 h-8 bg-slate-800/20 rounded-full blur-sm"
+        ></div>
+        <p
+          class="text-xs font-bold uppercase border-b border-slate-800/20 w-full text-center pb-1 mb-1"
+        >
+          Reminder
+        </p>
+        <p class="text-sm font-mono font-bold leading-tight text-center">
+          Update ID:<br /><span
+            class="blur-[1.5px] group-hover:blur-none transition-all duration-500"
+            >8492</span
+          >
+        </p>
+        <p class="text-[10px] mt-2 opacity-60">Don't forget!</p>
+      </div>
+    </div>
+    <!-- Main Content Container -->
+    <main class="relative z-20 flex min-h-screen flex-col md:flex-row">
+      <!-- GAUCHE : Terminal -->
+      <div
+        class="flex-1 flex items-center justify-center p-4 md:p-8 bg-black/10 md:bg-transparent"
+      >
+        <!-- Floor Indicator -->
+        <div
+          class="absolute top-8 left-8 flex flex-col gap-1 opacity-70 elevatorIndicator z-30"
+        >
+          <h1
+            class="text-4xl md:text-5xl font-black tracking-tighter text-white"
+          >
+            THE 404TH FLOOR
+          </h1>
+          <div class="flex items-center gap-2 text-primary">
+            <span class="material-symbols-outlined text-sm">meeting_room</span>
+            <span class="text-sm font-mono tracking-widest"
+              >FLOOR 02 // ACCESS TERMINAL</span
+            >
           </div>
-          <div class="font-mono text-[9px] text-primary/80">TERMINAL_ID: #404-B2</div>
         </div>
 
-        <div class="p-5 flex flex-col gap-5">
+        <!-- Terminal complet avec KEYPAD -->
+        <div
+          class="w-full max-w-[480px] rounded-xl overflow-hidden shadow-2xl animate-fade-in border border-primary/30 terminal transition-transform duration-500 scale-100"
+        >
+          <!-- Header -->
+          <div
+            class="bg-surface/80 border-b border-slate-700/50 p-3 flex justify-between items-center"
+          >
+            <div class="flex items-center gap-1.5">
+              <div
+                class="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.6)]"
+              ></div>
+              <span
+                class="text-[9px] font-bold tracking-[0.18em] text-slate-300"
+                >SYSTEM LOCKDOWN</span
+              >
+            </div>
+            <div class="font-mono text-[9px] text-primary/80">
+              TERMINAL_ID: #404-B2
+            </div>
+          </div>
 
-          <!-- Status & Input Section -->
-          <div class="flex flex-col gap-3.5">
-            <div class="flex flex-col gap-0.5">
-              <label class="text-[9px] font-bold text-primary tracking-widest uppercase" for="technician-id">
-                Enter Technician ID
-              </label>
-              <div class="relative group">
-                <input autocomplete="off"
-                  class="w-full bg-black/40 border border-slate-700 rounded-lg py-3 px-3 text-center font-mono text-xl tracking-[0.45em] text-primary placeholder-slate-700 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all uppercase"
-                  id="technician-id" maxlength="4" placeholder="_ _ _ _" type="text" />
-                <div
-                  class="absolute inset-0 rounded-lg pointer-events-none border border-primary/0 group-focus-within:border-primary/20 transition-colors">
-                </div>
-                <div class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-600">
-                  <span id="lock-icon" class="material-symbols-outlined text-lg">lock</span>
+          <div class="p-5 flex flex-col gap-5">
+            <!-- Status & Input Section -->
+            <div class="flex flex-col gap-3.5">
+              <div class="flex flex-col gap-0.5">
+                <label
+                  class="text-[9px] font-bold text-primary tracking-widest uppercase"
+                  for="technician-id"
+                >
+                  Enter Technician ID
+                </label>
+                <div class="relative group">
+                  <input
+                    autocomplete="off"
+                    class="w-full bg-black/40 border border-slate-700 rounded-lg py-3 px-3 text-center font-mono text-xl tracking-[0.45em] text-primary placeholder-slate-700 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all uppercase"
+                    id="technician-id"
+                    maxlength="4"
+                    placeholder="_ _ _ _"
+                    type="text"
+                  />
+                  <div
+                    class="absolute inset-0 rounded-lg pointer-events-none border border-primary/0 group-focus-within:border-primary/20 transition-colors"
+                  ></div>
+                  <div
+                    class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-600"
+                  >
+                    <span
+                      id="lock-icon"
+                      class="material-symbols-outlined text-lg"
+                      >lock</span
+                    >
+                  </div>
                 </div>
               </div>
+              <p class="text-[10px] text-center text-slate-400 font-mono">
+                <span class="text-primary">*</span> ACCESS RESTRICTED TO
+                AUTHORIZED PERSONNEL ONLY
+              </p>
             </div>
-            <p class="text-[10px] text-center text-slate-400 font-mono">
-              <span class="text-primary">*</span> ACCESS RESTRICTED TO AUTHORIZED PERSONNEL ONLY
-            </p>
+
+            <!-- KEYPAD GRID → c'est ici qu'on le remet en entier -->
+            <div class="grid grid-cols-3 gap-2.5">
+              <!-- Row 1 -->
+              <button
+                class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group"
+              >
+                <span class="relative z-10 button">1</span>
+                <div
+                  class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"
+                ></div>
+              </button>
+              <button
+                class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group"
+              >
+                <span class="relative z-10 button">2</span>
+                <div
+                  class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"
+                ></div>
+              </button>
+              <button
+                class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group"
+              >
+                <span class="relative z-10 button">3</span>
+                <div
+                  class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"
+                ></div>
+              </button>
+
+              <!-- Row 2 -->
+              <button
+                class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group"
+              >
+                <span class="relative z-10 button">4</span>
+                <div
+                  class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"
+                ></div>
+              </button>
+              <button
+                class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group"
+              >
+                <span class="relative z-10 button">5</span>
+                <div
+                  class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"
+                ></div>
+              </button>
+              <button
+                class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group"
+              >
+                <span class="relative z-10 button">6</span>
+                <div
+                  class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"
+                ></div>
+              </button>
+
+              <!-- Row 3 -->
+              <button
+                class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group"
+              >
+                <span class="relative z-10 button">7</span>
+                <div
+                  class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"
+                ></div>
+              </button>
+              <button
+                class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group"
+              >
+                <span class="relative z-10 button">8</span>
+                <div
+                  class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"
+                ></div>
+              </button>
+              <button
+                class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group"
+              >
+                <span class="relative z-10 button">9</span>
+                <div
+                  class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"
+                ></div>
+              </button>
+
+              <!-- Row 4 -->
+              <button
+                class="aspect-[4/3] rounded-lg bg-surface border border-red-900/30 hover:bg-red-900/20 hover:border-red-500/50 text-red-400 font-bold text-xs active:scale-95 transition-all flex items-center justify-center uppercase tracking-wider group"
+              >
+                <span
+                  class="material-symbols-outlined text-lg group-hover:scale-110 transition-transform button"
+                  >backspace</span
+                >
+              </button>
+              <button
+                class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group"
+              >
+                <span class="relative z-10 button">0</span>
+                <div
+                  class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"
+                ></div>
+              </button>
+              <button
+                class="aspect-[4/3] rounded-lg bg-primary border border-primary shadow-[0_0_15px_rgba(19,91,236,0.4)] hover:shadow-[0_0_25px_rgba(19,91,236,0.6)] hover:bg-blue-600 text-white font-bold text-xs active:scale-95 transition-all flex items-center justify-center uppercase tracking-wider"
+              >
+                <span class="material-symbols-outlined button"
+                  >keyboard_return</span
+                >
+              </button>
+            </div>
+
+            <!-- Action Button -->
+            <button
+              class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-3.5 rounded-lg border border-slate-600 flex items-center justify-center gap-2 group transition-all"
+            >
+              <span class="material-symbols-outlined group-hover:animate-spin"
+                >settings</span
+              >
+              <span>DIAGNOSTIC OVERRIDE</span>
+            </button>
           </div>
 
-          <!-- KEYPAD GRID → c'est ici qu'on le remet en entier -->
-          <div class="grid grid-cols-3 gap-2.5">
-            <!-- Row 1 -->
-            <button
-              class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group">
-              <span class="relative z-10 button">1</span>
-              <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </button>
-            <button
-              class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group">
-              <span class="relative z-10 button">2</span>
-              <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </button>
-            <button
-              class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group">
-              <span class="relative z-10 button">3</span>
-              <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </button>
+          <!-- Footer -->
+          <div
+            class="bg-black/40 border-t border-slate-800 p-2.5 flex justify-between items-center text-[9px] text-slate-500 font-mono"
+          >
+            <div class="flex items-center gap-1.5">
+              <div
+                id="status-light"
+                class="w-1.5 h-1.5 bg-green-500 rounded-full opacity-50"
+              ></div>
+              <span id="system-status">SYSTEM_READY</span>
+            </div>
+            <span>V.2.0.45-ALPHA</span>
+          </div>
+        </div>
+      </div>
 
-            <!-- Row 2 -->
+      <!-- DROITE : Control Panel (aside) → colle ton <aside> complet ici, comme dans ma réponse précédente -->
+      <aside
+        class="w-full md:w-80 lg:w-96 h-auto md:min-h-screen bg-panel-dark border-l border-[#232f48] shadow-2xl z-20 flex flex-col relative overflow-hidden"
+      >
+        <div
+          class="absolute inset-0 bg-brushed-metal opacity-50 pointer-events-none"
+        ></div>
+        <!-- Panel Header -->
+        <div
+          class="p-6 border-b border-[#232f48] bg-[#151a25]/50 backdrop-blur"
+        >
+          <h2 class="text-white text-xl font-bold tracking-tight">
+            CONTROL PANEL
+          </h2>
+          <div class="flex items-center gap-2 mt-2">
+            <div class="h-1.5 flex-1 bg-slate-700 rounded-full overflow-hidden">
+              <div class="h-full bg-red-500 w-[35%] animate-pulse"></div>
+            </div>
+            <span class="text-xs text-red-400 font-mono">PWR: 35%</span>
+          </div>
+        </div>
+        <!-- Floor Buttons -->
+        <div
+          class="flex-1 overflow-y-auto p-6 flex flex-col gap-6 items-center justify-center"
+        >
+          <!-- Floor 4 (Current) -->
+          <div class="w-full flex items-center justify-between gap-4 group">
+            <div class="text-right flex-1">
+              <div class="text-sm font-bold text-slate-300">
+                Executive Suite
+              </div>
+              <div class="text-xs text-red-400 font-mono">ACCESS DENIED</div>
+            </div>
             <button
-              class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group">
-              <span class="relative z-10 button">4</span>
-              <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              class="relative w-16 h-16 rounded-lg bg-panel-dark border border-red-500/50 shadow-neon flex items-center justify-center group-hover:scale-105 transition-transform"
+            >
+              <div
+                class="absolute inset-0 bg-red-500/10 animate-pulse rounded-lg"
+              ></div>
+              <span class="text-2xl font-bold text-red-500 font-mono z-10"
+                >4</span
+              >
             </button>
+          </div>
+          <!-- Separator -->
+          <div class="w-12 h-px bg-slate-700/50"></div>
+          <!-- Floor 3 -->
+          <div
+            class="w-full flex items-center justify-between gap-4 group opacity-60 hover:opacity-100 transition-opacity"
+          >
+            <div class="text-right flex-1">
+              <div class="text-sm font-bold text-slate-400">Server Room</div>
+              <div class="text-xs text-slate-600 font-mono">LOCKED</div>
+            </div>
             <button
-              class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group">
-              <span class="relative z-10 button">5</span>
-              <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              class="w-16 h-16 rounded-lg bg-[#151a25] border border-[#232f48] shadow-button-normal active:shadow-button-pressed flex items-center justify-center transition-all active:scale-95"
+            >
+              <span class="text-2xl font-bold text-slate-500 font-mono">3</span>
             </button>
+          </div>
+          <!-- Floor 2 -->
+          <div
+            class="w-full flex items-center justify-between gap-4 group opacity-60 hover:opacity-100 transition-opacity"
+          >
+            <div class="text-right flex-1">
+              <div class="text-sm font-bold text-slate-400">Acces Terminal</div>
+              <div class="text-xs text-slate-600 font-mono">ACTIVE</div>
+            </div>
             <button
-              class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group">
-              <span class="relative z-10 button">6</span>
-              <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              class="w-16 h-16 rounded-lg bg-[#151a25] border border-[#232f48] shadow-button-normal active:shadow-button-pressed flex items-center justify-center transition-all active:scale-95 relative overflow-hidden"
+            >
+              <span class="text-2xl font-bold text-slate-500 font-mono z-10"
+                >2</span
+              >
+              <!-- Spark animation on hover -->
+              <div
+                class="absolute inset-0 bg-white/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"
+              ></div>
             </button>
-
-            <!-- Row 3 -->
+          </div>
+          <!-- Floor 1 -->
+          <div class="w-full flex items-center justify-between gap-4 group">
+            <div class="text-right flex-1">
+              <div class="text-sm font-bold text-primary">Lobby</div>
+              <div class="text-xs text-primary/70 font-mono">PASSED</div>
+            </div>
             <button
-              class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group">
-              <span class="relative z-10 button">7</span>
-              <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </button>
-            <button
-              class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group">
-              <span class="relative z-10 button">8</span>
-              <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </button>
-            <button
-              class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group">
-              <span class="relative z-10 button">9</span>
-              <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </button>
-
-            <!-- Row 4 -->
-            <button
-              class="aspect-[4/3] rounded-lg bg-surface border border-red-900/30 hover:bg-red-900/20 hover:border-red-500/50 text-red-400 font-bold text-xs active:scale-95 transition-all flex items-center justify-center uppercase tracking-wider group">
+              class="w-16 h-16 rounded-lg bg-primary border border-primary shadow-neon-strong flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer"
+            >
               <span
-                class="material-symbols-outlined text-lg group-hover:scale-110 transition-transform button">backspace</span>
-            </button>
-            <button
-              class="aspect-[4/3] rounded-lg bg-surface border border-slate-700/50 hover:bg-surface-highlight hover:border-primary/50 text-white font-bold text-lg active:scale-95 transition-all flex items-center justify-center relative overflow-hidden group">
-              <span class="relative z-10 button">0</span>
-              <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </button>
-            <button
-              class="aspect-[4/3] rounded-lg bg-primary border border-primary shadow-[0_0_15px_rgba(19,91,236,0.4)] hover:shadow-[0_0_25px_rgba(19,91,236,0.6)] hover:bg-blue-600 text-white font-bold text-xs active:scale-95 transition-all flex items-center justify-center uppercase tracking-wider">
-              <span class="material-symbols-outlined button">keyboard_return</span>
+                class="text-2xl font-bold text-white font-mono drop-shadow-md"
+                >1</span
+              >
             </button>
           </div>
-
-          <!-- Action Button -->
-          <button
-            class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-3.5 rounded-lg border border-slate-600 flex items-center justify-center gap-2 group transition-all">
-            <span class="material-symbols-outlined group-hover:animate-spin">settings</span>
-            <span>DIAGNOSTIC OVERRIDE</span>
-          </button>
         </div>
-
-        <!-- Footer -->
-        <div
-          class="bg-black/40 border-t border-slate-800 p-2.5 flex justify-between items-center text-[9px] text-slate-500 font-mono">
-          <div class="flex items-center gap-1.5">
-            <div id="status-light" class="w-1.5 h-1.5 bg-green-500 rounded-full opacity-50"></div>
-            <span id="system-status">SYSTEM_READY</span>
-          </div>
-          <span>V.2.0.45-ALPHA</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- DROITE : Control Panel (aside) → colle ton <aside> complet ici, comme dans ma réponse précédente -->
-    <aside
-      class="w-full md:w-80 lg:w-96 h-auto md:min-h-screen bg-panel-dark border-l border-[#232f48] shadow-2xl z-20 flex flex-col relative overflow-hidden">
-      <div class="absolute inset-0 bg-brushed-metal opacity-50 pointer-events-none"></div>
-      <!-- Panel Header -->
-      <div class="p-6 border-b border-[#232f48] bg-[#151a25]/50 backdrop-blur">
-        <h2 class="text-white text-xl font-bold tracking-tight">CONTROL PANEL</h2>
-        <div class="flex items-center gap-2 mt-2">
-          <div class="h-1.5 flex-1 bg-slate-700 rounded-full overflow-hidden">
-            <div class="h-full bg-red-500 w-[35%] animate-pulse"></div>
-          </div>
-          <span class="text-xs text-red-400 font-mono">PWR: 35%</span>
-        </div>
-      </div>
-      <!-- Floor Buttons -->
-      <div class="flex-1 overflow-y-auto p-6 flex flex-col gap-6 items-center justify-center">
-        <!-- Floor 4 (Current) -->
-        <div class="w-full flex items-center justify-between gap-4 group">
-          <div class="text-right flex-1">
-            <div class="text-sm font-bold text-slate-300">Executive Suite</div>
-            <div class="text-xs text-red-400 font-mono">ACCESS DENIED</div>
-          </div>
-          <button
-            class="relative w-16 h-16 rounded-lg bg-panel-dark border border-red-500/50 shadow-neon flex items-center justify-center group-hover:scale-105 transition-transform">
-            <div class="absolute inset-0 bg-red-500/10 animate-pulse rounded-lg"></div>
-            <span class="text-2xl font-bold text-red-500 font-mono z-10">4</span>
-          </button>
-        </div>
-        <!-- Separator -->
-        <div class="w-12 h-px bg-slate-700/50"></div>
-        <!-- Floor 3 -->
-        <div
-          class="w-full flex items-center justify-between gap-4 group opacity-60 hover:opacity-100 transition-opacity">
-          <div class="text-right flex-1">
-            <div class="text-sm font-bold text-slate-400">Server Room</div>
-            <div class="text-xs text-slate-600 font-mono">LOCKED</div>
-          </div>
-          <button
-            class="w-16 h-16 rounded-lg bg-[#151a25] border border-[#232f48] shadow-button-normal active:shadow-button-pressed flex items-center justify-center transition-all active:scale-95">
-            <span class="text-2xl font-bold text-slate-500 font-mono">3</span>
-          </button>
-        </div>
-        <!-- Floor 2 -->
-        <div
-          class="w-full flex items-center justify-between gap-4 group opacity-60 hover:opacity-100 transition-opacity">
-          <div class="text-right flex-1">
-            <div class="text-sm font-bold text-slate-400">Acces Terminal</div>
-            <div class="text-xs text-slate-600 font-mono">ACTIVE</div>
-          </div>
-          <button
-            class="w-16 h-16 rounded-lg bg-[#151a25] border border-[#232f48] shadow-button-normal active:shadow-button-pressed flex items-center justify-center transition-all active:scale-95 relative overflow-hidden">
-            <span class="text-2xl font-bold text-slate-500 font-mono z-10">2</span>
-            <!-- Spark animation on hover -->
+        <!-- Maintenance Panel -->
+        <div class="p-6 border-t border-[#232f48] bg-[#0d111a]">
+          <div class="flex flex-col gap-3">
             <div
-              class="absolute inset-0 bg-white/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+              class="flex justify-between items-center text-xs text-slate-500 font-mono uppercase"
+            >
+              <span>Maintenance Mode</span>
+              <span class="text-red-500">OFF</span>
             </div>
-          </button>
-        </div>
-        <!-- Floor 1 -->
-        <div class="w-full flex items-center justify-between gap-4 group">
-          <div class="text-right flex-1">
-            <div class="text-sm font-bold text-primary">Lobby</div>
-            <div class="text-xs text-primary/70 font-mono">PASSED</div>
+            <div class="grid grid-cols-4 gap-2">
+              <div class="h-1 bg-primary/40 rounded-full"></div>
+              <div class="h-1 bg-primary/40 rounded-full"></div>
+              <div class="h-1 bg-slate-700 rounded-full"></div>
+              <div class="h-1 bg-slate-700 rounded-full"></div>
+            </div>
+            <button
+              class="mt-2 w-full py-3 bg-[#1a1f2e] hover:bg-[#232f48] border border-[#232f48] text-slate-300 text-xs font-bold uppercase tracking-widest rounded flex items-center justify-center gap-2 transition-colors"
+            >
+              <span class="material-symbols-outlined text-sm">build</span>
+              Diagnostics
+            </button>
           </div>
-          <button
-            class="w-16 h-16 rounded-lg bg-primary border border-primary shadow-neon-strong flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer">
-            <span class="text-2xl font-bold text-white font-mono drop-shadow-md">1</span>
-          </button>
         </div>
-      </div>
-      <!-- Maintenance Panel -->
-      <div class="p-6 border-t border-[#232f48] bg-[#0d111a]">
-        <div class="flex flex-col gap-3">
-          <div class="flex justify-between items-center text-xs text-slate-500 font-mono uppercase">
-            <span>Maintenance Mode</span>
-            <span class="text-red-500">OFF</span>
-          </div>
-          <div class="grid grid-cols-4 gap-2">
-            <div class="h-1 bg-primary/40 rounded-full"></div>
-            <div class="h-1 bg-primary/40 rounded-full"></div>
-            <div class="h-1 bg-slate-700 rounded-full"></div>
-            <div class="h-1 bg-slate-700 rounded-full"></div>
-          </div>
-          <button
-            class="mt-2 w-full py-3 bg-[#1a1f2e] hover:bg-[#232f48] border border-[#232f48] text-slate-300 text-xs font-bold uppercase tracking-widest rounded flex items-center justify-center gap-2 transition-colors">
-            <span class="material-symbols-outlined text-sm">build</span>
-            Diagnostics
-          </button>
+        <!-- Key Slot / Card Reader -->
+        <div
+          class="absolute top-1/2 -left-3 w-6 h-24 bg-[#0d111a] border border-[#232f48] rounded-l-lg flex flex-col items-center justify-center gap-2 shadow-lg z-0"
+        >
+          <div
+            class="w-1 h-16 bg-black rounded-full shadow-[inset_0_0_2px_rgba(255,255,255,0.2)]"
+          ></div>
         </div>
-      </div>
-      <!-- Key Slot / Card Reader -->
+      </aside>
+    </main>
+    <!-- Decorative Elements -->
+    <div class="fixed bottom-8 right-8 z-30 hidden md:block">
       <div
-        class="absolute top-1/2 -left-3 w-6 h-24 bg-[#0d111a] border border-[#232f48] rounded-l-lg flex flex-col items-center justify-center gap-2 shadow-lg z-0">
-        <div class="w-1 h-16 bg-black rounded-full shadow-[inset_0_0_2px_rgba(255,255,255,0.2)]"></div>
-      </div>
-    </aside>
-
-  </main>
-  <!-- Decorative Elements -->
-  <div class="fixed bottom-8 right-8 z-30 hidden md:block">
-    <div class="flex flex-col items-end gap-1 opacity-50 hover:opacity-100 transition-opacity">
-      <div class="text-[10px] font-mono text-primary uppercase tracking-widest">
-        Network Status
-      </div>
-      <div class="flex gap-1">
-        <div class="w-1 h-4 bg-primary rounded-sm animate-pulse"></div>
-        <div class="w-1 h-6 bg-primary rounded-sm animate-pulse delay-75"></div>
-        <div class="w-1 h-3 bg-primary rounded-sm animate-pulse delay-150"></div>
-        <div class="w-1 h-5 bg-primary rounded-sm animate-pulse delay-100"></div>
+        class="flex flex-col items-end gap-1 opacity-50 hover:opacity-100 transition-opacity"
+      >
+        <div
+          class="text-[10px] font-mono text-primary uppercase tracking-widest"
+        >
+          Network Status
+        </div>
+        <div class="flex gap-1">
+          <div class="w-1 h-4 bg-primary rounded-sm animate-pulse"></div>
+          <div
+            class="w-1 h-6 bg-primary rounded-sm animate-pulse delay-75"
+          ></div>
+          <div
+            class="w-1 h-3 bg-primary rounded-sm animate-pulse delay-150"
+          ></div>
+          <div
+            class="w-1 h-5 bg-primary rounded-sm animate-pulse delay-100"
+          ></div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script src="src/floors/floor2.js"></script>
-  <script src="src/audio/sounds.js"></script>
-</body>
-
+    <script src="src/audio/sounds.js"></script>
+    <script src="src/floors/floor2.js"></script>
+  </body>
 </html>
