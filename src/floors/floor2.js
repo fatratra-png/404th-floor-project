@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // ── Injecte les keyframes CSS pour la chute et la montée ──
-  const style = document.createElement('style');
+  const style = document.createElement("style");
   style.textContent = `
     @keyframes elevatorFall {
       0%   { transform: translateY(0px) rotate(0deg); }
@@ -109,18 +109,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!elevator) return;
 
     // Chute
-    elevator.classList.add('elevator-falling');
-    document.body.classList.add('elevator-shaking');
+    elevator.classList.add("elevator-falling");
+    document.body.classList.add("elevator-shaking");
 
     // Après l'impact → tremblement résiduel + retour
     setTimeout(() => {
-      elevator.classList.remove('elevator-falling');
-      elevator.classList.add('elevator-returning');
-      document.body.classList.remove('elevator-shaking');
+      elevator.classList.remove("elevator-falling");
+      elevator.classList.add("elevator-returning");
+      document.body.classList.remove("elevator-shaking");
     }, 1500);
 
     setTimeout(() => {
-      elevator.classList.remove('elevator-returning');
+      elevator.classList.remove("elevator-returning");
     }, 2400);
   }
 
@@ -128,11 +128,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function triggerRise() {
     if (!elevator) return;
 
-    elevator.classList.add('elevator-rising');
-    document.body.classList.add('elevator-rise-shaking');
+    elevator.classList.add("elevator-rising");
+    document.body.classList.add("elevator-rise-shaking");
 
     setTimeout(() => {
-      document.body.classList.remove('elevator-rise-shaking');
+      document.body.classList.remove("elevator-rise-shaking");
     }, 4600);
   }
 
@@ -175,8 +175,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (input.value === system.validId) {
       // ────── ACCESS GRANTED ──────
-      Sounds.play('elevator_rise');  // son ascenseur qui monte
-      triggerRise();                 // animation montée + tremblement
+      Sounds.play("elevator_rise"); // son ascenseur qui monte
+      triggerRise(); // animation montée + tremblement
 
       input.value = "ACCESS_GRANTED";
       input.classList.remove("text-red-500");
@@ -202,11 +202,10 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         playElevatorTransition();
       }, 2000);
-
     } else {
       // ────── ACCESS DENIED ──────
-      Sounds.play('elevator_fall');  // son de chute + impact
-      triggerFall();                 // animation chute visuelle
+      Sounds.play("elevator_fall"); // son de chute + impact
+      triggerFall(); // animation chute visuelle
 
       input.value = "ACCESS_DENIED";
       input.classList.remove("text-green-500");
@@ -239,7 +238,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (spans.length) {
         const spanArray = Array.from(spans);
         const digitSpan = spanArray.find((s) => /\d/.test(s.textContent));
-        const nonIconSpan = spanArray.find((s) => !s.classList.contains("material-symbols-outlined"));
+        const nonIconSpan = spanArray.find(
+          (s) => !s.classList.contains("material-symbols-outlined"),
+        );
         const chosen = digitSpan || nonIconSpan || spanArray[0];
         value = chosen.textContent.trim();
       } else {
@@ -251,14 +252,17 @@ document.addEventListener("DOMContentLoaded", () => {
       if (digitMatch) {
         if (input.value.length < 4) {
           input.value += digitMatch[0];
-          Sounds.play('keyclick');
+          Sounds.play("keyclick");
         }
       }
 
       // Backspace
-      if (btn.innerHTML.includes("backspace") || value.toLowerCase().includes("backspace")) {
+      if (
+        btn.innerHTML.includes("backspace") ||
+        value.toLowerCase().includes("backspace")
+      ) {
         input.value = input.value.slice(0, -1);
-        Sounds.play('keyclick');
+        Sounds.play("keyclick");
       }
 
       // Entrée
@@ -282,10 +286,16 @@ document.addEventListener("DOMContentLoaded", () => {
           : "Diagnostic Override: OFF";
 
         if (passwdBtn) {
-          passwdBtn.style.display = system.diagnosticOverride ? "block" : "none";
+          passwdBtn.style.display = system.diagnosticOverride
+            ? "block"
+            : "none";
         }
 
-        btn.classList.remove("bg-slate-800", "hover:bg-slate-700", "bg-gray-300");
+        btn.classList.remove(
+          "bg-slate-800",
+          "hover:bg-slate-700",
+          "bg-gray-300",
+        );
         if (system.diagnosticOverride) {
           btn.classList.add("bg-yellow-500", "text-black");
           btn.classList.remove("text-slate-300");
@@ -302,12 +312,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (/^[0-9]$/.test(e.key)) {
       if (input.value.length < 4) {
         input.value += e.key;
-        Sounds.play('keyclick');
+        Sounds.play("keyclick");
       }
     }
     if (e.key === "Backspace") {
       input.value = input.value.slice(0, -1);
-      Sounds.play('keyclick');
+      Sounds.play("keyclick");
     }
     if (e.key === "Enter") {
       updateStatus();
