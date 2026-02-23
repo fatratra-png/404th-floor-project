@@ -134,7 +134,7 @@ TARGET
         ? "text-green-400 font-mono text-xl font-bold"
         : "text-red-400 font-mono text-xl font-bold animate-pulse";
 
-    alertBanner.style.display = pct < 20 ? "flex" : "none";
+    alertBanner.style.visibility = pct < 20 ? "visible" : "hidden";
   }
 
   function updateSustainBar() {
