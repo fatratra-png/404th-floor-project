@@ -9,6 +9,47 @@
       href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="src/styles/floor2.css" />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#135bec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#0a0f16",
+              "terminal-green": "#0f0",
+              surface: "#192233",
+              "surface-highlight": "#232d42",
+            },
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+              mono: ["Courier New", "Courier", "monospace"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            backgroundImage: {
+              "glitch-pattern":
+                "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMDAwIiBmaWxsLW9wYWNpdHk9IjAuMSIvPgo8cGF0aCBkPSJNMSAzdjFIMVYzTTEgMXYxSDFWMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjApIi8+Cjwvc3ZnPg==')",
+            },
+          },
+        },
+      };
+    </script>
 
     <style>
       /* ── Root & Variables ── */
@@ -153,7 +194,7 @@
       /* ── Main Layout ── */
       #floor3-root {
         display: grid;
-        grid-template-columns: 1fr 380px;
+        grid-template-columns: 380px 1fr 380px;
         height: calc(100vh - 52px);
         gap: 0;
       }
@@ -703,6 +744,49 @@
           opacity: 1;
         }
       }
+
+      /* Classes manquantes venues du thème 404 */
+      .bg-panel-dark {
+        background-color: #1a1f2e;
+      }
+      .bg-metal-dark {
+        background-color: #151a25;
+      }
+      .shadow-neon {
+        box-shadow:
+          0 0 10px rgba(19, 91, 236, 0.5),
+          0 0 20px rgba(19, 91, 236, 0.3);
+      }
+      .shadow-neon-strong {
+        box-shadow:
+          0 0 15px rgba(19, 91, 236, 0.8),
+          0 0 30px rgba(19, 91, 236, 0.5);
+      }
+      .shadow-button-normal {
+        box-shadow:
+          5px 5px 10px rgba(0, 0, 0, 0.5),
+          -1px -1px 2px rgba(255, 255, 255, 0.05);
+      }
+      .shadow-button-pressed {
+        box-shadow:
+          inset 2px 2px 5px rgba(0, 0, 0, 0.5),
+          inset -1px -1px 2px rgba(255, 255, 255, 0.1);
+      }
+
+      /* Brushed metal background */
+      .bg-brushed-metal {
+        background-image: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.02) 25%,
+          transparent 25%,
+          transparent 50%,
+          rgba(255, 255, 255, 0.02) 50%,
+          rgba(255, 255, 255, 0.02) 75%,
+          transparent 75%,
+          transparent
+        );
+        background-size: 20px 20px;
+      }
     </style>
   </head>
 
@@ -737,53 +821,6 @@
        MAIN GRID
   ═══════════════════════════════════════════ -->
     <div id="floor3-root">
-      <!-- ───────── LEFT: BRAKE MECHANISM ───────── -->
-      <div id="brake-panel">
-        <!-- Alert banner -->
-        <div id="f3-alert">
-          <span>⚠</span>
-          <span>⚠ &nbsp; CRITICAL FREEFALL DETECTED &nbsp; ⚠</span>
-          <span>⚠</span>
-        </div>
-
-        <!-- Brake visual -->
-        <div class="brake-wrapper">
-          <!-- The big red button -->
-          <button id="f3-tap-btn" title="MASH THIS">✋</button>
-
-          <!-- Shaft -->
-          <div class="brake-shaft"></div>
-
-          <!-- Base plate -->
-          <div class="brake-base">MANUAL OVERRIDE</div>
-        </div>
-
-        <!-- CTA -->
-        <div class="cta-box">
-          <div class="cta-label">MANUAL OVERRIDE</div>
-          <div class="cta-key">
-            <span>⌨</span>
-            MASH SPACE
-          </div>
-          <div class="cta-hint">Repeatedly press to build pressure</div>
-        </div>
-
-        <!-- Status & sustain -->
-        <div id="f3-status">AWAITING INPUT...</div>
-        <div class="sustain-track">
-          <div id="f3-sustain-bar"></div>
-        </div>
-
-        <!-- Bottom ticker -->
-        <div class="bottom-ticker">
-          <div class="ticker-alert">
-            <div class="ticker-dot"></div>
-            SYSTEM ALERT: Impact imminent in 00:15...
-          </div>
-          <div>ERR_CODE: 404_GRAVITY_NOT_FOUND</div>
-        </div>
-      </div>
-
       <!-- ───────── RIGHT: GAUGE PANEL ───────── -->
       <div id="gauge-panel">
         <!-- Metrics row -->
@@ -898,6 +935,179 @@
           >
         </div>
       </div>
+      <!-- ───────── LEFT: BRAKE MECHANISM ───────── -->
+      <div id="brake-panel">
+        <!-- Alert banner -->
+        <div id="f3-alert">
+          <span>⚠</span>
+          <span>⚠ &nbsp; CRITICAL FREEFALL DETECTED &nbsp; ⚠</span>
+          <span>⚠</span>
+        </div>
+
+        <!-- Brake visual -->
+        <div class="brake-wrapper">
+          <!-- The big red button -->
+          <button id="f3-tap-btn" title="MASH THIS">✋</button>
+
+          <!-- Shaft -->
+          <div class="brake-shaft"></div>
+
+          <!-- Base plate -->
+          <div class="brake-base">MANUAL OVERRIDE</div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-box">
+          <div class="cta-label">MANUAL OVERRIDE</div>
+          <div class="cta-key">
+            <span>⌨</span>
+            MASH SPACE
+          </div>
+          <div class="cta-hint">Repeatedly press to build pressure</div>
+        </div>
+
+        <!-- Status & sustain -->
+        <div id="f3-status">AWAITING INPUT...</div>
+        <div class="sustain-track">
+          <div id="f3-sustain-bar"></div>
+        </div>
+
+        <!-- Bottom ticker -->
+        <div class="bottom-ticker">
+          <div class="ticker-alert">
+            <div class="ticker-dot"></div>
+            SYSTEM ALERT: Impact imminent in 00:15...
+          </div>
+          <div>ERR_CODE: 404_GRAVITY_NOT_FOUND</div>
+        </div>
+      </div>
+      <aside
+        class="w-full md:w-80 lg:w-96 h-auto md:min-h-screen bg-panel-dark border-l border-[#232f48] shadow-2xl z-20 flex flex-col relative overflow-hidden"
+      >
+        <div
+          class="absolute inset-0 bg-brushed-metal opacity-50 pointer-events-none"
+        ></div>
+        <!-- Panel Header -->
+        <div
+          class="p-6 border-b border-[#232f48] bg-[#151a25]/50 backdrop-blur"
+        >
+          <h2 class="text-white text-xl font-bold tracking-tight">
+            CONTROL PANEL
+          </h2>
+          <div class="flex items-center gap-2 mt-2">
+            <div class="h-1.5 flex-1 bg-slate-700 rounded-full overflow-hidden">
+              <div class="h-full bg-red-500 w-[35%] animate-pulse"></div>
+            </div>
+            <span class="text-xs text-red-400 font-mono">PWR: 35%</span>
+          </div>
+        </div>
+        <!-- Floor Buttons -->
+        <div
+          class="flex-1 overflow-y-auto p-6 flex flex-col gap-6 items-center justify-center"
+        >
+          <!-- Floor 4 (Current) -->
+          <div class="w-full flex items-center justify-between gap-4 group">
+            <div class="text-right flex-1">
+              <div class="text-sm font-bold text-slate-300">
+                Executive Suite
+              </div>
+              <div class="text-xs text-red-400 font-mono">ACCESS DENIED</div>
+            </div>
+            <button
+              class="relative w-16 h-16 rounded-lg bg-panel-dark border border-red-500/50 shadow-neon flex items-center justify-center group-hover:scale-105 transition-transform"
+            >
+              <div
+                class="absolute inset-0 bg-red-500/10 animate-pulse rounded-lg"
+              ></div>
+              <span class="text-2xl font-bold text-red-500 font-mono z-10"
+                >4</span
+              >
+            </button>
+          </div>
+          <!-- Separator -->
+          <div class="w-12 h-px bg-slate-700/50"></div>
+          <!-- Floor 3 -->
+          <div
+            class="w-full flex items-center justify-between gap-4 group opacity-60 hover:opacity-100 transition-opacity"
+          >
+            <div class="text-right flex-1">
+              <div class="text-sm font-bold text-slate-400">Server Room</div>
+              <div class="text-xs text-slate-600 font-mono">LOCKED</div>
+            </div>
+            <button
+              class="w-16 h-16 rounded-lg bg-[#151a25] border border-[#232f48] shadow-button-normal active:shadow-button-pressed flex items-center justify-center transition-all active:scale-95"
+            >
+              <span class="text-2xl font-bold text-slate-500 font-mono">3</span>
+            </button>
+          </div>
+          <!-- Floor 2 -->
+          <div
+            class="w-full flex items-center justify-between gap-4 group opacity-60 hover:opacity-100 transition-opacity"
+          >
+            <div class="text-right flex-1">
+              <div class="text-sm font-bold text-slate-400">Acces Terminal</div>
+              <div class="text-xs text-slate-600 font-mono">ACTIVE</div>
+            </div>
+            <button
+              class="w-16 h-16 rounded-lg bg-[#151a25] border border-[#232f48] shadow-button-normal active:shadow-button-pressed flex items-center justify-center transition-all active:scale-95 relative overflow-hidden"
+            >
+              <span class="text-2xl font-bold text-slate-500 font-mono z-10"
+                >2</span
+              >
+              <!-- Spark animation on hover -->
+              <div
+                class="absolute inset-0 bg-white/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"
+              ></div>
+            </button>
+          </div>
+          <!-- Floor 1 -->
+          <div class="w-full flex items-center justify-between gap-4 group">
+            <div class="text-right flex-1">
+              <div class="text-sm font-bold text-primary">Lobby</div>
+              <div class="text-xs text-primary/70 font-mono">PASSED</div>
+            </div>
+            <button
+              class="w-16 h-16 rounded-lg bg-primary border border-primary shadow-neon-strong flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              <span
+                class="text-2xl font-bold text-white font-mono drop-shadow-md"
+                >1</span
+              >
+            </button>
+          </div>
+        </div>
+        <!-- Maintenance Panel -->
+        <div class="p-6 border-t border-[#232f48] bg-[#0d111a]">
+          <div class="flex flex-col gap-3">
+            <div
+              class="flex justify-between items-center text-xs text-slate-500 font-mono uppercase"
+            >
+              <span>Maintenance Mode</span>
+              <span class="text-red-500">OFF</span>
+            </div>
+            <div class="grid grid-cols-4 gap-2">
+              <div class="h-1 bg-primary/40 rounded-full"></div>
+              <div class="h-1 bg-primary/40 rounded-full"></div>
+              <div class="h-1 bg-slate-700 rounded-full"></div>
+              <div class="h-1 bg-slate-700 rounded-full"></div>
+            </div>
+            <button
+              class="mt-2 w-full py-3 bg-[#1a1f2e] hover:bg-[#232f48] border border-[#232f48] text-slate-300 text-xs font-bold uppercase tracking-widest rounded flex items-center justify-center gap-2 transition-colors"
+            >
+              <span class="material-symbols-outlined text-sm">build</span>
+              Diagnostics
+            </button>
+          </div>
+        </div>
+        <!-- Key Slot / Card Reader -->
+        <div
+          class="absolute top-1/2 -left-3 w-6 h-24 bg-[#0d111a] border border-[#232f48] rounded-l-lg flex flex-col items-center justify-center gap-2 shadow-lg z-0"
+        >
+          <div
+            class="w-1 h-16 bg-black rounded-full shadow-[inset_0_0_2px_rgba(255,255,255,0.2)]"
+          ></div>
+        </div>
+      </aside>
     </div>
 
     <!-- ═══════════════════════════════════════════
