@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (input.value === system.validId) {
       // ── ACCESS GRANTED ──
-      Sounds.play('elevator_move'); // son ascenseur + câbles + ding
+      Sounds.play("elevator_move"); // son ascenseur + câbles + ding
 
       input.value = "ACCESS_GRANTED";
       input.classList.remove("text-red-500");
@@ -69,10 +69,9 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         playElevator();
       }, 2000);
-
     } else {
       // ── ACCESS DENIED ──
-      Sounds.play('cable_stress'); // son câble qui grince + menace
+      Sounds.play("cable_stress"); // son câble qui grince + menace
 
       input.value = "ACCESS_DENIED";
       input.classList.remove("text-green-500");
@@ -99,7 +98,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (spans.length) {
         const spanArray = Array.from(spans);
         const digitSpan = spanArray.find((s) => /\d/.test(s.textContent));
-        const nonIconSpan = spanArray.find((s) => !s.classList.contains("material-symbols-outlined"));
+        const nonIconSpan = spanArray.find(
+          (s) => !s.classList.contains("material-symbols-outlined"),
+        );
         const chosen = digitSpan || nonIconSpan || spanArray[0];
         value = chosen.textContent.trim();
       } else {
@@ -111,14 +112,17 @@ document.addEventListener("DOMContentLoaded", () => {
       if (digitMatch) {
         if (input.value.length < 4) {
           input.value += digitMatch[0];
-          Sounds.play('keyclick'); // clic sonore sur chaque touche
+          Sounds.play("keyclick"); // clic sonore sur chaque touche
         }
       }
 
       // Backspace
-      if (btn.innerHTML.includes("backspace") || value.toLowerCase().includes("backspace")) {
+      if (
+        btn.innerHTML.includes("backspace") ||
+        value.toLowerCase().includes("backspace")
+      ) {
         input.value = input.value.slice(0, -1);
-        Sounds.play('keyclick');
+        Sounds.play("keyclick");
       }
 
       // Entrée / Valider
@@ -132,7 +136,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Diagnostic Override
       const passwdBtn = document.getElementById("password");
-      if (value.toLowerCase().includes("diagnostic override") || btn.textContent.toLowerCase().includes("diagnostic")) {
+      if (
+        value.toLowerCase().includes("diagnostic override") ||
+        btn.textContent.toLowerCase().includes("diagnostic")
+      ) {
         system.diagnosticOverride = !system.diagnosticOverride;
         btn.textContent = system.diagnosticOverride
           ? "Diagnostic Override: ON"
@@ -140,7 +147,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         passwdBtn.style.display = system.diagnosticOverride ? "block" : "none";
 
-        btn.classList.remove("bg-slate-800", "hover:bg-slate-700", "bg-gray-300");
+        btn.classList.remove(
+          "bg-slate-800",
+          "hover:bg-slate-700",
+          "bg-gray-300",
+        );
 
         if (system.diagnosticOverride) {
           btn.classList.add("bg-yellow-500");
@@ -159,13 +170,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (/^[0-9]$/.test(e.key)) {
       if (input.value.length < 4) {
         input.value += e.key;
-        Sounds.play('keyclick');
+        Sounds.play("keyclick");
       }
     }
 
     if (e.key === "Backspace") {
       input.value = input.value.slice(0, -1);
-      Sounds.play('keyclick');
+      Sounds.play("keyclick");
     }
 
     if (e.key === "Enter") {
