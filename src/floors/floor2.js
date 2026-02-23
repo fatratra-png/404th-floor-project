@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
       80%  { transform: translateY(56px) rotate(0.2deg); }
       100% { transform: translateY(0px) rotate(0deg); }
     }
-    @keyframes elevatorRise {
+    @keyframes elevatorRise {/* lasa hafahafa be*/
       0%   { transform: translateY(0px) rotate(0deg); }
       5%   { transform: translateY(8px) rotate(0.5deg); }
       10%  { transform: translateY(-5px) rotate(-0.4deg); }
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
       90%  { transform: translateY(-78px) rotate(-0.1deg); }
       100% { transform: translateY(-90px) rotate(0deg); }
     }
-    @keyframes screenShake {
+    @keyframes screenShake { 
       0%,100% { transform: translateX(0); }
       10%     { transform: translateX(-8px) translateY(3px); }
       20%     { transform: translateX(6px) translateY(-4px); }
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .elevator-falling      { animation: elevatorFall 1.4s cubic-bezier(0.25,0.46,0.45,0.94) forwards; }
     .elevator-shaking      { animation: screenShake 1.4s ease-in-out; }
     .elevator-returning    { animation: elevatorShakeReturn 0.8s ease-out forwards; }
-    .elevator-rising       { animation: elevatorRise 4.5s cubic-bezier(0.4,0,0.2,1) forwards; }
+    
     .elevator-rise-shaking { animation: screenRiseShake 4.5s ease-in-out; }
     .terminal { transition: transform 0.5s ease; transform-origin: center; }
     .scale-0  { transform: scale(0) !important; }
@@ -167,7 +167,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }, 400);
 
-    // Le fade-black déclenche main.js → redirection floor3
     setTimeout(() => {
       if (overlay) overlay.classList.add("fade-black");
     }, 2500);
