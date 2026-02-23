@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("technician-id");
-  const buttons = document.querySelectorAll("button");
+  const buttons = document.querySelectorAll(".gridBtn");
   const terminal = document.querySelector(".terminal");
   const elevator = document.querySelector(".elevator");
   const elevator1 = document.querySelector(".elevatorIndicator");
   const overlay = document.querySelector("#black-overlay");
+  const passwdBtn = document.getElementById("password");
   const system = {
     validId: "8492",
     diagnosticOverride: false,
@@ -15,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function playElevator() {
   elevator.classList.add("elevator-start");
-
+  passwdBtn.style.display = "none";
   setTimeout(() => {
     elevator.classList.remove("elevator-start");
     elevator.classList.add("elevator-moving");
@@ -97,7 +98,7 @@ function playElevator() {
       if (btn.innerHTML.includes("keyboard_return") || value.toLowerCase().includes("keyboard_return") || value.toLowerCase().includes("enter")) {
         updateStatus(system.validate(input.value));
       }
-      const passwdBtn = document.getElementById("password");
+      
       if (value.toLowerCase().includes("diagnostic override")) {
         system.diagnosticOverride = !system.diagnosticOverride;
         btn.textContent = system.diagnosticOverride ? "Diagnostic Override: ON" : "Diagnostic Override: OFF";
