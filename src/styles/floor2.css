@@ -88,59 +88,27 @@
   animation: fade-to-black 1s forwards;
 }
 @keyframes elevator-start {
-  0% {
-    transform: translateY(0);
-  }
-  20% {
-    transform: translateY(3px);
-  }
-  50% {
-    transform: translateY(-2px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+  0% { transform: translateY(0); }
+  20% { transform: translateY(3px); }   
+  50% { transform: translateY(-2px); }  
+  100% { transform: translateY(0); }
 }
 
 @keyframes elevator-moving {
-  0% {
-    transform: translateY(0);
-  }
-  25% {
-    transform: translateY(-1px);
-  }
-  50% {
-    transform: translateY(1px);
-  }
-  75% {
-    transform: translateY(-1px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+  0% { transform: translateY(0); }
+  25% { transform: translateY(-1px); }
+  50% { transform: translateY(1px); }
+  75% { transform: translateY(-1px); }
+  100% { transform: translateY(0); }
 }
 @keyframes elevator-stop {
-  0% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-4px);
-  }
-  70% {
-    transform: translateY(3px);
-  }
-  90% {
-    transform: translateY(-1px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+  0% { transform: translateY(0); }
+  40% { transform: translateY(-4px); }
+  70% { transform: translateY(3px); }
+  90% { transform: translateY(-1px); }
+  100% { transform: translateY(0); }
 }
 @keyframes fade-to-black {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }

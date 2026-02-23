@@ -107,8 +107,7 @@
         </div>
 
         <button
-          class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-blue-600 transition-colors shadow-[0_0_15px_rgba(19,91,236,0.5)]"
-          id="rebootButton"
+          class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-blue-600 transition-colors shadow-[0_0_15px_rgba(19,91,236,0.5)]" id="rebootButton"
         >
           <span class="material-symbols-outlined mr-2 text-[18px]"
             >engineering</span
@@ -145,10 +144,7 @@
         </div>
 
         <!-- Fuse Container -->
-        <div
-          class="flex-1 overflow-y-auto pr-2 space-y-4 hidden"
-          id="inventoryContainer"
-        >
+        <div class="flex-1 overflow-y-auto pr-2 space-y-4 hidden" id="inventoryContainer">
           <!-- Fuse Item: Type A -->
           <div
             draggable="true"
@@ -197,7 +193,7 @@
                 >
               </div>
               <div>
-                <div class="text-white font-bold tracking-widest">Plasma</div>
+                <div class="text-white font-bold tracking-widest ">Plasma</div>
                 <div class="text-xs text-primary font-mono">500V / 25A</div>
                 <div class="text-[10px] text-slate-500 mt-1 uppercase">
                   High Capacity
@@ -224,7 +220,7 @@
                 >
               </div>
               <div>
-                <div class="text-white font-bold tracking-widest">QUANTUM</div>
+                <div class="text-white font-bold tracking-widest ">QUANTUM</div>
                 <div class="text-xs text-purple-400 font-mono">∞V / ∞A</div>
                 <div class="text-[10px] text-slate-500 mt-1 uppercase">
                   Unstable
@@ -252,7 +248,7 @@
                 >
               </div>
               <div>
-                <div class="text-white font-bold tracking-widest">Thermal</div>
+                <div class="text-white font-bold tracking-widest ">Thermal</div>
                 <div class="text-xs text-accent-yellow font-mono">
                   250V / 10A
                 </div>
@@ -328,18 +324,11 @@
 
         <!-- Circuit Board Container -->
         <div
-          class="relative w-full max-w-4xl aspect-[16/9] bg-[#1a1f2c] rounded-xl border-2 border-slate-600 shadow-2xl p-8 overflow-hidden group"
-          id="panel"
+          class="relative w-full max-w-4xl aspect-[16/9] bg-[#1a1f2c] rounded-xl border-2 border-slate-600 shadow-2xl p-8 overflow-hidden group" id="panel"
         >
-          <!-- Rideaux métalliques -->
-          <div
-            id="curtainTop"
-            class="absolute top-0 left-0 w-full h-0 bg-slate-800 z-50"
-          ></div>
-          <div
-            id="curtainBottom"
-            class="absolute bottom-0 left-0 w-full h-0 bg-slate-800 z-50"
-          ></div>
+        <!-- Rideaux métalliques -->
+        <div id="curtainTop" class="absolute top-0 left-0 w-full h-0 bg-slate-800 z-50"></div>
+        <div id="curtainBottom" class="absolute bottom-0 left-0 w-full h-0 bg-slate-800 z-50"></div>
           <!-- Circuit Background Image/Pattern -->
           <div
             class="absolute inset-0 opacity-20 pointer-events-none"
@@ -412,15 +401,14 @@
               <div class="flex flex-col items-center gap-4">
                 <div
                   class="relative w-24 h-32 border-2 border-dashed border-accent-yellow rounded-lg bg-slate-900/50 flex flex-col items-center justify-center transition-all hover:bg-slate-800/80 hover:scale-105 hover:shadow-[0_0_15px_rgba(250,204,21,0.2)]"
-                  data-accept="thermal"
-                  data-index="0"
+                  data-accept="thermal" data-index="0"
                 >
                   <span
                     class="material-symbols-outlined text-slate-600 text-3xl mb-2"
                     >download</span
                   >
                   <span
-                    class="text-[10px] text-accent-yellow font-mono uppercase"
+                    class="text-[10px] text-accent-yellow font-mono uppercase" 
                     >Thermal</span
                   >
 
@@ -442,8 +430,7 @@
               <div class="flex flex-col items-center gap-4">
                 <div
                   class="relative w-24 h-32 border-2 border-dashed border-accent-yellow rounded-lg bg-slate-900/50 flex flex-col items-center justify-center transition-all hover:bg-slate-800/80 hover:scale-105 hover:shadow-[0_0_15px_rgba(250,204,21,0.2)]"
-                  data-accept="quantum"
-                  data-index="1"
+                  data-accept="quantum" data-index="1"
                 >
                   <span
                     class="material-symbols-outlined text-slate-600 text-3xl mb-2"
@@ -470,8 +457,7 @@
               <div class="flex flex-col items-center gap-4">
                 <div
                   class="relative w-24 h-32 border-2 border-dashed border-accent-yellow rounded-lg bg-slate-900/50 flex flex-col items-center justify-center transition-all hover:bg-slate-800/80 hover:scale-105 hover:shadow-[0_0_15px_rgba(250,204,21,0.2)]"
-                  data-accept="plasma"
-                  data-index="2"
+                  data-accept="plasma" data-index="2"
                 >
                   <span
                     class="material-symbols-outlined text-slate-600 text-3xl mb-2"
@@ -491,7 +477,7 @@
                 <div class="h-12 w-0.5 bg-slate-700"></div>
                 <div
                   class="w-3 h-3 rounded-full bg-slate-800 border border-slate-600 indicator"
-                ></div>
+                ></div> 
               </div>
             </div>
 
@@ -505,8 +491,12 @@
                   <span class="text-xs text-slate-400 font-mono">NODE_A</span>
                 </div>
                 <div class="flex items-center gap-2 NODE_B">
-                  <div class="w-2 h-2 rounded-full bg-slate-600"></div>
-                  <span class="text-xs text-slate-400 font-mono">NODE_B</span>
+                  <div
+                    class="w-2 h-2 rounded-full bg-slate-600"
+                  ></div>
+                  <span class="text-xs text-slate-400 font-mono"
+                    >NODE_B</span
+                  >
                 </div>
                 <div class="flex items-center gap-2 NODE_C">
                   <div class="w-2 h-2 rounded-full bg-slate-600"></div>
@@ -540,6 +530,6 @@
 
     <script src="src/audio/sounds.js"></script>
     <script src="src/floors/floor1.js"></script>
-    <script src="main.js"></script>
+      <script src="main.js"></script>
   </body>
 </html>

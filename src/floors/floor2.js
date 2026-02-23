@@ -1,27 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const input = document.getElementById("technician-id");
-  const buttons = document.querySelectorAll(".terminal button");
+  const input    = document.getElementById("technician-id");
+  const buttons  = document.querySelectorAll(".terminal button");
   const terminal = document.querySelector(".terminal");
   const elevator = document.querySelector(".elevator");
-  const elevator1 = document.querySelector(".elevatorIndicator");
-  const overlay = document.querySelector("#black-overlay");
+  const elevator1= document.querySelector(".elevatorIndicator");
+  const overlay  = document.querySelector("#black-overlay");
 
   const system = {
     validId: "8492",
     diagnosticOverride: false,
-    validate(id) {
-      return id === this.validId;
-    },
+    validate(id) { return id === this.validId; },
   };
 
   // ── Post-it avec l'indice (toujours présent, révélé par Diagnostic Override) ──
   // Le HTML a déjà un #password. Si absent, on l'injecte.
-  if (!document.getElementById("password")) {
-    const postit = document.createElement("div");
-    postit.id = "password";
-    postit.setAttribute("data-technician-id", "TECH-882-X");
-    postit.style.cssText =
-      "display:none;position:absolute;top:20%;right:18%;z-index:30;";
+  if (!document.getElementById('password')) {
+    const postit = document.createElement('div');
+    postit.id = 'password';
+    postit.setAttribute('data-technician-id', 'TECH-882-X');
+    postit.style.cssText = 'display:none;position:absolute;top:20%;right:18%;z-index:30;';
     postit.innerHTML = `
       <div class="relative w-32 h-32 bg-yellow-200/90 shadow-lg rounded-sm p-3 flex flex-col items-center justify-center font-mono text-slate-800 rotate-2" style="transform:rotate(3deg)">
         <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-8 h-8 bg-slate-800/20 rounded-full blur-sm"></div>
@@ -36,19 +33,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Déflou au hover
-  const postitEl = document.getElementById("password");
-  const codeSpan = document.getElementById("postit-code");
+  const postitEl = document.getElementById('password');
+  const codeSpan = document.getElementById('postit-code');
   if (postitEl && codeSpan) {
-    postitEl.addEventListener("mouseenter", () => {
-      codeSpan.style.filter = "blur(0px)";
-      postitEl.style.transform = "rotate(3deg) scale(1.06)";
-    });
-    postitEl.addEventListener("mouseleave", () => {
-      codeSpan.style.filter = "blur(2px)";
-      postitEl.style.transform = "rotate(6deg) scale(1)";
-    });
-    postitEl.style.transform = "rotate(6deg)";
-    postitEl.style.transition = "transform 0.3s";
+    postitEl.addEventListener('mouseenter', () => { codeSpan.style.filter = 'blur(0px)'; postitEl.style.transform = 'rotate(3deg) scale(1.06)'; });
+    postitEl.addEventListener('mouseleave', () => { codeSpan.style.filter = 'blur(2px)'; postitEl.style.transform = 'rotate(6deg) scale(1)'; });
+    postitEl.style.transform = 'rotate(6deg)';
+    postitEl.style.transition = 'transform 0.3s';
   }
 
   // ── Keyframes animations ascenseur ──
@@ -138,9 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
       elevator.classList.add("elevator-returning");
       document.body.classList.remove("elevator-shaking");
     }, 1500);
-    setTimeout(() => {
-      elevator.classList.remove("elevator-returning");
-    }, 2400);
+    setTimeout(() => { elevator.classList.remove("elevator-returning"); }, 2400);
   }
 
   // ── Montée (ACCESS GRANTED) ──
@@ -148,44 +137,30 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!elevator) return;
     elevator.classList.add("elevator-rising");
     document.body.classList.add("elevator-rise-shaking");
-    setTimeout(() => {
-      document.body.classList.remove("elevator-rise-shaking");
-    }, 4600);
+    setTimeout(() => { document.body.classList.remove("elevator-rise-shaking"); }, 4600);
   }
 
   // ── Transition vers floor3 ──
   function playElevatorTransition() {
-    if (elevator) elevator.classList.add("elevator-start");
+    if (elevator)  elevator.classList.add("elevator-start");
     setTimeout(() => {
-      if (elevator) {
-        elevator.classList.remove("elevator-start");
-        elevator.classList.add("elevator-moving");
-      }
-      if (elevator1) {
-        elevator1.classList.remove("elevator-start");
-        elevator1.classList.add("elevator-moving");
-      }
+      if (elevator)  { elevator.classList.remove("elevator-start");  elevator.classList.add("elevator-moving"); }
+      if (elevator1) { elevator1.classList.remove("elevator-start"); elevator1.classList.add("elevator-moving"); }
     }, 400);
 
-    setTimeout(() => {
-      if (overlay) overlay.classList.add("fade-black");
-    }, 2500);
+    // Le fade-black déclenche main.js → redirection floor3
+    setTimeout(() => { if (overlay) overlay.classList.add("fade-black"); }, 2500);
 
     setTimeout(() => {
-      if (elevator1) {
-        elevator1.classList.remove("elevator-moving");
-        elevator1.classList.add("elevator-stop");
-      }
+      if (elevator1) { elevator1.classList.remove("elevator-moving"); elevator1.classList.add("elevator-stop"); }
     }, 4000);
-    setTimeout(() => {
-      if (elevator1) elevator1.classList.remove("elevator-stop");
-    }, 4300);
+    setTimeout(() => { if (elevator1) elevator1.classList.remove("elevator-stop"); }, 4300);
   }
 
   // ── Logique principale ──
   function updateStatus() {
-    const lockIcon = document.getElementById("lock-icon");
-    const indicator = document.getElementById("status-light");
+    const lockIcon   = document.getElementById("lock-icon");
+    const indicator  = document.getElementById("status-light");
     const statusText = document.getElementById("system-status");
 
     if (input.value === system.validId) {
@@ -195,21 +170,13 @@ document.addEventListener("DOMContentLoaded", () => {
       input.value = "ACCESS_GRANTED";
       input.classList.remove("text-red-500");
       input.classList.add("text-green-500", "font-bold");
-      if (lockIcon) {
-        lockIcon.textContent = "lock_open";
-        lockIcon.classList.remove("text-slate-600");
-        lockIcon.classList.add("text-green-500");
-      }
-      if (indicator) {
-        indicator.classList.remove("bg-red-500");
-        indicator.classList.add("bg-green-500");
-      }
-      if (statusText) statusText.textContent = "ACCESS_GRANTED";
+      if (lockIcon)   { lockIcon.textContent = "lock_open"; lockIcon.classList.remove("text-slate-600"); lockIcon.classList.add("text-green-500"); }
+      if (indicator)  { indicator.classList.remove("bg-red-500"); indicator.classList.add("bg-green-500"); }
+      if (statusText)   statusText.textContent = "ACCESS_GRANTED";
 
-      setTimeout(() => {
-        if (terminal) terminal.classList.add("scale-0");
-      }, 1000);
+      setTimeout(() => { if (terminal) terminal.classList.add("scale-0"); }, 1000);
       setTimeout(() => playElevatorTransition(), 2000);
+
     } else {
       // ACCESS DENIED
       Sounds.play("elevator_fall");
@@ -217,20 +184,14 @@ document.addEventListener("DOMContentLoaded", () => {
       input.value = "ACCESS_DENIED";
       input.classList.remove("text-green-500");
       input.classList.add("text-red-500", "font-bold");
-      if (indicator) {
-        indicator.classList.remove("bg-green-500");
-        indicator.classList.add("bg-red-500");
-      }
-      if (statusText) statusText.textContent = "ACCESS_DENIED";
+      if (indicator)  { indicator.classList.remove("bg-green-500"); indicator.classList.add("bg-red-500"); }
+      if (statusText)   statusText.textContent = "ACCESS_DENIED";
 
       setTimeout(() => {
         input.value = "";
         input.classList.remove("text-red-500", "font-bold");
-        if (indicator) {
-          indicator.classList.remove("bg-red-500");
-          indicator.classList.add("bg-green-500");
-        }
-        if (statusText) statusText.textContent = "SYSTEM_READY";
+        if (indicator)  { indicator.classList.remove("bg-red-500"); indicator.classList.add("bg-green-500"); }
+        if (statusText)   statusText.textContent = "SYSTEM_READY";
       }, 2500);
     }
   }
@@ -241,46 +202,32 @@ document.addEventListener("DOMContentLoaded", () => {
       let value = "";
       const spans = btn.querySelectorAll("span");
       if (spans.length) {
-        const spanArray = Array.from(spans);
-        const digitSpan = spanArray.find((s) => /\d/.test(s.textContent));
-        const nonIconSpan = spanArray.find(
-          (s) => !s.classList.contains("material-symbols-outlined"),
-        );
+        const spanArray   = Array.from(spans);
+        const digitSpan   = spanArray.find(s => /\d/.test(s.textContent));
+        const nonIconSpan = spanArray.find(s => !s.classList.contains("material-symbols-outlined"));
         value = (digitSpan || nonIconSpan || spanArray[0]).textContent.trim();
       } else {
         value = btn.textContent.trim();
       }
 
       const digitMatch = value.match(/\d/);
-      if (digitMatch && input.value.length < 4) {
-        input.value += digitMatch[0];
-        Sounds.play("keyclick");
-      }
+      if (digitMatch && input.value.length < 4) { input.value += digitMatch[0]; Sounds.play("keyclick"); }
 
-      if (
-        btn.innerHTML.includes("backspace") ||
-        value.toLowerCase().includes("backspace")
-      ) {
+      if (btn.innerHTML.includes("backspace") || value.toLowerCase().includes("backspace")) {
         input.value = input.value.slice(0, -1);
         Sounds.play("keyclick");
       }
 
-      if (
-        btn.innerHTML.includes("keyboard_return") ||
-        value.toLowerCase().includes("keyboard_return")
-      ) {
+      if (btn.innerHTML.includes("keyboard_return") || value.toLowerCase().includes("keyboard_return")) {
         updateStatus();
       }
 
       // Diagnostic Override → révèle le post-it
       if (btn.textContent.toLowerCase().includes("diagnostic")) {
         system.diagnosticOverride = !system.diagnosticOverride;
-        btn.textContent = system.diagnosticOverride
-          ? "Diagnostic Override: ON"
-          : "Diagnostic Override: OFF";
+        btn.textContent = system.diagnosticOverride ? "Diagnostic Override: ON" : "Diagnostic Override: OFF";
         const pwd = document.getElementById("password");
-        if (pwd)
-          pwd.style.display = system.diagnosticOverride ? "block" : "none";
+        if (pwd) pwd.style.display = system.diagnosticOverride ? "block" : "none";
         if (system.diagnosticOverride) {
           btn.classList.add("bg-yellow-500", "text-black");
           btn.classList.remove("text-slate-300");
@@ -294,14 +241,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ── Clavier physique ──
   document.addEventListener("keydown", (e) => {
-    if (/^[0-9]$/.test(e.key) && input.value.length < 4) {
-      input.value += e.key;
-      Sounds.play("keyclick");
-    }
-    if (e.key === "Backspace") {
-      input.value = input.value.slice(0, -1);
-      Sounds.play("keyclick");
-    }
+    if (/^[0-9]$/.test(e.key) && input.value.length < 4) { input.value += e.key; Sounds.play("keyclick"); }
+    if (e.key === "Backspace") { input.value = input.value.slice(0, -1); Sounds.play("keyclick"); }
     if (e.key === "Enter") updateStatus();
   });
 });
