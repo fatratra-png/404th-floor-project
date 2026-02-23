@@ -17,7 +17,7 @@ const Floor3 = (() => {
   const DECAY = 0.8; // -% par tick (gravité)
   const DECAY_RATE = 80; // ms entre chaque tick de decay
   const SUSTAIN_NEEDED = 3000; // ms à tenir au-dessus de TARGET
-TARGET
+  TARGET;
   // --- DOM REFS ---
   let gaugeBar,
     pressureLabel,
