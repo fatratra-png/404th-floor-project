@@ -1,485 +1,592 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html class="dark" lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>The 404th Floor: Elevator Hub</title>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
-        rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
     <!-- Icons -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
     <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <!-- Theme Configuration -->
     <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#135bec",
-                        "background-light": "#f6f6f8",
-                        "background-dark": "#101622",
-                        "panel-dark": "#1a1f2e",
-                        "metal-dark": "#151a25",
-                        "accent-glow": "#3b82f6",
-                    },
-                    fontFamily: {
-                        "display": ["Space Grotesk", "sans-serif"]
-                    },
-                    boxShadow: {
-                        'neon': '0 0 10px rgba(19, 91, 236, 0.5), 0 0 20px rgba(19, 91, 236, 0.3)',
-                        'neon-strong': '0 0 15px rgba(19, 91, 236, 0.8), 0 0 30px rgba(19, 91, 236, 0.5)',
-                        'crt': 'inset 0 0 20px rgba(0,0,0,0.5)',
-                        'button-pressed': 'inset 2px 2px 5px rgba(0,0,0,0.5), inset -1px -1px 2px rgba(255,255,255,0.1)',
-                        'button-normal': '5px 5px 10px rgba(0,0,0,0.5), -1px -1px 2px rgba(255,255,255,0.05)',
-                    },
-                    backgroundImage: {
-                        'brushed-metal': 'linear-gradient(135deg, rgba(255,255,255,0.02) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.02) 75%, transparent 75%, transparent)',
-                        'scanlines': 'linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2))',
-                    },
-                    animation: {
-                        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'flicker': 'flicker 3s infinite',
-                    },
-                    keyframes: {
-                        flicker: {
-                            '0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100%': { opacity: '1' },
-                            '20%, 21.999%, 63%, 63.999%, 65%, 69.999%': { opacity: '0.4' },
-                        }
-                    }
-                },
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#135bec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+              "panel-dark": "#1a1f2e",
+              "metal-dark": "#151a25",
+              "accent-glow": "#3b82f6",
             },
-        }
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+            },
+            boxShadow: {
+              neon: "0 0 10px rgba(19, 91, 236, 0.5), 0 0 20px rgba(19, 91, 236, 0.3)",
+              "neon-strong":
+                "0 0 15px rgba(19, 91, 236, 0.8), 0 0 30px rgba(19, 91, 236, 0.5)",
+              crt: "inset 0 0 20px rgba(0,0,0,0.5)",
+              "button-pressed":
+                "inset 2px 2px 5px rgba(0,0,0,0.5), inset -1px -1px 2px rgba(255,255,255,0.1)",
+              "button-normal":
+                "5px 5px 10px rgba(0,0,0,0.5), -1px -1px 2px rgba(255,255,255,0.05)",
+            },
+            backgroundImage: {
+              "brushed-metal":
+                "linear-gradient(135deg, rgba(255,255,255,0.02) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.02) 75%, transparent 75%, transparent)",
+              scanlines:
+                "linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2))",
+            },
+            animation: {
+              "pulse-fast": "pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+              flicker: "flicker 3s infinite",
+            },
+            keyframes: {
+              flicker: {
+                "0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100%": {
+                  opacity: "1",
+                },
+                "20%, 21.999%, 63%, 63.999%, 65%, 69.999%": { opacity: "0.4" },
+              },
+            },
+          },
+        },
+      };
     </script>
     <style>
-        /* Custom Utilities for Glitch Effect */
-        .glitch-text {
-            position: relative;
+      /* Custom Utilities for Glitch Effect */
+      .glitch-text {
+        position: relative;
+      }
+
+      .glitch-text::before,
+      .glitch-text::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #101622;
+      }
+
+      .glitch-text::before {
+        left: 2px;
+        text-shadow: -1px 0 #ff00c1;
+        clip: rect(44px, 450px, 56px, 0);
+        animation: glitch-anim 5s infinite linear alternate-reverse;
+      }
+
+      .glitch-text::after {
+        left: -2px;
+        text-shadow: -1px 0 #00fff9;
+        clip: rect(44px, 450px, 56px, 0);
+        animation: glitch-anim-2 5s infinite linear alternate-reverse;
+      }
+
+      @keyframes glitch-anim {
+        0% {
+          clip: rect(42px, 9999px, 44px, 0);
         }
 
-        .glitch-text::before,
-        .glitch-text::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #101622;
+        5% {
+          clip: rect(12px, 9999px, 59px, 0);
         }
 
-        .glitch-text::before {
-            left: 2px;
-            text-shadow: -1px 0 #ff00c1;
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim 5s infinite linear alternate-reverse;
+        10% {
+          clip: rect(48px, 9999px, 29px, 0);
         }
 
-        .glitch-text::after {
-            left: -2px;
-            text-shadow: -1px 0 #00fff9;
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim-2 5s infinite linear alternate-reverse;
+        15.0% {
+          clip: rect(42px, 9999px, 73px, 0);
         }
 
-        @keyframes glitch-anim {
-            0% {
-                clip: rect(42px, 9999px, 44px, 0);
-            }
-
-            5% {
-                clip: rect(12px, 9999px, 59px, 0);
-            }
-
-            10% {
-                clip: rect(48px, 9999px, 29px, 0);
-            }
-
-            15.0% {
-                clip: rect(42px, 9999px, 73px, 0);
-            }
-
-            20% {
-                clip: rect(63px, 9999px, 27px, 0);
-            }
-
-            25% {
-                clip: rect(34px, 9999px, 55px, 0);
-            }
-
-            30.0% {
-                clip: rect(86px, 9999px, 73px, 0);
-            }
-
-            35% {
-                clip: rect(20px, 9999px, 20px, 0);
-            }
-
-            40% {
-                clip: rect(26px, 9999px, 60px, 0);
-            }
-
-            45% {
-                clip: rect(25px, 9999px, 66px, 0);
-            }
-
-            50% {
-                clip: rect(57px, 9999px, 98px, 0);
-            }
-
-            55.0% {
-                clip: rect(5px, 9999px, 46px, 0);
-            }
-
-            60.0% {
-                clip: rect(82px, 9999px, 31px, 0);
-            }
-
-            65% {
-                clip: rect(54px, 9999px, 27px, 0);
-            }
-
-            70% {
-                clip: rect(28px, 9999px, 99px, 0);
-            }
-
-            75% {
-                clip: rect(45px, 9999px, 69px, 0);
-            }
-
-            80% {
-                clip: rect(23px, 9999px, 85px, 0);
-            }
-
-            85.0% {
-                clip: rect(54px, 9999px, 84px, 0);
-            }
-
-            90% {
-                clip: rect(45px, 9999px, 47px, 0);
-            }
-
-            95% {
-                clip: rect(37px, 9999px, 20px, 0);
-            }
-
-            100% {
-                clip: rect(4px, 9999px, 91px, 0);
-            }
+        20% {
+          clip: rect(63px, 9999px, 27px, 0);
         }
 
-        @keyframes glitch-anim-2 {
-            0% {
-                clip: rect(65px, 9999px, 100px, 0);
-            }
-
-            5% {
-                clip: rect(52px, 9999px, 74px, 0);
-            }
-
-            10% {
-                clip: rect(79px, 9999px, 85px, 0);
-            }
-
-            15.0% {
-                clip: rect(75px, 9999px, 5px, 0);
-            }
-
-            20% {
-                clip: rect(67px, 9999px, 61px, 0);
-            }
-
-            25% {
-                clip: rect(14px, 9999px, 79px, 0);
-            }
-
-            30.0% {
-                clip: rect(1px, 9999px, 66px, 0);
-            }
-
-            35% {
-                clip: rect(86px, 9999px, 30px, 0);
-            }
-
-            40% {
-                clip: rect(23px, 9999px, 98px, 0);
-            }
-
-            45% {
-                clip: rect(85px, 9999px, 72px, 0);
-            }
-
-            50% {
-                clip: rect(71px, 9999px, 75px, 0);
-            }
-
-            55.0% {
-                clip: rect(2px, 9999px, 48px, 0);
-            }
-
-            60.0% {
-                clip: rect(30px, 9999px, 16px, 0);
-            }
-
-            65% {
-                clip: rect(59px, 9999px, 50px, 0);
-            }
-
-            70% {
-                clip: rect(41px, 9999px, 62px, 0);
-            }
-
-            75% {
-                clip: rect(2px, 9999px, 82px, 0);
-            }
-
-            80% {
-                clip: rect(47px, 9999px, 73px, 0);
-            }
-
-            85.0% {
-                clip: rect(3px, 9999px, 27px, 0);
-            }
-
-            90% {
-                clip: rect(26px, 9999px, 55px, 0);
-            }
-
-            95% {
-                clip: rect(42px, 9999px, 97px, 0);
-            }
-
-            100% {
-                clip: rect(38px, 9999px, 49px, 0);
-            }
+        25% {
+          clip: rect(34px, 9999px, 55px, 0);
         }
 
-        .scanlines {
-            background-size: 100% 4px;
+        30.0% {
+          clip: rect(86px, 9999px, 73px, 0);
         }
+
+        35% {
+          clip: rect(20px, 9999px, 20px, 0);
+        }
+
+        40% {
+          clip: rect(26px, 9999px, 60px, 0);
+        }
+
+        45% {
+          clip: rect(25px, 9999px, 66px, 0);
+        }
+
+        50% {
+          clip: rect(57px, 9999px, 98px, 0);
+        }
+
+        55.0% {
+          clip: rect(5px, 9999px, 46px, 0);
+        }
+
+        60.0% {
+          clip: rect(82px, 9999px, 31px, 0);
+        }
+
+        65% {
+          clip: rect(54px, 9999px, 27px, 0);
+        }
+
+        70% {
+          clip: rect(28px, 9999px, 99px, 0);
+        }
+
+        75% {
+          clip: rect(45px, 9999px, 69px, 0);
+        }
+
+        80% {
+          clip: rect(23px, 9999px, 85px, 0);
+        }
+
+        85.0% {
+          clip: rect(54px, 9999px, 84px, 0);
+        }
+
+        90% {
+          clip: rect(45px, 9999px, 47px, 0);
+        }
+
+        95% {
+          clip: rect(37px, 9999px, 20px, 0);
+        }
+
+        100% {
+          clip: rect(4px, 9999px, 91px, 0);
+        }
+      }
+
+      @keyframes glitch-anim-2 {
+        0% {
+          clip: rect(65px, 9999px, 100px, 0);
+        }
+
+        5% {
+          clip: rect(52px, 9999px, 74px, 0);
+        }
+
+        10% {
+          clip: rect(79px, 9999px, 85px, 0);
+        }
+
+        15.0% {
+          clip: rect(75px, 9999px, 5px, 0);
+        }
+
+        20% {
+          clip: rect(67px, 9999px, 61px, 0);
+        }
+
+        25% {
+          clip: rect(14px, 9999px, 79px, 0);
+        }
+
+        30.0% {
+          clip: rect(1px, 9999px, 66px, 0);
+        }
+
+        35% {
+          clip: rect(86px, 9999px, 30px, 0);
+        }
+
+        40% {
+          clip: rect(23px, 9999px, 98px, 0);
+        }
+
+        45% {
+          clip: rect(85px, 9999px, 72px, 0);
+        }
+
+        50% {
+          clip: rect(71px, 9999px, 75px, 0);
+        }
+
+        55.0% {
+          clip: rect(2px, 9999px, 48px, 0);
+        }
+
+        60.0% {
+          clip: rect(30px, 9999px, 16px, 0);
+        }
+
+        65% {
+          clip: rect(59px, 9999px, 50px, 0);
+        }
+
+        70% {
+          clip: rect(41px, 9999px, 62px, 0);
+        }
+
+        75% {
+          clip: rect(2px, 9999px, 82px, 0);
+        }
+
+        80% {
+          clip: rect(47px, 9999px, 73px, 0);
+        }
+
+        85.0% {
+          clip: rect(3px, 9999px, 27px, 0);
+        }
+
+        90% {
+          clip: rect(26px, 9999px, 55px, 0);
+        }
+
+        95% {
+          clip: rect(42px, 9999px, 97px, 0);
+        }
+
+        100% {
+          clip: rect(38px, 9999px, 49px, 0);
+        }
+      }
+
+      .scanlines {
+        background-size: 100% 4px;
+      }
     </style>
-</head>
+  </head>
 
-<body
-    class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-hidden">
+  <body
+    class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-hidden"
+  >
     <!-- Top Navigation -->
     <header
-        class="fixed top-0 left-0 right-0 z-50 bg-[#111722]/90 backdrop-blur-md border-b border-[#232f48] px-6 h-16 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-primary text-3xl">elevator</span>
-            <div>
-                <h1 class="text-white text-lg font-bold tracking-tight">ELEVATOR HUB</h1>
-                <p class="text-xs text-primary font-mono tracking-wider opacity-80">SYS.VER.4.0.4</p>
-            </div>
+      class="fixed top-0 left-0 right-0 z-50 bg-[#111722]/90 backdrop-blur-md border-b border-[#232f48] px-6 h-16 flex items-center justify-between"
+    >
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-primary text-3xl"
+          >elevator</span
+        >
+        <div>
+          <h1 class="text-white text-lg font-bold tracking-tight">
+            ELEVATOR HUB
+          </h1>
+          <p class="text-xs text-primary font-mono tracking-wider opacity-80">
+            SYS.VER.4.0.4
+          </p>
         </div>
-        <div class="flex items-center gap-6">
-            <div class="hidden md:flex items-center gap-4 text-xs font-mono text-slate-400">
-                <span class="flex items-center gap-1"><span
-                        class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> CONNECTION UNSTABLE</span>
-                <span class="text-[#232f48]">|</span>
-                <span class="flex items-center gap-1">ELEVATOR ID: #8F3A2</span>
-            </div>
-            <button class="bg-[#232f48] hover:bg-[#2c3b59] transition-colors p-2 rounded-lg text-white">
-                <span class="material-symbols-outlined text-xl">settings</span>
-            </button>
-            <div class="w-8 h-8 rounded-full bg-cover bg-center border border-[#232f48]"
-                data-alt="User avatar placeholder"
-                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBrgmOZTG9sKaEuOCjMf8vpnzReKHwOOWRVyMvcIqxmd41kOB4CHhf10rCfYAYTza58UAjgTaeayazmZhQ_Dh-EpF0eQl7mhJEHRDNz1L0QBEBPX956Sgxd6OSNE5qpjRwjxVNwoijROHkYG6sZ0qnI_ViyrT-wR7Jh-LLC1MaL5_Ixl2IpTCNzVXLH-dy9e5uZ5dKsOniHrsvxToQ-a8q5V1X6WnsoTQ7LkotZ_BVMUH6172zDolyNj4CrpC54hdAC_gZ6wtL5fzxW');">
-            </div>
+      </div>
+      <div class="flex items-center gap-6">
+        <div
+          class="hidden md:flex items-center gap-4 text-xs font-mono text-slate-400"
+        >
+          <span class="flex items-center gap-1"
+            ><span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+            CONNECTION UNSTABLE</span
+          >
+          <span class="text-[#232f48]">|</span>
+          <span class="flex items-center gap-1">ELEVATOR ID: #8F3A2</span>
         </div>
+        <button
+          class="bg-[#232f48] hover:bg-[#2c3b59] transition-colors p-2 rounded-lg text-white"
+        >
+          <span class="material-symbols-outlined text-xl">settings</span>
+        </button>
+        <div
+          class="w-8 h-8 rounded-full bg-cover bg-center border border-[#232f48]"
+          data-alt="User avatar placeholder"
+          style="
+            background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBrgmOZTG9sKaEuOCjMf8vpnzReKHwOOWRVyMvcIqxmd41kOB4CHhf10rCfYAYTza58UAjgTaeayazmZhQ_Dh-EpF0eQl7mhJEHRDNz1L0QBEBPX956Sgxd6OSNE5qpjRwjxVNwoijROHkYG6sZ0qnI_ViyrT-wR7Jh-LLC1MaL5_Ixl2IpTCNzVXLH-dy9e5uZ5dKsOniHrsvxToQ-a8q5V1X6WnsoTQ7LkotZ_BVMUH6172zDolyNj4CrpC54hdAC_gZ6wtL5fzxW&quot;);
+          "
+        ></div>
+      </div>
     </header>
     <!-- Main Elevator Interface -->
-    <main class="relative w-full h-screen pt-16 flex flex-col md:flex-row bg-background-dark overflow-hidden">
-        <!-- Left Wall / Main Viewport -->
+    <main
+      class="relative w-full h-screen pt-16 flex flex-col md:flex-row bg-background-dark overflow-hidden"
+    >
+      <!-- Left Wall / Main Viewport -->
+      <div
+        class="relative flex-1 bg-metal-dark flex flex-col items-center justify-center p-8 border-r border-[#232f48] shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]"
+      >
+        <!-- Environmental Texture/Decals -->
         <div
-            class="relative flex-1 bg-metal-dark flex flex-col items-center justify-center p-8 border-r border-[#232f48] shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]">
-            <!-- Environmental Texture/Decals -->
-            <div class="absolute inset-0 pointer-events-none opacity-10 overflow-hidden">
-                <div
-                    class="absolute top-20 left-10 text-6xl font-black text-slate-500 rotate-90 transform origin-top-left font-mono">
-                    .overflow-hidden</div>
-                <div class="absolute bottom-20 right-20 text-4xl font-black text-slate-500 -rotate-12 font-mono">
-                    z-index: 9999</div>
-                <div class="absolute top-1/3 left-1/4 w-full h-px bg-slate-700/30 -rotate-45"></div>
-                <div class="absolute bottom-1/4 right-1/4 w-px h-full bg-slate-700/30 rotate-12"></div>
-                <!-- Brushed metal overlay -->
-                <div class="absolute inset-0 bg-brushed-metal opacity-30 bg-[length:20px_20px]"></div>
-            </div>
-            <!-- CRT Monitor (Top Left Floating) -->
-            <div
-                class="absolute top-8 left-8 w-64 md:w-80 bg-[#0a0a0a] rounded-xl border-4 border-[#1a1f2e] shadow-lg overflow-hidden transform -rotate-2">
-                <div class="bg-[#1a1f2e] px-3 py-1 flex items-center justify-between">
-                    <span class="text-[10px] text-slate-400 font-mono">TERM_01</span>
-                    <div class="flex gap-1">
-                        <div class="w-2 h-2 rounded-full bg-red-500/50"></div>
-                        <div class="w-2 h-2 rounded-full bg-yellow-500/50"></div>
-                    </div>
-                </div>
-                <div class="relative p-4 h-32 bg-[#050505] font-mono text-xs shadow-crt">
-                    <div class="absolute inset-0 bg-scanlines opacity-20 pointer-events-none z-10"></div>
-                    <div class="text-red-500 mb-1">&gt; SYSTEM ERROR detected</div>
-                    <div class="text-primary mb-1">&gt; DOM_INTERRUPTION</div>
-                    <div class="text-slate-400 mb-1">&gt; Rerouting power...</div>
-                    <div class="text-slate-400 animate-pulse">&gt; Waiting for manual override_</div>
-                    <div class="absolute bottom-2 right-2 text-[10px] text-slate-600">ERR_CODE: 503</div>
-                </div>
-            </div>
-            <!-- Central Floor Indicator -->
-            <div class="relative z-10 flex flex-col items-center">
-                <div class="text-primary/60 text-sm font-mono tracking-[0.5em] mb-4 uppercase">Current Floor</div>
-                <div class="relative">
-                    <h1 class="text-[120px] md:text-[200px] leading-none font-black text-primary glitch-text tracking-tighter drop-shadow-[0_0_15px_rgba(19,91,236,0.6)]"
-                        data-text="404">
-                        404
-                    </h1>
-                    <!-- Spark effect -->
-                    <div class="absolute top-0 right-10 w-2 h-2 bg-white rounded-full animate-ping opacity-75"></div>
-                </div>
-                <div
-                    class="mt-8 px-6 py-2 bg-red-500/10 border border-red-500/30 rounded text-red-400 font-mono text-sm flex items-center gap-2">
-                    <span class="material-symbols-outlined text-base animate-pulse">warning</span>
-                    <span>ELEVATOR STUCK BETWEEN NODES</span>
-                </div>
-            </div>
-            <!-- Emergency Intercom (Bottom Left) -->
-            <div class="absolute bottom-8 left-8 flex flex-col gap-2">
-                <label class="text-[10px] uppercase text-slate-500 font-bold tracking-widest">Intercom</label>
-                <button
-                    class="group relative w-24 h-24 rounded-full bg-[#1a1f2e] border-2 border-[#232f48] shadow-button-normal active:shadow-button-pressed flex items-center justify-center transition-all">
-                    <div
-                        class="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,_transparent_30%,_#000000_120%)] opacity-50">
-                    </div>
-                    <!-- Speaker Mesh Pattern -->
-                    <div
-                        class="w-16 h-16 rounded-full bg-[radial-gradient(#232f48_1.5px,transparent_1.5px)] [background-size:6px_6px] opacity-50">
-                    </div>
-                    <span
-                        class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors text-3xl z-10">mic_off</span>
-                </button>
-            </div>
+          class="absolute inset-0 pointer-events-none opacity-10 overflow-hidden"
+        >
+          <div
+            class="absolute top-20 left-10 text-6xl font-black text-slate-500 rotate-90 transform origin-top-left font-mono"
+          >
+            .overflow-hidden
+          </div>
+          <div
+            class="absolute bottom-20 right-20 text-4xl font-black text-slate-500 -rotate-12 font-mono"
+          >
+            z-index: 9999
+          </div>
+          <div
+            class="absolute top-1/3 left-1/4 w-full h-px bg-slate-700/30 -rotate-45"
+          ></div>
+          <div
+            class="absolute bottom-1/4 right-1/4 w-px h-full bg-slate-700/30 rotate-12"
+          ></div>
+          <!-- Brushed metal overlay -->
+          <div
+            class="absolute inset-0 bg-brushed-metal opacity-30 bg-[length:20px_20px]"
+          ></div>
         </div>
-        <!-- Right Rail / Control Panel -->
-        <aside
-            class="w-full md:w-80 h-auto md:h-full bg-panel-dark border-l border-[#232f48] shadow-2xl z-20 flex flex-col relative">
-            <!-- Panel Texture -->
-            <div class="absolute inset-0 bg-brushed-metal opacity-50 pointer-events-none"></div>
-            <!-- Panel Header -->
-            <div class="p-6 border-b border-[#232f48] bg-[#151a25]/50 backdrop-blur">
-                <h2 class="text-white text-xl font-bold tracking-tight">CONTROL PANEL</h2>
-                <div class="flex items-center gap-2 mt-2">
-                    <div class="h-1.5 flex-1 bg-slate-700 rounded-full overflow-hidden">
-                        <div class="h-full bg-red-500 w-[35%] animate-pulse"></div>
-                    </div>
-                    <span class="text-xs text-red-400 font-mono">PWR: 35%</span>
-                </div>
+        <!-- CRT Monitor (Top Left Floating) -->
+        <div
+          class="absolute top-8 left-8 w-64 md:w-80 bg-[#0a0a0a] rounded-xl border-4 border-[#1a1f2e] shadow-lg overflow-hidden transform -rotate-2"
+        >
+          <div class="bg-[#1a1f2e] px-3 py-1 flex items-center justify-between">
+            <span class="text-[10px] text-slate-400 font-mono">TERM_01</span>
+            <div class="flex gap-1">
+              <div class="w-2 h-2 rounded-full bg-red-500/50"></div>
+              <div class="w-2 h-2 rounded-full bg-yellow-500/50"></div>
             </div>
-            <!-- Floor Buttons -->
-            <div class="flex-1 overflow-y-auto p-6 flex flex-col gap-6 items-center justify-center">
-                <!-- Floor 4 (Current) -->
-                <div class="w-full flex items-center justify-between gap-4 group">
-                    <div class="text-right flex-1">
-                        <div class="text-sm font-bold text-slate-300">Executive Suite</div>
-                        <div class="text-xs text-red-400 font-mono">ACCESS DENIED</div>
-                    </div>
-                    <button
-                        class="relative w-16 h-16 rounded-lg bg-panel-dark border border-red-500/50 shadow-neon flex items-center justify-center group-hover:scale-105 transition-transform">
-                        <div class="absolute inset-0 bg-red-500/10 animate-pulse rounded-lg"></div>
-                        <span class="text-2xl font-bold text-red-500 font-mono z-10">4</span>
-                    </button>
-                </div>
-                <!-- Separator -->
-                <div class="w-12 h-px bg-slate-700/50"></div>
-                <!-- Floor 3 -->
-                <div
-                    class="w-full flex items-center justify-between gap-4 group opacity-60 hover:opacity-100 transition-opacity">
-                    <div class="text-right flex-1">
-                        <div class="text-sm font-bold text-slate-400">Server Room</div>
-                        <div class="text-xs text-slate-600 font-mono">LOCKED</div>
-                    </div>
-                    <button
-                        class="w-16 h-16 rounded-lg bg-[#151a25] border border-[#232f48] shadow-button-normal active:shadow-button-pressed flex items-center justify-center transition-all active:scale-95">
-                        <span class="text-2xl font-bold text-slate-500 font-mono">3</span>
-                    </button>
-                </div>
-                <!-- Floor 2 -->
-                <div
-                    class="w-full flex items-center justify-between gap-4 group opacity-60 hover:opacity-100 transition-opacity">
-                    <div class="text-right flex-1">
-                        <div class="text-sm font-bold text-slate-400">Mezzanine</div>
-                        <div class="text-xs text-slate-600 font-mono">LOCKED</div>
-                    </div>
-                    <button
-                        class="w-16 h-16 rounded-lg bg-[#151a25] border border-[#232f48] shadow-button-normal active:shadow-button-pressed flex items-center justify-center transition-all active:scale-95 relative overflow-hidden">
-                        <span class="text-2xl font-bold text-slate-500 font-mono z-10">2</span>
-                        <!-- Spark animation on hover -->
-                        <div
-                            class="absolute inset-0 bg-white/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                        </div>
-                    </button>
-                </div>
-                <!-- Floor 1 -->
-                <div class="w-full flex items-center justify-between gap-4 group">
-                    <div class="text-right flex-1">
-                        <div class="text-sm font-bold text-primary">Lobby</div>
-                        <div class="text-xs text-primary/70 font-mono">ACTIVE</div>
-                    </div>
-                    <button data-floor-btn="1"
-                        class="w-16 h-16 rounded-lg bg-primary border border-primary shadow-neon-strong flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer">
-                        <span class="text-2xl font-bold text-white font-mono drop-shadow-md">1</span>
-                    </button>
-                </div>
-            </div>
-            <!-- Maintenance Panel -->
-            <div class="p-6 border-t border-[#232f48] bg-[#0d111a]">
-                <div class="flex flex-col gap-3">
-                    <div class="flex justify-between items-center text-xs text-slate-500 font-mono uppercase">
-                        <span>Maintenance Mode</span>
-                        <span class="text-red-500">OFF</span>
-                    </div>
-                    <div class="grid grid-cols-4 gap-2">
-                        <div class="h-1 bg-primary/40 rounded-full"></div>
-                        <div class="h-1 bg-primary/40 rounded-full"></div>
-                        <div class="h-1 bg-slate-700 rounded-full"></div>
-                        <div class="h-1 bg-slate-700 rounded-full"></div>
-                    </div>
-                    <button
-                        class="mt-2 w-full py-3 bg-[#1a1f2e] hover:bg-[#232f48] border border-[#232f48] text-slate-300 text-xs font-bold uppercase tracking-widest rounded flex items-center justify-center gap-2 transition-colors">
-                        <span class="material-symbols-outlined text-sm">build</span>
-                        Diagnostics
-                    </button>
-                </div>
-            </div>
-            <!-- Key Slot / Card Reader -->
+          </div>
+          <div
+            class="relative p-4 h-32 bg-[#050505] font-mono text-xs shadow-crt"
+          >
             <div
-                class="absolute top-1/2 -left-3 w-6 h-24 bg-[#0d111a] border border-[#232f48] rounded-l-lg flex flex-col items-center justify-center gap-2 shadow-lg z-0">
-                <div class="w-1 h-16 bg-black rounded-full shadow-[inset_0_0_2px_rgba(255,255,255,0.2)]"></div>
+              class="absolute inset-0 bg-scanlines opacity-20 pointer-events-none z-10"
+            ></div>
+            <div class="text-red-500 mb-1">&gt; SYSTEM ERROR detected</div>
+            <div class="text-primary mb-1">&gt; DOM_INTERRUPTION</div>
+            <div class="text-slate-400 mb-1">&gt; Rerouting power...</div>
+            <div class="text-slate-400 animate-pulse">
+              &gt; Waiting for manual override_
             </div>
-        </aside>
+            <div class="absolute bottom-2 right-2 text-[10px] text-slate-600">
+              ERR_CODE: 503
+            </div>
+          </div>
+        </div>
+        <!-- Central Floor Indicator -->
+        <div class="relative z-10 flex flex-col items-center">
+          <div
+            class="text-primary/60 text-sm font-mono tracking-[0.5em] mb-4 uppercase"
+          >
+            Current Floor
+          </div>
+          <div class="relative">
+            <h1
+              class="text-[120px] md:text-[200px] leading-none font-black text-primary glitch-text tracking-tighter drop-shadow-[0_0_15px_rgba(19,91,236,0.6)]"
+              data-text="404"
+            >
+              404
+            </h1>
+            <!-- Spark effect -->
+            <div
+              class="absolute top-0 right-10 w-2 h-2 bg-white rounded-full animate-ping opacity-75"
+            ></div>
+          </div>
+          <div
+            class="mt-8 px-6 py-2 bg-red-500/10 border border-red-500/30 rounded text-red-400 font-mono text-sm flex items-center gap-2"
+          >
+            <span class="material-symbols-outlined text-base animate-pulse"
+              >warning</span
+            >
+            <span>ELEVATOR STUCK BETWEEN NODES</span>
+          </div>
+        </div>
+        <!-- Emergency Intercom (Bottom Left) -->
+        <div class="absolute bottom-8 left-8 flex flex-col gap-2">
+          <label
+            class="text-[10px] uppercase text-slate-500 font-bold tracking-widest"
+            >Intercom</label
+          >
+          <button
+            class="group relative w-24 h-24 rounded-full bg-[#1a1f2e] border-2 border-[#232f48] shadow-button-normal active:shadow-button-pressed flex items-center justify-center transition-all"
+          >
+            <div
+              class="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,_transparent_30%,_#000000_120%)] opacity-50"
+            ></div>
+            <!-- Speaker Mesh Pattern -->
+            <div
+              class="w-16 h-16 rounded-full bg-[radial-gradient(#232f48_1.5px,transparent_1.5px)] [background-size:6px_6px] opacity-50"
+            ></div>
+            <span
+              class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors text-3xl z-10"
+              >mic_off</span
+            >
+          </button>
+        </div>
+      </div>
+      <!-- Right Rail / Control Panel -->
+      <aside
+        class="w-full md:w-80 h-auto md:h-full bg-panel-dark border-l border-[#232f48] shadow-2xl z-20 flex flex-col relative"
+      >
+        <!-- Panel Texture -->
+        <div
+          class="absolute inset-0 bg-brushed-metal opacity-50 pointer-events-none"
+        ></div>
+        <!-- Panel Header -->
+        <div
+          class="p-6 border-b border-[#232f48] bg-[#151a25]/50 backdrop-blur"
+        >
+          <h2 class="text-white text-xl font-bold tracking-tight">
+            CONTROL PANEL
+          </h2>
+          <div class="flex items-center gap-2 mt-2">
+            <div class="h-1.5 flex-1 bg-slate-700 rounded-full overflow-hidden">
+              <div class="h-full bg-red-500 w-[35%] animate-pulse"></div>
+            </div>
+            <span class="text-xs text-red-400 font-mono">PWR: 35%</span>
+          </div>
+        </div>
+        <!-- Floor Buttons -->
+        <div
+          class="flex-1 overflow-y-auto p-6 flex flex-col gap-6 items-center justify-center"
+        >
+          <!-- Floor 4 (Current) -->
+          <div class="w-full flex items-center justify-between gap-4 group">
+            <div class="text-right flex-1">
+              <div class="text-sm font-bold text-slate-300">
+                Executive Suite
+              </div>
+              <div class="text-xs text-red-400 font-mono">ACCESS DENIED</div>
+            </div>
+            <button
+              class="relative w-16 h-16 rounded-lg bg-panel-dark border border-red-500/50 shadow-neon flex items-center justify-center group-hover:scale-105 transition-transform"
+            >
+              <div
+                class="absolute inset-0 bg-red-500/10 animate-pulse rounded-lg"
+              ></div>
+              <span class="text-2xl font-bold text-red-500 font-mono z-10"
+                >4</span
+              >
+            </button>
+          </div>
+          <!-- Separator -->
+          <div class="w-12 h-px bg-slate-700/50"></div>
+          <!-- Floor 3 -->
+          <div
+            class="w-full flex items-center justify-between gap-4 group opacity-60 hover:opacity-100 transition-opacity"
+          >
+            <div class="text-right flex-1">
+              <div class="text-sm font-bold text-slate-400">Server Room</div>
+              <div class="text-xs text-slate-600 font-mono">LOCKED</div>
+            </div>
+            <button
+              class="w-16 h-16 rounded-lg bg-[#151a25] border border-[#232f48] shadow-button-normal active:shadow-button-pressed flex items-center justify-center transition-all active:scale-95"
+            >
+              <span class="text-2xl font-bold text-slate-500 font-mono">3</span>
+            </button>
+          </div>
+          <!-- Floor 2 -->
+          <div
+            class="w-full flex items-center justify-between gap-4 group opacity-60 hover:opacity-100 transition-opacity"
+          >
+            <div class="text-right flex-1">
+              <div class="text-sm font-bold text-slate-400">Mezzanine</div>
+              <div class="text-xs text-slate-600 font-mono">LOCKED</div>
+            </div>
+            <button
+              class="w-16 h-16 rounded-lg bg-[#151a25] border border-[#232f48] shadow-button-normal active:shadow-button-pressed flex items-center justify-center transition-all active:scale-95 relative overflow-hidden"
+            >
+              <span class="text-2xl font-bold text-slate-500 font-mono z-10"
+                >2</span
+              >
+              <!-- Spark animation on hover -->
+              <div
+                class="absolute inset-0 bg-white/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"
+              ></div>
+            </button>
+          </div>
+          <!-- Floor 1 -->
+          <div class="w-full flex items-center justify-between gap-4 group">
+            <div class="text-right flex-1">
+              <div class="text-sm font-bold text-primary">Lobby</div>
+              <div class="text-xs text-primary/70 font-mono">ACTIVE</div>
+            </div>
+            <button
+              data-floor-btn="1"
+              class="w-16 h-16 rounded-lg bg-primary border border-primary shadow-neon-strong flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              <span
+                class="text-2xl font-bold text-white font-mono drop-shadow-md"
+                >1</span
+              >
+            </button>
+          </div>
+        </div>
+        <!-- Maintenance Panel -->
+        <div class="p-6 border-t border-[#232f48] bg-[#0d111a]">
+          <div class="flex flex-col gap-3">
+            <div
+              class="flex justify-between items-center text-xs text-slate-500 font-mono uppercase"
+            >
+              <span>Maintenance Mode</span>
+              <span class="text-red-500">OFF</span>
+            </div>
+            <div class="grid grid-cols-4 gap-2">
+              <div class="h-1 bg-primary/40 rounded-full"></div>
+              <div class="h-1 bg-primary/40 rounded-full"></div>
+              <div class="h-1 bg-slate-700 rounded-full"></div>
+              <div class="h-1 bg-slate-700 rounded-full"></div>
+            </div>
+            <button
+              class="mt-2 w-full py-3 bg-[#1a1f2e] hover:bg-[#232f48] border border-[#232f48] text-slate-300 text-xs font-bold uppercase tracking-widest rounded flex items-center justify-center gap-2 transition-colors"
+            >
+              <span class="material-symbols-outlined text-sm">build</span>
+              Diagnostics
+            </button>
+          </div>
+        </div>
+        <!-- Key Slot / Card Reader -->
+        <div
+          class="absolute top-1/2 -left-3 w-6 h-24 bg-[#0d111a] border border-[#232f48] rounded-l-lg flex flex-col items-center justify-center gap-2 shadow-lg z-0"
+        >
+          <div
+            class="w-1 h-16 bg-black rounded-full shadow-[inset_0_0_2px_rgba(255,255,255,0.2)]"
+          ></div>
+        </div>
+      </aside>
     </main>
     <!-- Overlay Vignette for Atmosphere -->
-    <div class="fixed inset-0 pointer-events-none shadow-[inset_0_0_150px_rgba(0,0,0,0.9)] z-40"></div>
-<script src="main.js"></script>
-<script>
-  // Save game start time for victory screen
-  document.querySelector('[data-floor-btn="1"]')?.addEventListener('click', () => {
-    const state = JSON.parse(localStorage.getItem('404floor_progress') || '{}');
-    if (!state.startTime) {
-      state.startTime = Date.now();
-      localStorage.setItem('404floor_progress', JSON.stringify(state));
-    }
-  });
-</script>
-</body>
-
+    <div
+      class="fixed inset-0 pointer-events-none shadow-[inset_0_0_150px_rgba(0,0,0,0.9)] z-40"
+    ></div>
+    <script src="main.js"></script>
+    <script>
+      // Save game start time for victory screen
+      document
+        .querySelector('[data-floor-btn="1"]')
+        ?.addEventListener("click", () => {
+          const state = JSON.parse(
+            localStorage.getItem("404floor_progress") || "{}",
+          );
+          if (!state.startTime) {
+            state.startTime = Date.now();
+            localStorage.setItem("404floor_progress", JSON.stringify(state));
+          }
+        });
+    </script>
+  </body>
 </html>
