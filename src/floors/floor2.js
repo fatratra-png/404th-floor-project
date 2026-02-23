@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("technician-id");
-  const buttons = document.querySelectorAll("button");
+  const buttons = document.querySelectorAll(".terminal button");
   const terminal = document.querySelector(".terminal");
   const elevator = document.querySelector(".elevator");
   const elevator1 = document.querySelector(".elevatorIndicator");
