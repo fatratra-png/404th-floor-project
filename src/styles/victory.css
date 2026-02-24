@@ -1,32 +1,26 @@
-/* ============================================================
-   VICTORY.CSS — The 404th Floor
-   Contient : styles originaux de la page victoire
-              + tous les styles de la cinématique crédits
-   ============================================================ */
-
-/* ── VARIABLES & RESET (original) ── */
 :root {
   --green: #22c55e;
   --blue: #3b82f6;
 }
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
-/* ── BODY — override par le nouveau HTML (bg-black via Tailwind) ── */
-/* Conservé pour compatibilité si jamais victory.css est chargé seul */
-html,
 body {
-  height: 100%;
+  font-family: "Share Tech Mono", monospace;
+  background: #080b0f;
+  color: #94a3b8;
+  height: 100vh;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
   cursor: default;
-  user-select: none;
 }
 
-/* ── SCANLINES GLOBALES (body::after original) ── */
 body::after {
   content: "";
   position: fixed;
@@ -42,7 +36,6 @@ body::after {
   z-index: 1000;
 }
 
-/* ── CLASSES ORIGINALES (conservées intactes) ── */
 .victory-glow {
   position: fixed;
   width: 600px;
@@ -168,181 +161,4 @@ body::after {
   font-size: 0.6rem;
   letter-spacing: 0.1em;
   color: var(--green);
-}
-
-/* ============================================================
-   NOUVELLES CLASSES — Cinématique crédits
-   (extraites du <style> inline du nouveau victory.html)
-   ============================================================ */
-
-/* ── Texture métal brossé des portes ── */
-.door-texture {
-  background-image:
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 22px,
-      rgba(255, 255, 255, 0.008) 22px,
-      rgba(255, 255, 255, 0.008) 23px
-    ),
-    repeating-linear-gradient(
-      180deg,
-      transparent,
-      transparent 80px,
-      rgba(255, 255, 255, 0.012) 80px,
-      rgba(255, 255, 255, 0.012) 82px
-    ),
-    linear-gradient(175deg, #1e2a3a 0%, #111928 30%, #0d1520 60%, #0a1018 100%);
-}
-
-/* ── Fond intérieur ascenseur ── */
-.elev-bg {
-  background:
-    radial-gradient(
-      ellipse 80% 60% at 50% 0%,
-      rgba(19, 91, 236, 0.07) 0%,
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse 100% 50% at 50% 100%,
-      rgba(0, 0, 0, 0.85) 0%,
-      transparent 70%
-    ),
-    linear-gradient(180deg, #050810 0%, #080e18 40%, #0a1020 70%, #040709 100%);
-}
-
-/* ── Fond du couloir au-delà des portes ── */
-.corridor-bg {
-  background:
-    radial-gradient(
-      ellipse 60% 40% at 50% 35%,
-      rgba(19, 91, 236, 0.18) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      ellipse 40% 30% at 50% 35%,
-      rgba(6, 182, 212, 0.1) 0%,
-      transparent 40%
-    ),
-    radial-gradient(
-      ellipse 100% 70% at 50% 100%,
-      rgba(0, 0, 0, 0.95) 0%,
-      transparent 80%
-    ),
-    linear-gradient(180deg, #020408 0%, #050c18 30%, #08101e 55%, #020509 100%);
-}
-
-/* ── Overlay scanlines sur les éléments ── */
-.scanlines::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 3px,
-    rgba(0, 0, 0, 0.06) 3px,
-    rgba(0, 0, 0, 0.06) 4px
-  );
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* ── Lueur de la fente centrale entre les portes ── */
-#gap-glow {
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(6, 182, 212, 0.6) 15%,
-    rgba(19, 91, 236, 1) 30%,
-    rgba(6, 182, 212, 0.9) 50%,
-    rgba(19, 91, 236, 1) 70%,
-    rgba(6, 182, 212, 0.6) 85%,
-    transparent 100%
-  );
-  filter: blur(3px);
-}
-
-/* ── Texte en dégradé bleu cyan (titre crédits) ── */
-.gradient-text {
-  background: linear-gradient(
-    135deg,
-    #135bec 0%,
-    #06b6d4 40%,
-    #22d3ee 70%,
-    #135bec 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ── Séparateurs de sections crédits ── */
-.cred-line {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(19, 91, 236, 0.5),
-    rgba(6, 182, 212, 0.7),
-    rgba(19, 91, 236, 0.5),
-    transparent
-  );
-}
-
-.cred-line-acid {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(163, 230, 53, 0.4),
-    rgba(163, 230, 53, 0.7),
-    rgba(163, 230, 53, 0.4),
-    transparent
-  );
-}
-
-/* ── Vignettes autour du panneau crédits ── */
-.vignette-top {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.95), transparent);
-}
-
-.vignette-bottom {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.98), transparent);
-}
-
-.vignette-left {
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.7), transparent);
-}
-
-.vignette-right {
-  background: linear-gradient(-90deg, rgba(0, 0, 0, 0.7), transparent);
-}
-
-/* ── Lueur bord des portes (côté fente) ── */
-.door-edge-glow {
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(6, 182, 212, 0.4) 30%,
-    rgba(19, 91, 236, 0.6) 50%,
-    rgba(6, 182, 212, 0.4) 70%,
-    transparent
-  );
-}
-
-/* ── Glow noms dev ── */
-.name-glow-blue {
-  text-shadow:
-    0 0 14px rgba(19, 91, 236, 0.5),
-    0 0 30px rgba(19, 91, 236, 0.2);
-}
-
-.name-glow-acid {
-  text-shadow:
-    0 0 16px rgba(163, 230, 53, 0.6),
-    0 0 40px rgba(163, 230, 53, 0.2);
-}
-
-/* ── Optimisation scroll GPU ── */
-#credits-scroll {
-  will-change: transform;
 }
