@@ -1,47 +1,639 @@
 <!doctype html>
-<html class="dark" lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The 404th Floor — ESCAPED</title>
+    <title>The 404th Floor — Credits</title>
+
     <link
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap"
       rel="stylesheet"
     />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="src/floors/victory.css" />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              orbitron: ["Orbitron", "monospace"],
+              mono: ["Share Tech Mono", "monospace"],
+              rajdhani: ["Rajdhani", "sans-serif"],
+            },
+            colors: {
+              primary: "#135bec",
+              cyan: "#06b6d4",
+              acid: "#a3e635",
+            },
+            keyframes: {
+              scanline: {
+                "0%": { top: "-4px" },
+                "100%": { top: "100%" },
+              },
+              flicker: {
+                "0%,94%,96%,100%": { opacity: "1" },
+                "95%": { opacity: "0.3" },
+                "97%": { opacity: "0.7" },
+              },
+              bgGlow: {
+                "0%,100%": { opacity: "0.06" },
+                "50%": { opacity: "0.12" },
+              },
+            },
+            animation: {
+              scanline: "scanline 7s linear infinite",
+              flicker: "flicker 5s infinite",
+              bgGlow: "bgGlow 4s ease-in-out infinite",
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Tous les styles dans victory.css, zero style inline ici -->
     <link rel="stylesheet" href="src/styles/victory.css" />
   </head>
-  <body>
-    <div class="victory-glow"></div>
 
-    <div class="title">ELEVATOR RESTORED</div>
-    <div class="subtitle">
-      ALL SYSTEMS NOMINAL — YOU ESCAPED THE 404TH FLOOR
-    </div>
-
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-val">4</div>
-        <div class="stat-label">FLOORS CLEARED</div>
+  <body class="bg-black font-mono overflow-hidden">
+    <div id="scene" class="relative w-full h-screen overflow-hidden">
+      <!-- ── ELEVATOR INTERIOR BG ── -->
+      <div class="elev-bg scanlines absolute inset-0 z-0">
+        <div
+          class="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-px bg-cyan-400/70 z-10 shadow-[0_0_12px_rgba(6,182,212,0.6)]"
+        ></div>
+        <div
+          class="absolute bottom-8 left-0 right-0 h-px bg-primary/20 z-10"
+        ></div>
+        <div
+          class="absolute top-6 left-1/2 -translate-x-1/2 flex items-center gap-2 border border-primary/30 bg-black/60 px-4 py-1.5 z-10 animate-flicker"
+        >
+          <span
+            class="font-orbitron font-black text-xl text-cyan-400 floor-indicator"
+            style="text-shadow: 0 0 12px rgba(6, 182, 212, 0.7)"
+            >404</span
+          >
+          <div class="flex flex-col">
+            <span class="font-mono text-[6px] text-primary/60 tracking-widest"
+              >FLOOR</span
+            >
+            <span class="font-mono text-[6px] text-primary/60 tracking-widest"
+              >CURRENT</span
+            >
+          </div>
+        </div>
+        <div
+          class="absolute left-0 right-0 h-0.5 bg-cyan-400/10 blur-sm z-20 pointer-events-none animate-scanline"
+        ></div>
+        <div
+          class="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent"
+        ></div>
+        <div
+          class="absolute right-4 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent"
+        ></div>
+        <div
+          class="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-40 rounded-full bg-primary/5 blur-3xl animate-bgGlow pointer-events-none"
+        ></div>
       </div>
-      <div class="stat">
-        <div class="stat-val">404</div>
-        <div class="stat-label">FLOOR ID</div>
+
+      <!-- ── CORRIDOR BEYOND ── -->
+      <div
+        id="corridor"
+        class="corridor-bg absolute inset-0 z-1 opacity-0 pointer-events-none"
+      >
+        <div class="absolute inset-0 opacity-25">
+          <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.9" />
+                <stop offset="100%" stop-color="#135bec" stop-opacity="0" />
+              </linearGradient>
+              <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#135bec" stop-opacity="0.5" />
+                <stop offset="100%" stop-color="#135bec" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+            <line
+              x1="50%"
+              y1="38%"
+              x2="0%"
+              y2="100%"
+              stroke="url(#g1)"
+              stroke-width="0.5"
+            />
+            <line
+              x1="50%"
+              y1="38%"
+              x2="15%"
+              y2="100%"
+              stroke="url(#g2)"
+              stroke-width="0.5"
+            />
+            <line
+              x1="50%"
+              y1="38%"
+              x2="32%"
+              y2="100%"
+              stroke="url(#g2)"
+              stroke-width="0.4"
+            />
+            <line
+              x1="50%"
+              y1="38%"
+              x2="68%"
+              y2="100%"
+              stroke="url(#g2)"
+              stroke-width="0.4"
+            />
+            <line
+              x1="50%"
+              y1="38%"
+              x2="85%"
+              y2="100%"
+              stroke="url(#g2)"
+              stroke-width="0.5"
+            />
+            <line
+              x1="50%"
+              y1="38%"
+              x2="100%"
+              y2="100%"
+              stroke="url(#g1)"
+              stroke-width="0.5"
+            />
+            <line
+              x1="25%"
+              y1="56%"
+              x2="75%"
+              y2="56%"
+              stroke="#135bec"
+              stroke-width="0.3"
+              stroke-opacity="0.4"
+            />
+            <line
+              x1="15%"
+              y1="68%"
+              x2="85%"
+              y2="68%"
+              stroke="#135bec"
+              stroke-width="0.3"
+              stroke-opacity="0.3"
+            />
+            <line
+              x1="5%"
+              y1="80%"
+              x2="95%"
+              y2="80%"
+              stroke="#135bec"
+              stroke-width="0.3"
+              stroke-opacity="0.2"
+            />
+            <line
+              x1="0%"
+              y1="92%"
+              x2="100%"
+              y2="92%"
+              stroke="#135bec"
+              stroke-width="0.3"
+              stroke-opacity="0.15"
+            />
+          </svg>
+        </div>
+        <div
+          class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+        >
+          <div
+            class="w-4 h-4 rounded-full bg-cyan-300/80 blur-sm shadow-[0_0_30px_rgba(6,182,212,0.8),0_0_80px_rgba(6,182,212,0.3)]"
+          ></div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-2/5 opacity-20">
+          <svg
+            viewBox="0 0 1200 300"
+            class="w-full h-full"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMax meet"
+          >
+            <rect x="30" y="150" width="35" height="150" fill="#135bec" />
+            <rect x="35" y="130" width="25" height="20" fill="#06b6d4" />
+            <rect x="100" y="180" width="55" height="120" fill="#0a1a3a" />
+            <rect x="200" y="120" width="20" height="180" fill="#135bec" />
+            <rect x="260" y="170" width="70" height="130" fill="#060e22" />
+            <rect x="280" y="155" width="30" height="15" fill="#06b6d4" />
+            <rect x="380" y="140" width="25" height="160" fill="#135bec" />
+            <rect x="450" y="110" width="180" height="190" fill="#040c1e" />
+            <rect x="465" y="95" width="150" height="15" fill="#135bec" />
+            <rect x="495" y="80" width="90" height="15" fill="#06b6d4" />
+            <rect x="680" y="155" width="45" height="145" fill="#135bec" />
+            <rect x="780" y="195" width="65" height="105" fill="#0a1a3a" />
+            <rect x="900" y="125" width="28" height="175" fill="#135bec" />
+            <rect x="970" y="165" width="85" height="135" fill="#040c1e" />
+            <rect x="1100" y="145" width="38" height="155" fill="#135bec" />
+          </svg>
+        </div>
       </div>
-      <div class="stat">
-        <div class="stat-val" id="time-val">--:--</div>
-        <div class="stat-label">SURVIVAL TIME</div>
+
+      <!-- ── LEFT DOOR ── -->
+      <div
+        id="door-L"
+        class="door-texture scanlines absolute top-0 left-0 w-1/2 h-full z-20 overflow-hidden"
+        style="transform-origin: left center; will-change: transform"
+      >
+        <div class="absolute inset-0 pointer-events-none">
+          <div
+            class="absolute left-0 right-0 h-px bg-white/5"
+            style="top: 25%"
+          ></div>
+          <div
+            class="absolute left-0 right-0 h-px bg-white/5"
+            style="top: 50%"
+          ></div>
+          <div
+            class="absolute left-0 right-0 h-px bg-white/5"
+            style="top: 75%"
+          ></div>
+        </div>
+        <div class="absolute right-0 top-0 bottom-0 w-0.5 door-edge-glow"></div>
+        <div
+          class="absolute left-1/3 top-1/4 bottom-1/4 w-px bg-gradient-to-b from-transparent via-primary/15 to-transparent"
+        ></div>
+        <div
+          class="absolute bottom-20 right-8 font-mono text-[8px] text-primary/20 tracking-[0.3em] rotate-90 origin-right"
+        >
+          SYS // DOOR-L
+        </div>
+      </div>
+
+      <!-- ── RIGHT DOOR ── -->
+      <div
+        id="door-R"
+        class="door-texture scanlines absolute top-0 right-0 w-1/2 h-full z-20 overflow-hidden"
+        style="transform-origin: right center; will-change: transform"
+      >
+        <div class="absolute inset-0 pointer-events-none">
+          <div
+            class="absolute left-0 right-0 h-px bg-white/5"
+            style="top: 25%"
+          ></div>
+          <div
+            class="absolute left-0 right-0 h-px bg-white/5"
+            style="top: 50%"
+          ></div>
+          <div
+            class="absolute left-0 right-0 h-px bg-white/5"
+            style="top: 75%"
+          ></div>
+        </div>
+        <div class="absolute left-0 top-0 bottom-0 w-0.5 door-edge-glow"></div>
+        <div
+          class="absolute right-1/3 top-1/4 bottom-1/4 w-px bg-gradient-to-b from-transparent via-primary/15 to-transparent"
+        ></div>
+        <div
+          class="absolute bottom-20 left-8 font-mono text-[8px] text-primary/20 tracking-[0.3em] rotate-90 origin-left"
+        >
+          SYS // DOOR-R
+        </div>
+      </div>
+
+      <!-- ── CENTER GAP GLOW ── -->
+      <div
+        class="absolute top-0 bottom-0 pointer-events-none"
+        style="left: calc(50% - 1px); width: 2px; z-index: 19"
+      >
+        <div id="gap-glow" class="w-full h-full"></div>
+      </div>
+
+      <!-- ── CREDITS PANEL ── -->
+      <div
+        id="credits-wrap"
+        class="absolute inset-0 z-10 overflow-hidden opacity-0 pointer-events-none"
+      >
+        <div
+          class="absolute top-0 left-0 right-0 h-28 z-30 pointer-events-none vignette-top"
+        ></div>
+        <div
+          class="absolute bottom-0 left-0 right-0 h-36 z-30 pointer-events-none vignette-bottom"
+        ></div>
+        <div
+          class="absolute top-0 bottom-0 left-0 w-28 z-30 pointer-events-none vignette-left"
+        ></div>
+        <div
+          class="absolute top-0 bottom-0 right-0 w-28 z-30 pointer-events-none vignette-right"
+        ></div>
+
+        <div
+          class="absolute left-0 right-0 flex justify-center"
+          style="top: 100%"
+          id="credits-scroll"
+        >
+          <div class="w-full max-w-xl px-6 flex flex-col items-center">
+            <div class="h-24"></div>
+
+            <!-- TITLE -->
+            <div class="flex flex-col items-center gap-5 mb-28 w-full">
+              <div
+                class="font-mono text-[9px] text-cyan-400/50 tracking-[0.5em] animate-flicker"
+              >
+                ELEVATOR RESTORED
+              </div>
+              <div
+                class="font-orbitron font-black leading-none text-center"
+                style="font-size: clamp(2.5rem, 6vw, 4.5rem)"
+              >
+                <span class="gradient-text block">THE 404TH</span>
+                <span class="gradient-text block">FLOOR</span>
+              </div>
+              <div class="h-px w-40 cred-line"></div>
+              <div
+                class="font-rajdhani text-slate-500 text-xs tracking-[0.35em] text-center"
+              >
+                48-HOUR ESCAPE ROOM SPRINT<br />
+                <span class="text-primary/60">ALL SYSTEMS NOMINAL</span>
+              </div>
+            </div>
+
+            <!-- DEVELOPED BY -->
+            <div class="w-full flex flex-col items-center gap-12 mb-24">
+              <div
+                class="font-mono text-[9px] text-primary/40 tracking-[0.45em]"
+              >
+                DEVELOPED BY
+              </div>
+
+              <div class="w-full flex flex-col items-center gap-2">
+                <div
+                  class="font-mono text-[8px] text-slate-600 tracking-[0.35em]"
+                >
+                  SYSTEM ARCHITECT
+                </div>
+                <div
+                  id="name-m1"
+                  class="font-orbitron font-bold text-white tracking-wider name-glow-blue"
+                  style="font-size: 1.6rem"
+                >
+                  @github_m1
+                </div>
+                <div
+                  class="font-rajdhani text-slate-500 text-sm tracking-widest text-center"
+                >
+                  State Management · Floor Routing · Navigation Engine
+                </div>
+                <div class="h-px w-28 cred-line mt-2"></div>
+              </div>
+
+              <div class="w-full flex flex-col items-center gap-2">
+                <div
+                  class="font-mono text-[8px] text-slate-600 tracking-[0.35em]"
+                >
+                  UI / UX ENGINEER
+                </div>
+                <div
+                  id="name-m2"
+                  class="font-orbitron font-bold text-white tracking-wider name-glow-blue"
+                  style="font-size: 1.6rem"
+                >
+                  @github_m2
+                </div>
+                <div
+                  class="font-rajdhani text-slate-500 text-sm tracking-widest text-center"
+                >
+                  Tailwind Design System · Animations · Visual Identity
+                </div>
+                <div class="h-px w-28 cred-line mt-2"></div>
+              </div>
+
+              <div class="w-full flex flex-col items-center gap-2">
+                <div
+                  class="font-mono text-[8px] text-slate-600 tracking-[0.35em]"
+                >
+                  FRONTEND DEVELOPER
+                </div>
+                <div
+                  id="name-m3"
+                  class="font-orbitron font-bold text-white tracking-wider name-glow-blue"
+                  style="font-size: 1.6rem"
+                >
+                  @github_m3
+                </div>
+                <div
+                  class="font-rajdhani text-slate-500 text-sm tracking-widest text-center"
+                >
+                  Floor 1 Drag &amp; Drop · Floor 2 Terminal · Keypad Logic
+                </div>
+                <div class="h-px w-28 cred-line mt-2"></div>
+              </div>
+
+              <!-- DevOps — toi — acid green -->
+              <div class="w-full flex flex-col items-center gap-2">
+                <div
+                  class="font-mono text-[8px] text-acid/50 tracking-[0.35em]"
+                >
+                  DEVOPS ENGINEER
+                </div>
+                <div
+                  id="name-m4"
+                  class="font-orbitron font-bold tracking-wider name-glow-acid"
+                  style="font-size: 1.6rem; color: #a3e635"
+                >
+                  @github_m4
+                </div>
+                <div
+                  class="font-rajdhani text-slate-500 text-sm tracking-widest text-center"
+                >
+                  Floor 3 Brake · Floor 4 Debug · Audio Engine · CI/CD ·
+                  Deployment
+                </div>
+                <div class="h-px w-28 cred-line-acid mt-2"></div>
+              </div>
+            </div>
+
+            <!-- TECH STACK -->
+            <div class="w-full flex flex-col items-center gap-6 mb-24">
+              <div class="h-px w-full cred-line"></div>
+              <div
+                class="font-mono text-[9px] text-primary/40 tracking-[0.45em] mt-2"
+              >
+                BUILT WITH
+              </div>
+              <div class="grid grid-cols-3 gap-8 text-center w-full">
+                <div>
+                  <div
+                    class="font-mono text-[7px] text-slate-700 tracking-widest mb-1"
+                  >
+                    LANGUAGE
+                  </div>
+                  <div
+                    class="font-rajdhani text-slate-400 font-semibold text-sm"
+                  >
+                    Vanilla JS
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class="font-mono text-[7px] text-slate-700 tracking-widest mb-1"
+                  >
+                    STYLING
+                  </div>
+                  <div
+                    class="font-rajdhani text-slate-400 font-semibold text-sm"
+                  >
+                    Tailwind CSS v3
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class="font-mono text-[7px] text-slate-700 tracking-widest mb-1"
+                  >
+                    AUDIO
+                  </div>
+                  <div
+                    class="font-rajdhani text-slate-400 font-semibold text-sm"
+                  >
+                    Web Audio API
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class="font-mono text-[7px] text-slate-700 tracking-widest mb-1"
+                  >
+                    ICONS
+                  </div>
+                  <div
+                    class="font-rajdhani text-slate-400 font-semibold text-sm"
+                  >
+                    Material Symbols
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class="font-mono text-[7px] text-slate-700 tracking-widest mb-1"
+                  >
+                    FONTS
+                  </div>
+                  <div
+                    class="font-rajdhani text-slate-400 font-semibold text-sm"
+                  >
+                    Orbitron + Rajdhani
+                  </div>
+                </div>
+                <div>
+                  <div
+                    class="font-mono text-[7px] text-slate-700 tracking-widest mb-1"
+                  >
+                    SPRINT
+                  </div>
+                  <div
+                    class="font-rajdhani text-slate-400 font-semibold text-sm"
+                  >
+                    48 Hours
+                  </div>
+                </div>
+              </div>
+              <div class="h-px w-full cred-line"></div>
+            </div>
+
+            <!-- INCIDENT LOG -->
+            <div class="w-full flex flex-col items-center gap-4 mb-24">
+              <div
+                class="font-mono text-[9px] text-primary/40 tracking-[0.45em]"
+              >
+                INCIDENT LOG
+              </div>
+              <div
+                class="w-full border border-primary/10 bg-black/50 p-4 rounded-sm font-mono text-[10px] leading-loose text-slate-700"
+              >
+                <div>
+                  <span class="text-red-500/80">ERR</span> Elevator.js:404 —
+                  TypeError: floor is not a function
+                </div>
+                <div>
+                  <span class="text-yellow-500/80">WRN</span> Drag event fired
+                  847 times in under 3 seconds
+                </div>
+                <div>
+                  <span class="text-primary/60">INF</span> Web Audio context
+                  unlocked after first user gesture
+                </div>
+                <div>
+                  <span class="text-red-500/80">ERR</span>
+                  querySelector('.terminal button') — 47 results, expected 12
+                </div>
+                <div>
+                  <span class="text-yellow-500/80">WRN</span> MutationObserver:
+                  curtainTop.style.height returned NaN
+                </div>
+                <div>
+                  <span class="text-primary/60">INF</span> Hydraulic pressure
+                  held at 94% for 3.2 consecutive seconds
+                </div>
+                <div>
+                  <span class="text-red-500/80">ERR</span> bug-17 removeChild
+                  failed — node not a child of arena
+                </div>
+                <div>
+                  <span class="text-acid/70">OK </span> [47:59] All systems
+                  nominal. Elevator successfully restored.
+                </div>
+              </div>
+            </div>
+
+            <!-- CLOSING -->
+            <div class="flex flex-col items-center gap-6 mb-8">
+              <div
+                class="font-mono text-[8px] text-primary/30 tracking-[0.5em]"
+              >
+                A PRODUCTION OF
+              </div>
+              <div
+                class="font-orbitron font-black gradient-text leading-none text-center"
+                style="
+                  font-size: clamp(3rem, 8vw, 5rem);
+                  filter: drop-shadow(0 0 25px rgba(6, 182, 212, 0.3));
+                "
+              >
+                404<br />COLLECTIVE
+              </div>
+              <div
+                class="font-rajdhani text-slate-700 text-xs tracking-[0.3em] text-center mt-2"
+              >
+                NO FLOORS WERE HARMED IN THE MAKING OF THIS ESCAPE ROOM
+              </div>
+              <div
+                class="font-mono text-[8px] text-slate-800 tracking-widest mt-4"
+              >
+                ERR_ELEVATOR_ESCAPED_SUCCESSFULLY_0x00404
+              </div>
+            </div>
+
+            <div class="h-screen"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── STATUS BAR ── -->
+      <div
+        class="absolute bottom-0 left-0 right-0 h-8 z-50 flex items-center justify-between px-6 bg-black/90 border-t border-primary/10"
+      >
+        <div
+          class="font-mono text-[8px] text-primary/40 tracking-widest animate-flicker"
+        >
+          THE 404TH FLOOR // CREDITS
+        </div>
+        <div
+          id="status-txt"
+          class="font-mono text-[8px] text-slate-700 tracking-widest"
+        >
+          INITIALIZING...
+        </div>
+        <!-- restart() défini dans victory.js : vide localStorage + redirect index.html -->
+        <button
+          onclick="restart()"
+          class="font-mono text-[8px] text-slate-700 hover:text-primary transition-colors tracking-widest border border-slate-800 hover:border-primary/30 px-3 py-0.5"
+        >
+          [ RESTART ]
+        </button>
       </div>
     </div>
-
-    <div class="floor-list">
-      <span class="floor-badge">✓ FLOOR 1 — FUSES</span>
-      <span class="floor-badge">✓ FLOOR 2 — ACCESS</span>
-      <span class="floor-badge">✓ FLOOR 3 — BRAKE</span>
-      <span class="floor-badge">✓ FLOOR 4 — DEBUG</span>
-    </div>
-
-    <button class="replay-btn" onclick="restart()">[ RESTART SEQUENCE ]</button>
+    <!-- /scene -->
 
     <script src="src/floors/victory.js"></script>
   </body>
