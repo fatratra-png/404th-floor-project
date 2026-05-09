@@ -18,6 +18,16 @@ const floorNames: Record<number, { name: string; status: string }> = {
   6: { name: 'Power Plant', status: 'Circuit Balance' },
   7: { name: 'Comms Hub', status: 'Wire Cipher' },
   8: { name: 'Mainframe', status: 'Core Reboot' },
+  9: { name: 'Signal Lab', status: 'Frequency Match' },
+  10: { name: 'Plumbing Core', status: 'Pipe Network' },
+  11: { name: 'Logic Bay', status: 'Boolean Gates' },
+  12: { name: 'Decode Chamber', status: 'Binary Decoder' },
+  13: { name: 'Reactor Core', status: 'Pattern Matrix' },
+  14: { name: 'Thermal Unit', status: 'Temperature Control' },
+  15: { name: 'Vault Room', status: 'Cipher Lock' },
+  16: { name: 'Pulse Lab', status: 'EM Sequencing' },
+  17: { name: 'Life Support', status: 'Oxygen Balance' },
+  18: { name: 'Zero Point', status: 'Final Ascent' },
 }
 
 export default function Layout({ children, floorNumber, title, subtitle, showPanel = true }: LayoutProps) {
@@ -64,16 +74,32 @@ export default function Layout({ children, floorNumber, title, subtitle, showPan
 function ControlPanel({ floorNumber }: { floorNumber: number }) {
   const navigate = useNavigate()
 
-  const floors = [
-    { num: 8, name: 'Mainframe', status: floorNumber === 8 ? 'ACTIVE' : floorNumber > 8 ? 'PASSED' : 'LOCKED', color: floorNumber === 8 ? 'primary' : floorNumber > 8 ? 'green' : 'slate' },
-    { num: 7, name: 'Comms Hub', status: floorNumber === 7 ? 'ACTIVE' : floorNumber > 7 ? 'PASSED' : 'LOCKED', color: floorNumber === 7 ? 'primary' : floorNumber > 7 ? 'green' : 'slate' },
-    { num: 6, name: 'Power Plant', status: floorNumber === 6 ? 'ACTIVE' : floorNumber > 6 ? 'PASSED' : 'LOCKED', color: floorNumber === 6 ? 'primary' : floorNumber > 6 ? 'green' : 'slate' },
-    { num: 5, name: 'Memory Core', status: floorNumber === 5 ? 'ACTIVE' : floorNumber > 5 ? 'PASSED' : 'LOCKED', color: floorNumber === 5 ? 'primary' : floorNumber > 5 ? 'green' : 'slate' },
-    { num: 4, name: 'Executive Suite', status: floorNumber === 4 ? 'ACTIVE' : floorNumber > 4 || (floorNumber === 4) ? 'PASSED' : 'LOCKED', color: floorNumber === 4 ? 'primary' : floorNumber > 4 ? 'green' : 'slate' },
-    { num: 3, name: 'Server Room', status: floorNumber === 3 ? 'ACTIVE' : floorNumber > 3 ? 'PASSED' : 'LOCKED', color: floorNumber === 3 ? 'primary' : floorNumber > 3 ? 'green' : 'slate' },
-    { num: 2, name: 'Access Terminal', status: floorNumber === 2 ? 'ACTIVE' : floorNumber > 2 ? 'PASSED' : 'LOCKED', color: floorNumber === 2 ? 'primary' : floorNumber > 2 ? 'green' : 'slate' },
-    { num: 1, name: 'Lobby', status: floorNumber === 1 ? 'ACTIVE' : floorNumber > 1 ? 'PASSED' : 'LOCKED', color: floorNumber === 1 ? 'primary' : floorNumber > 1 ? 'green' : 'slate' },
+  const allFloors = [
+    { num: 18, name: 'Zero Point' },
+    { num: 17, name: 'Life Support' },
+    { num: 16, name: 'Pulse Lab' },
+    { num: 15, name: 'Vault Room' },
+    { num: 14, name: 'Thermal Unit' },
+    { num: 13, name: 'Reactor Core' },
+    { num: 12, name: 'Decode Chamber' },
+    { num: 11, name: 'Logic Bay' },
+    { num: 10, name: 'Plumbing Core' },
+    { num: 9, name: 'Signal Lab' },
+    { num: 8, name: 'Mainframe' },
+    { num: 7, name: 'Comms Hub' },
+    { num: 6, name: 'Power Plant' },
+    { num: 5, name: 'Memory Core' },
+    { num: 4, name: 'Executive Suite' },
+    { num: 3, name: 'Server Room' },
+    { num: 2, name: 'Access Terminal' },
+    { num: 1, name: 'Lobby' },
   ]
+
+  const floors = allFloors.map(f => ({
+    ...f,
+    status: floorNumber === f.num ? 'ACTIVE' : floorNumber > f.num ? 'PASSED' : 'LOCKED',
+    color: floorNumber === f.num ? 'primary' : floorNumber > f.num ? 'green' : 'slate' as const,
+  }))
 
   const colorMap: Record<string, string> = {
     primary: 'bg-primary border-primary shadow-neon-strong text-white',

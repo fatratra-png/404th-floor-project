@@ -10,6 +10,16 @@ const floors = [
   { num: 6, name: 'Power Plant', desc: 'Circuit Balance', icon: 'power' },
   { num: 7, name: 'Comms Hub', desc: 'Wire Cipher', icon: 'router' },
   { num: 8, name: 'Mainframe', desc: 'Core Reboot', icon: 'settings' },
+  { num: 9, name: 'Signal Lab', desc: 'Frequency Match', icon: 'radio' },
+  { num: 10, name: 'Plumbing Core', desc: 'Pipe Network', icon: 'plumbing' },
+  { num: 11, name: 'Logic Bay', desc: 'Boolean Gates', icon: 'memory' },
+  { num: 12, name: 'Decode Chamber', desc: 'Binary Decoder', icon: 'terminal' },
+  { num: 13, name: 'Reactor Core', desc: 'Pattern Matrix', icon: 'nuclear' },
+  { num: 14, name: 'Thermal Unit', desc: 'Temperature Control', icon: 'thermostat' },
+  { num: 15, name: 'Vault Room', desc: 'Cipher Lock', icon: 'lock' },
+  { num: 16, name: 'Pulse Lab', desc: 'EM Sequencing', icon: 'electric' },
+  { num: 17, name: 'Life Support', desc: 'Oxygen Balance', icon: 'air' },
+  { num: 18, name: 'Zero Point', desc: 'Final Ascent', icon: 'rocket' },
 ]
 
 export default function ElevatorHub() {
