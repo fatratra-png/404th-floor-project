@@ -5,9 +5,10 @@ import { Sounds } from '../audio/sounds'
 import { markComplete } from '../lib/gameLogic'
 
 const COLORS = ['#ef4444', '#3b82f6', '#22c55e', '#eab308']
-const COLOR_NAMES = ['red', 'blue', 'green', 'yellow']
-const BASE_ROUNDS = 4
-const MAX_ROUNDS = 12
+const BASE_ROUNDS = 3
+const MAX_ROUNDS = 7
+const ROUNDS_TO_WIN = 5
+const DISPLAY_MS = 700
 
 export default function Floor5() {
   const navigate = useNavigate()
@@ -16,7 +17,6 @@ export default function Floor5() {
   const [round, setRound] = useState(1)
   const [phase, setPhase] = useState<'show' | 'input' | 'success' | 'fail' | 'complete'>('show')
   const [activeColor, setActiveColor] = useState<number | null>(null)
-  const [score, setScore] = useState(0)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const startRound = useCallback((r: number) => {
@@ -30,92 +30,79 @@ export default function Floor5() {
       setTimeout(() => {
         setActiveColor(colorIdx)
         Sounds.play('keyclick')
-        setTimeout(() => setActiveColor(null), 300)
-      }, (i + 1) * 600)
+        setTimeout(() => setActiveColor(null), 350)
+      }, (i + 1) * DISPLAY_MS)
     })
 
     timeoutRef.current = setTimeout(() => {
       setPhase('input')
-    }, (seq.length + 1) * 600)
+    }, (seq.length + 1) * DISPLAY_MS)
   }, [])
 
   useEffect(() => {
     startRound(1)
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current)
-    }
+    return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current) }
   }, [])
 
   const handleColorPress = useCallback((idx: number) => {
     if (phase !== 'input') return
-
     const nextInput = [...playerInput, idx]
     setPlayerInput(nextInput)
     setActiveColor(idx)
     Sounds.play('mem_success')
     setTimeout(() => setActiveColor(null), 200)
 
-    // Check if correct
     const pos = playerInput.length
     if (idx !== sequence[pos]) {
       setPhase('fail')
       Sounds.play('mem_fail')
-      setTimeout(() => {
-        if (round > 1) setRound(r => r - 1)
-        startRound(round)
-      }, 1500)
+      setTimeout(() => startRound(round), 1200)
       return
     }
 
-    // Check if round complete
     if (nextInput.length === sequence.length) {
-      setPhase('success')
-      setScore(s => s + 1)
-      Sounds.play('floor_complete')
-
-      if (round >= 8) {
+      if (round >= ROUNDS_TO_WIN) {
         setPhase('complete')
         markComplete(5)
+        Sounds.play('floor_complete')
         setTimeout(() => navigate('/floor/6'), 2500)
       } else {
+        setPhase('success')
+        Sounds.play('floor_complete')
         setTimeout(() => {
-          const nextRound = round + 1
-          setRound(nextRound)
-          startRound(nextRound)
-        }, 1500)
+          setRound(prev => prev + 1)
+          startRound(round + 1)
+        }, 1200)
       }
     }
   }, [phase, playerInput, sequence, round, startRound, navigate])
 
   return (
     <Layout floorNumber={5} title="Memory Core" subtitle="Sequence Lock">
-      <div className="flex-1 flex flex-col items-center justify-center p-8 gap-6 bg-[#080b0f]">
+      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-[#080b0f] gap-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-1">MEMORY MATRIX</h1>
           <p className="text-slate-500 font-mono text-sm">
             {phase === 'show' && 'Watch the sequence...'}
-            {phase === 'input' && `Round ${round}/8 - Repeat the pattern`}
+            {phase === 'input' && `Round ${round}/${ROUNDS_TO_WIN} - Repeat the pattern`}
             {phase === 'success' && '✓ Correct!'}
             {phase === 'fail' && '✗ Wrong! Retry...'}
             {phase === 'complete' && '✓ MEMORY CORE UNLOCKED'}
           </p>
         </div>
 
-        {/* Score / Round */}
-        <div className="flex gap-8 text-sm font-mono">
-          <div className="text-slate-500">ROUND <span className="text-primary">{round}</span>/8</div>
-          <div className="text-slate-500">SCORE <span className="text-green-400">{score}</span></div>
+        <div className="flex gap-6 text-sm font-mono">
+          <div className="text-slate-500">ROUND <span className="text-primary">{round}</span>/{ROUNDS_TO_WIN}</div>
           <div className="text-slate-500">LENGTH <span className="text-yellow-400">{sequence.length}</span></div>
         </div>
 
-        {/* Color Grid */}
         <div className="grid grid-cols-2 gap-4">
           {COLORS.map((color, idx) => (
             <button
               key={idx}
               onClick={() => handleColorPress(idx)}
               disabled={phase !== 'input'}
-              className={`w-32 h-32 rounded-2xl transition-all duration-150 border-2 ${
+              className={`w-28 h-28 rounded-2xl transition-all duration-150 border-2 ${
                 activeColor === idx
                   ? 'scale-110 border-white shadow-[0_0_30px_rgba(255,255,255,0.3)]'
                   : phase === 'input'
@@ -127,7 +114,6 @@ export default function Floor5() {
           ))}
         </div>
 
-        {/* Sequence indicator */}
         <div className="flex gap-1.5">
           {sequence.map((_, idx) => (
             <div
