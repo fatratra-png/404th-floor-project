@@ -1,16 +1,32 @@
 {
   "name": "the-404th-floor",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "The 404th Floor - React Escape Room",
+  "type": "module",
   "scripts": {
-    "build-css": "npx tailwindcss -i ./src/styles/input.css -o ./src/output.css --watch"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "mocha --require tsx test/**/*.test.ts",
+    "test:watch": "mocha --require tsx --watch test/**/*.test.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "devDependencies": {
-    "tailwindcss": "^3.4.19"
+    "@vitejs/plugin-react": "^6.0.1",
+    "autoprefixer": "^10.5.0",
+    "chai": "^6.2.2",
+    "mocha": "^11.7.5",
+    "postcss": "^8.5.14",
+    "tailwindcss": "^3.4.19",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.11"
+  },
+  "dependencies": {
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-router-dom": "^7.15.0"
   }
 }
