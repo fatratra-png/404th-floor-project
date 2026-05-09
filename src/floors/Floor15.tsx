@@ -85,7 +85,7 @@ export default function Floor15() {
 
   return (
     <Layout floorNumber={15} title="Cipher Lock" subtitle="Combination Puzzle">
-      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-[#080b0f] gap-6">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 bg-[#080b0f] gap-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-1">CIPHER LOCK</h1>
           <p className="text-slate-500 font-mono text-sm">
@@ -108,7 +108,7 @@ export default function Floor15() {
               >
                 ▲
               </button>
-              <div className="w-16 h-20 rounded-xl border-2 border-slate-600 bg-slate-900 flex items-center justify-center text-3xl font-mono font-bold text-primary">
+              <div className="w-12 md:w-16 h-16 md:h-20 rounded-xl border-2 border-slate-600 bg-slate-900 flex items-center justify-center text-2xl md:text-3xl font-mono font-bold text-primary">
                 {val}
               </div>
               <button

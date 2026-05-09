@@ -98,7 +98,7 @@ export default function Floor10() {
 
   return (
     <Layout floorNumber={10} title="Pipe Network" subtitle="Connect the Flow">
-      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-[#080b0f] gap-6">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 bg-[#080b0f] gap-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-1">PIPE NETWORK</h1>
           <p className="text-slate-500 font-mono text-sm">
@@ -117,10 +117,10 @@ export default function Floor10() {
           <div className="grid grid-cols-5 gap-1.5" style={{ direction: 'ltr' }}>
             {grid.map((row, r) => (
               row.map((cell, c) => (
-                <button
-                  key={`${r}-${c}`}
-                  onClick={() => rotate(r, c)}
-                  className="w-14 h-14 rounded-lg border-2 flex items-center justify-center text-2xl font-bold transition-all font-mono hover:border-primary bg-slate-900/50"
+                  <button
+                    key={`${r}-${c}`}
+                    onClick={() => rotate(r, c)}
+                    className="w-10 md:w-14 h-10 md:h-14 rounded-lg border-2 flex items-center justify-center text-lg md:text-2xl font-bold transition-all font-mono hover:border-primary bg-slate-900/50"
                   style={{
                     borderColor: c === 0 ? '#135bec' : c === GRID - 1 ? '#22c55e' : '#334155',
                     color: connected && (c === 0 || c === GRID - 1) ? '#22c55e' : '#94a3b8',

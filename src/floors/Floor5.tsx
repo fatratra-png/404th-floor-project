@@ -102,7 +102,7 @@ export default function Floor5() {
               key={idx}
               onClick={() => handleColorPress(idx)}
               disabled={phase !== 'input'}
-              className={`w-28 h-28 rounded-2xl transition-all duration-150 border-2 ${
+              className={`w-24 md:w-28 h-24 md:h-28 rounded-2xl transition-all duration-150 border-2 ${
                 activeColor === idx
                   ? 'scale-110 border-white shadow-[0_0_30px_rgba(255,255,255,0.3)]'
                   : phase === 'input'

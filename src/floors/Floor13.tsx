@@ -86,7 +86,7 @@ export default function Floor13() {
 
   return (
     <Layout floorNumber={13} title="Reaction Matrix" subtitle="Pattern Memory">
-      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-[#080b0f] gap-6">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 bg-[#080b0f] gap-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-1">REACTION MATRIX</h1>
           <p className="text-slate-500 font-mono text-sm">
@@ -109,7 +109,7 @@ export default function Floor13() {
                 key={idx}
                 onClick={() => handleCellClick(idx)}
                 disabled={phase !== 'input' && activeCell !== idx}
-                className={`w-20 h-20 rounded-xl border-2 transition-all duration-150 ${
+                className={`w-16 md:w-20 h-16 md:h-20 rounded-xl border-2 transition-all duration-150 ${
                   activeCell === idx
                     ? 'scale-110 border-white bg-primary/30 shadow-[0_0_30px_rgba(19,91,236,0.5)]'
                     : playerInput.includes(idx) && phase === 'input'

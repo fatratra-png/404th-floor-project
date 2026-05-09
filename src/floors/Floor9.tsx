@@ -88,7 +88,7 @@ export default function Floor9() {
 
   return (
     <Layout floorNumber={9} title="Signal Interceptor" subtitle="Frequency Match">
-      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-[#080b0f] gap-6">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 bg-[#080b0f] gap-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-1">SIGNAL INTERCEPTOR</h1>
           <p className="text-slate-500 font-mono text-sm">
@@ -102,7 +102,7 @@ export default function Floor9() {
         </div>
 
         {/* Dial */}
-        <div className="relative w-72 h-72">
+        <div className="relative w-56 md:w-72 h-56 md:h-72">
           {/* Dial background */}
           <div className="absolute inset-0 rounded-full border-4 border-slate-700 bg-slate-900/50">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl font-mono font-bold">

@@ -85,7 +85,7 @@ export default function Floor17() {
 
   return (
     <Layout floorNumber={17} title="Oxygen Scrubber" subtitle="Multi-Gauge Balance">
-      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-[#080b0f] gap-6">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 bg-[#080b0f] gap-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-1">OXYGEN SCRUBBER</h1>
           <p className="text-slate-500 font-mono text-sm">
@@ -106,7 +106,7 @@ export default function Floor17() {
             return (
               <div key={i} className="flex flex-col items-center gap-2">
                 <div className="text-[10px] font-mono text-slate-500">SCRUBBER {i + 1}</div>
-                <div className="relative w-16 h-48 bg-slate-900 rounded-lg overflow-hidden border border-slate-700">
+                <div className="relative w-12 md:w-16 h-36 md:h-48 bg-slate-900 rounded-lg overflow-hidden border border-slate-700">
                   <div
                     className="absolute left-0 right-0 bg-green-500/20 border-y border-green-500/30"
                     style={{ bottom: `${TARGET_MIN}%`, height: `${TARGET_MAX - TARGET_MIN}%` }}

@@ -78,7 +78,7 @@ export default function Floor8() {
 
   return (
     <Layout floorNumber={8} title="Mainframe" subtitle="Core Reboot">
-      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-[#080b0f] gap-6">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 bg-[#080b0f] gap-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-1">CORE REBOOT SEQUENCE</h1>
           <p className="text-slate-500 font-mono text-sm">
@@ -103,7 +103,7 @@ export default function Floor8() {
         </div>
 
         {/* Active phase content */}
-        <div className="w-full max-w-lg bg-[#0c1018] border border-[#1a2030] rounded-xl p-6">
+        <div className="w-full max-w-xs md:max-w-lg bg-[#0c1018] border border-[#1a2030] rounded-xl p-4 md:p-6">
           {currentPhase === 0 && (
             <div className="flex flex-col items-center gap-4">
               <h3 className="text-lg font-bold text-white">Phase 1: Drain Residual Power</h3>

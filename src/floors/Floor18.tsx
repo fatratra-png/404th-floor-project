@@ -135,8 +135,8 @@ export default function Floor18() {
   }, [clicks, navigate])
 
   return (
-    <Layout floorNumber={18} title="Zero Point" subtitle="The Final Ascent" showPanel={false}>
-      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-[#080b0f] gap-6">
+    <Layout floorNumber={18} title="Zero Point" subtitle="The Final Ascent">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 bg-[#080b0f] gap-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white glitch-text" data-text="ZERO POINT">ZERO POINT</h1>
           <p className="text-slate-500 font-mono text-sm">

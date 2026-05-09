@@ -83,7 +83,7 @@ export default function Floor16() {
 
   return (
     <Layout floorNumber={16} title="EM Pulse" subtitle="Rapid Sequencing">
-      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-[#080b0f] gap-6">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 bg-[#080b0f] gap-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-1">EM PULSE SEQUENCER</h1>
           <p className="text-slate-500 font-mono text-sm">
@@ -105,7 +105,7 @@ export default function Floor16() {
                 key={num}
                 onClick={() => handleClick(num)}
                 disabled={phase !== 'play' || clicked}
-                className={`w-16 h-16 rounded-xl border-2 text-xl font-bold font-mono transition-all ${
+                className={`w-12 md:w-16 h-12 md:h-16 rounded-xl border-2 text-base md:text-xl font-bold font-mono transition-all ${
                   clicked
                     ? 'border-green-500 bg-green-500/10 text-green-400'
                     : phase === 'play'

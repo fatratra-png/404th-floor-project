@@ -82,7 +82,7 @@ export default function Floor7() {
 
   return (
     <Layout floorNumber={7} title="Comms Hub" subtitle="Wire Cipher">
-      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-[#080b0f] gap-6">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 bg-[#080b0f] gap-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-1">WIRE CIPHER</h1>
           <p className="text-slate-500 font-mono text-sm">
@@ -100,7 +100,7 @@ export default function Floor7() {
         <div className="flex gap-4">
           {roundData.targets.map((t, i) => (
             <div key={i} className="flex flex-col items-center gap-1">
-              <div className="w-10 h-10 rounded-lg border-2 border-slate-600 flex items-center justify-center"
+              <div className="w-8 md:w-10 h-8 md:h-10 rounded-lg border-2 border-slate-600 flex items-center justify-center"
                 style={{ backgroundColor: t.hex }}>
               </div>
               <span className="text-[9px] font-mono text-slate-500">{t.label}</span>
@@ -119,7 +119,7 @@ export default function Floor7() {
           {Array.from({ length: roundData.count }).map((_, idx) => (
             <div key={idx} className="flex flex-col items-center gap-2">
               <div
-                className={`w-14 h-14 rounded-lg border-2 flex items-center justify-center transition-all ${
+                className={`w-10 md:w-14 h-10 md:h-14 rounded-lg border-2 flex items-center justify-center transition-all ${
                   selected[idx]
                     ? 'border-green-500 bg-green-500/10'
                     : 'border-dashed border-slate-600 bg-slate-900/50'
@@ -147,7 +147,7 @@ export default function Floor7() {
                 }
               }}
               disabled={phase !== 'play' || selected.every(s => s !== null)}
-              className="w-12 h-12 rounded-xl transition-all hover:scale-110 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] disabled:opacity-30 disabled:hover:scale-100 border-2 border-transparent hover:border-white"
+              className="w-10 md:w-12 h-10 md:h-12 rounded-xl transition-all hover:scale-110 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] disabled:opacity-30 disabled:hover:scale-100 border-2 border-transparent hover:border-white"
               style={{ backgroundColor: color.hex, borderColor: selected.some(s => s?.name === color.name) ? '#22c55e' : 'transparent' }}
             />
           ))}

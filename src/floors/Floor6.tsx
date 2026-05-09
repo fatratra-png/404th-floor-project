@@ -82,7 +82,7 @@ export default function Floor6() {
 
   return (
     <Layout floorNumber={6} title="Power Plant" subtitle="Circuit Balance">
-      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-[#080b0f] gap-6">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 bg-[#080b0f] gap-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-1">CIRCUIT OVERLOAD</h1>
           <p className="text-slate-500 font-mono text-sm">
@@ -108,9 +108,9 @@ export default function Floor6() {
           {circuits.map((circuit, idx) => {
             const balanced = circuit.power >= TARGET_MIN && circuit.power <= TARGET_MAX
             return (
-              <div key={circuit.id} className="flex flex-col items-center gap-2">
-                <div className="text-[10px] font-mono text-slate-500">C{idx + 1}</div>
-                <div className="relative w-16 h-48 bg-slate-900 rounded-lg overflow-hidden border border-slate-700">
+                <div key={circuit.id} className="flex flex-col items-center gap-2">
+                  <div className="text-[10px] font-mono text-slate-500">C{idx + 1}</div>
+                  <div className="relative w-12 md:w-16 h-36 md:h-48 bg-slate-900 rounded-lg overflow-hidden border border-slate-700">
                   <div
                     className={`absolute bottom-0 left-0 right-0 transition-all duration-200 ${
                       balanced ? 'bg-green-500' : circuit.power > TARGET_MAX ? 'bg-yellow-500' : 'bg-red-500'

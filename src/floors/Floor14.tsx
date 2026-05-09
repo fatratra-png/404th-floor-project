@@ -76,7 +76,7 @@ export default function Floor14() {
 
   return (
     <Layout floorNumber={14} title="Thermal Control" subtitle="Temperature Regulation">
-      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-[#080b0f] gap-6">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 bg-[#080b0f] gap-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-1">THERMAL CONTROL</h1>
           <p className="text-slate-500 font-mono text-sm">
@@ -90,7 +90,7 @@ export default function Floor14() {
         </div>
 
         {/* Thermometer */}
-        <div className="relative w-24 h-72 bg-slate-900 rounded-xl border-2 border-slate-700 overflow-hidden">
+        <div className="relative w-20 md:w-24 h-56 md:h-72 bg-slate-900 rounded-xl border-2 border-slate-700 overflow-hidden">
           {/* Green zone */}
           <div
             className="absolute left-0 right-0 bg-green-500/20 border-y border-green-500/30"

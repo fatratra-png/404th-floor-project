@@ -174,8 +174,8 @@ export default function Floor19() {
   }, [reflexScore, navigate])
 
   return (
-    <Layout floorNumber={19} title="The Crucible" subtitle="Ultimate Trial" showPanel={false}>
-      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-[#080b0f] gap-6">
+    <Layout floorNumber={19} title="The Crucible" subtitle="Ultimate Trial">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 bg-[#080b0f] gap-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-red-400 glitch-text" data-text="THE CRUCIBLE">THE CRUCIBLE</h1>
           <p className="text-slate-500 font-mono text-sm">No margin for error</p>

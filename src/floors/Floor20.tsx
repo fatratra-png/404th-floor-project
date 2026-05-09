@@ -233,8 +233,8 @@ export default function Floor20() {
   const hpPercent = Math.max(0, bossHp / BOSS_MAX_HP * 100)
 
   return (
-    <Layout floorNumber={20} title="BOSS: THE OVERLORD" subtitle="Final Confrontation" showPanel={false}>
-      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-[#080b0f] gap-6 relative overflow-hidden">
+    <Layout floorNumber={20} title="BOSS: THE OVERLORD" subtitle="Final Confrontation">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 bg-[#080b0f] gap-6 relative overflow-hidden">
         {/* Atmosphere */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/3 left-1/4 w-96 h-96 rounded-full bg-red-500/5 blur-3xl animate-pulse" />

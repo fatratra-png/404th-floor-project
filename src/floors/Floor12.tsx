@@ -75,7 +75,7 @@ export default function Floor12() {
 
   return (
     <Layout floorNumber={12} title="Binary Decoder" subtitle="Binary to Decimal">
-      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-[#080b0f] gap-6">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 bg-[#080b0f] gap-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-1">BINARY DECODER</h1>
           <p className="text-slate-500 font-mono text-sm">
@@ -94,11 +94,11 @@ export default function Floor12() {
         {/* Binary display */}
         <div className="flex gap-2">
           {binary.split('').map((bit, i) => (
-            <div
-              key={i}
-              className={`w-14 h-20 rounded-lg border-2 flex items-center justify-center text-3xl font-mono font-bold transition-all ${
-                bit === '1' ? 'bg-primary/20 border-primary text-primary' : 'bg-slate-900 border-slate-600 text-slate-500'
-              }`}
+              <div
+                key={i}
+                className={`w-10 md:w-14 h-14 md:h-20 rounded-lg border-2 flex items-center justify-center text-xl md:text-3xl font-mono font-bold transition-all ${
+                  bit === '1' ? 'bg-primary/20 border-primary text-primary' : 'bg-slate-900 border-slate-600 text-slate-500'
+                }`}
             >
               {bit}
             </div>
