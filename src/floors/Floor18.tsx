@@ -130,7 +130,7 @@ export default function Floor18() {
       setCompleted(true)
       markComplete(18)
       Sounds.play('victory')
-      setTimeout(() => navigate('/victory'), 3000)
+      setTimeout(() => navigate('/floor/19'), 3000)
     }
   }, [clicks, navigate])
 

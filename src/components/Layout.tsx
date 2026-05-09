@@ -28,6 +28,8 @@ const floorNames: Record<number, { name: string; status: string }> = {
   16: { name: 'Pulse Lab', status: 'EM Sequencing' },
   17: { name: 'Life Support', status: 'Oxygen Balance' },
   18: { name: 'Zero Point', status: 'Final Ascent' },
+  19: { name: 'The Crucible', status: 'Ultimate Trial' },
+  20: { name: 'The Overlord', status: 'Final Boss' },
 }
 
 export default function Layout({ children, floorNumber, title, subtitle, showPanel = true }: LayoutProps) {
@@ -75,6 +77,8 @@ function ControlPanel({ floorNumber }: { floorNumber: number }) {
   const navigate = useNavigate()
 
   const allFloors = [
+    { num: 20, name: 'The Overlord' },
+    { num: 19, name: 'The Crucible' },
     { num: 18, name: 'Zero Point' },
     { num: 17, name: 'Life Support' },
     { num: 16, name: 'Pulse Lab' },

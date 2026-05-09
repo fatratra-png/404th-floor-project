@@ -18,6 +18,8 @@ import Floor15 from './floors/Floor15'
 import Floor16 from './floors/Floor16'
 import Floor17 from './floors/Floor17'
 import Floor18 from './floors/Floor18'
+import Floor19 from './floors/Floor19'
+import Floor20 from './floors/Floor20'
 import Victory from './floors/Victory'
 
 export default function App() {
@@ -42,6 +44,8 @@ export default function App() {
       <Route path="/floor/16" element={<Floor16 />} />
       <Route path="/floor/17" element={<Floor17 />} />
       <Route path="/floor/18" element={<Floor18 />} />
+      <Route path="/floor/19" element={<Floor19 />} />
+      <Route path="/floor/20" element={<Floor20 />} />
       <Route path="/victory" element={<Victory />} />
     </Routes>
   )

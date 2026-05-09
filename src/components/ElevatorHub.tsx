@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { isCompleted, isFloorUnlocked, resetProgress } from '../lib/gameLogic'
+import { getState, isCompleted, isFloorUnlocked, resetProgress } from '../lib/gameLogic'
 
 const floors = [
   { num: 1, name: 'Lobby', desc: 'Fuse Panel', icon: 'bolt' },
@@ -20,10 +20,14 @@ const floors = [
   { num: 16, name: 'Pulse Lab', desc: 'EM Sequencing', icon: 'electric' },
   { num: 17, name: 'Life Support', desc: 'Oxygen Balance', icon: 'air' },
   { num: 18, name: 'Zero Point', desc: 'Final Ascent', icon: 'rocket' },
+  { num: 19, name: 'The Crucible', desc: 'Ultimate Trial', icon: 'whatshot' },
+  { num: 20, name: 'The Overlord', desc: 'Final Boss', icon: 'dangerous' },
 ]
 
 export default function ElevatorHub() {
   const navigate = useNavigate()
+  const state = getState()
+  const hasStarted = Object.keys(state).some(k => k.startsWith('floor'))
 
   const handleFloorClick = (num: number) => {
     if (isFloorUnlocked(num)) {
@@ -99,9 +103,11 @@ export default function ElevatorHub() {
               </h1>
               <div className="absolute top-0 right-10 w-2 h-2 bg-white rounded-full animate-ping opacity-75" />
             </div>
-            <div className="mt-8 px-6 py-2 bg-red-500/10 border border-red-500/30 rounded text-red-400 font-mono text-sm flex items-center gap-2">
+            <div className={`mt-8 px-6 py-2 border rounded text-red-400 font-mono text-sm flex items-center gap-2 ${
+              hasStarted ? 'bg-red-500/10 border-red-500/30' : 'bg-primary/10 border-primary/30 text-primary'
+            }`}>
               <span className="material-symbols-outlined text-base animate-pulse">warning</span>
-              <span>ELEVATOR STUCK BETWEEN NODES</span>
+              <span>{hasStarted ? 'ELEVATOR STUCK BETWEEN NODES' : 'SELECT FLOOR 1 TO BEGIN'}</span>
             </div>
           </div>
 
@@ -132,10 +138,16 @@ export default function ElevatorHub() {
             {floors.map(f => {
               const unlocked = isFloorUnlocked(f.num)
               const completed = isCompleted(f.num)
+              const isFirst = !hasStarted && f.num === 1
               return (
                 <div key={f.num} className="w-full flex items-center justify-between gap-4 group">
                   <div className="text-right flex-1">
-                    <div className={`text-sm font-bold ${completed ? 'text-green-500' : unlocked ? 'text-primary' : 'text-slate-500'}`}>
+                    <div className={`text-sm font-bold flex items-center justify-end gap-2 ${completed ? 'text-green-500' : unlocked ? 'text-primary' : 'text-slate-500'}`}>
+                      {isFirst && (
+                        <span className="text-[10px] font-mono text-green-400 animate-pulse border border-green-500/50 px-1.5 py-0.5 rounded">
+                          START
+                        </span>
+                      )}
                       {f.name}
                     </div>
                     <div className={`text-xs font-mono ${completed ? 'text-green-500/70' : unlocked ? 'text-primary/70' : 'text-slate-600'}`}>
@@ -148,7 +160,7 @@ export default function ElevatorHub() {
                       completed
                         ? 'bg-green-600 border border-green-600 shadow-neon-strong'
                         : unlocked
-                          ? 'bg-primary border border-primary shadow-neon cursor-pointer hover:scale-105'
+                          ? `bg-primary border border-primary shadow-neon cursor-pointer ${isFirst ? 'hover:scale-110 animate-pulse shadow-[0_0_20px_rgba(19,91,236,0.8)]' : 'hover:scale-105'}`
                           : 'bg-[#151a25] border border-[#232f48] opacity-60'
                     }`}
                   >
