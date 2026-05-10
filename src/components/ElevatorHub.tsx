@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getState, isCompleted, isFloorUnlocked, resetProgress, getCompletedCount } from '../lib/gameLogic'
+import { LEVELS } from '../lib/levels'
 
-const floors = [
+const FLOORS_1_20 = [
   { num: 1, name: 'Lobby', desc: 'Fuse Panel' },
   { num: 2, name: 'Access Terminal', desc: 'Keypad' },
   { num: 3, name: 'Server Room', desc: 'Emergency Brake' },
@@ -23,6 +24,11 @@ const floors = [
   { num: 18, name: 'Zero Point', desc: 'Final Ascent' },
   { num: 19, name: 'The Crucible', desc: 'Ultimate Trial' },
   { num: 20, name: 'The Overlord', desc: 'Final Boss' },
+]
+
+const floors = [
+  ...FLOORS_1_20,
+  ...LEVELS.map(l => ({ num: l.id, name: l.name, desc: l.challenge })),
 ]
 
 export default function ElevatorHub() {

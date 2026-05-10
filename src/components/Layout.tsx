@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { isCompleted, getCompletedCount } from '../lib/gameLogic'
+import { LEVELS } from '../lib/levels'
 
 interface LayoutProps {
   children: ReactNode
@@ -33,13 +34,18 @@ const floorNames: Record<number, { name: string; status: string }> = {
   20: { name: 'The Overlord', status: 'Final Boss' },
 }
 
+// Populate floorNames for floors 21-404 from LEVELS data
+for (const level of LEVELS) {
+  floorNames[level.id] = { name: level.name, status: level.challenge }
+}
+
 export default function Layout({ children, floorNumber, title, subtitle }: LayoutProps) {
   const navigate = useNavigate()
   const [panelOpen, setPanelOpen] = useState(false)
 
   const floorCompleted = isCompleted(floorNumber)
   const prevFloor = floorNumber > 1 ? floorNumber - 1 : null
-  const nextFloor = floorNumber < 20 && floorCompleted ? floorNumber + 1 : null
+  const nextFloor = floorNumber < 404 && floorCompleted ? floorNumber + 1 : null
   const done = getCompletedCount()
 
   return (
@@ -112,7 +118,7 @@ export default function Layout({ children, floorNumber, title, subtitle }: Layou
             <div className="px-5 py-4 border-b border-white/[0.06] flex items-center justify-between">
               <div>
                 <h2 className="text-white text-sm font-bold tracking-tight">FLOORS</h2>
-                <p className="text-[10px] text-primary/50 font-mono">{done}/20 completed</p>
+                <p className="text-[10px] text-primary/50 font-mono">{done}/404 completed</p>
               </div>
               <button onClick={() => setPanelOpen(false)} className="text-white/40 hover:text-white/80 transition-colors">
                 <span className="material-symbols-outlined text-lg">close</span>
@@ -178,6 +184,7 @@ export default function Layout({ children, floorNumber, title, subtitle }: Layou
 }
 
 const FLOOR_LIST = [
+  ...LEVELS.map(l => ({ num: l.id, name: l.name })).reverse(),
   { num: 20, name: 'The Overlord' },
   { num: 19, name: 'The Crucible' },
   { num: 18, name: 'Zero Point' },

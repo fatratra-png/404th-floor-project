@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useParams, Navigate } from 'react-router-dom'
+import type { ComponentType } from 'react'
 import ElevatorHub from './components/ElevatorHub'
 import Floor1 from './floors/Floor1'
 import Floor2 from './floors/Floor2'
@@ -21,31 +22,36 @@ import Floor18 from './floors/Floor18'
 import Floor19 from './floors/Floor19'
 import Floor20 from './floors/Floor20'
 import Victory from './floors/Victory'
+import PuzzleLevel from './components/PuzzleLevel'
+
+const floorComponents: Record<number, ComponentType> = {
+  1: Floor1, 2: Floor2, 3: Floor3, 4: Floor4, 5: Floor5,
+  6: Floor6, 7: Floor7, 8: Floor8, 9: Floor9, 10: Floor10,
+  11: Floor11, 12: Floor12, 13: Floor13, 14: Floor14, 15: Floor15,
+  16: Floor16, 17: Floor17, 18: Floor18, 19: Floor19, 20: Floor20,
+}
+
+function FloorRouter() {
+  const { id } = useParams<{ id: string }>()
+  const num = parseInt(id || '', 10)
+
+  if (num >= 1 && num <= 20) {
+    const Component = floorComponents[num]
+    return <Component />
+  }
+
+  if (num >= 21 && num <= 404) {
+    return <PuzzleLevel floorNumber={num} />
+  }
+
+  return <Navigate to="/" replace />
+}
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<ElevatorHub />} />
-      <Route path="/floor/1" element={<Floor1 />} />
-      <Route path="/floor/2" element={<Floor2 />} />
-      <Route path="/floor/3" element={<Floor3 />} />
-      <Route path="/floor/4" element={<Floor4 />} />
-      <Route path="/floor/5" element={<Floor5 />} />
-      <Route path="/floor/6" element={<Floor6 />} />
-      <Route path="/floor/7" element={<Floor7 />} />
-      <Route path="/floor/8" element={<Floor8 />} />
-      <Route path="/floor/9" element={<Floor9 />} />
-      <Route path="/floor/10" element={<Floor10 />} />
-      <Route path="/floor/11" element={<Floor11 />} />
-      <Route path="/floor/12" element={<Floor12 />} />
-      <Route path="/floor/13" element={<Floor13 />} />
-      <Route path="/floor/14" element={<Floor14 />} />
-      <Route path="/floor/15" element={<Floor15 />} />
-      <Route path="/floor/16" element={<Floor16 />} />
-      <Route path="/floor/17" element={<Floor17 />} />
-      <Route path="/floor/18" element={<Floor18 />} />
-      <Route path="/floor/19" element={<Floor19 />} />
-      <Route path="/floor/20" element={<Floor20 />} />
+      <Route path="/floor/:id" element={<FloorRouter />} />
       <Route path="/victory" element={<Victory />} />
     </Routes>
   )
