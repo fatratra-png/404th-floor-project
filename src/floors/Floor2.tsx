@@ -107,8 +107,8 @@ export default function Floor2() {
         </div>
 
         {/* Keypad Terminal */}
-        <div className="relative z-10 w-full max-w-sm">
-          <div className="rounded-xl overflow-hidden border border-slate-700/50 bg-[#111722]/95 backdrop-blur shadow-2xl">
+        <div className="relative z-10 w-full max-w-md bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-2xl p-2 shadow-lg">
+          <div className="rounded-lg overflow-hidden border border-white/[0.04] bg-[#111722]/95 shadow-inner">
             <div className="bg-[#0d111a] border-b border-slate-700/50 p-3 flex justify-between items-center">
               <div className="flex items-center gap-1.5">
                 <div className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.6)]" />

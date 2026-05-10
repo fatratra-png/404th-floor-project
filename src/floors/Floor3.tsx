@@ -85,12 +85,13 @@ export default function Floor3() {
 
   return (
     <Layout floorNumber={3} title="Emergency Brake" subtitle="Mash SPACE">
-      <div className="flex-1 flex flex-col bg-[#0a0f16]">
+      <div className="flex-1 flex flex-col relative">
         <div className={`bg-red-900/30 border-b border-red-500/30 py-2 px-4 text-center transition-all ${pressure < 20 ? 'opacity-100' : 'opacity-0'}`}>
           <span className="text-red-400 font-mono text-sm font-bold">⚠ CRITICAL FREEFALL DETECTED ⚠</span>
         </div>
 
-        <div className="flex-1 flex flex-col items-center justify-center gap-6 p-6">
+        <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8">
+          <div className="w-full max-w-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-2xl p-6 md:p-8 shadow-lg flex flex-col items-center gap-6">
           {/* Brake button */}
           <div className="flex flex-col items-center gap-4">
             <button
@@ -148,6 +149,7 @@ export default function Floor3() {
               ✓ BRAKES ENGAGED - PROCEEDING...
             </div>
           )}
+        </div>
         </div>
       </div>
     </Layout>

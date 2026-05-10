@@ -2,7 +2,32 @@ import type { BugType } from '../types';
 
 export const PROGRESS_KEY = '404floor_progress';
 
-export function getState(): Record<string, string> {
+interface GameState {
+  floor1?: 'completed'
+  floor2?: 'completed'
+  floor3?: 'completed'
+  floor4?: 'completed'
+  floor5?: 'completed'
+  floor6?: 'completed'
+  floor7?: 'completed'
+  floor8?: 'completed'
+  floor9?: 'completed'
+  floor10?: 'completed'
+  floor11?: 'completed'
+  floor12?: 'completed'
+  floor13?: 'completed'
+  floor14?: 'completed'
+  floor15?: 'completed'
+  floor16?: 'completed'
+  floor17?: 'completed'
+  floor18?: 'completed'
+  floor19?: 'completed'
+  floor20?: 'completed'
+  startTime?: number
+  [key: string]: string | number | undefined
+}
+
+export function getState(): GameState {
   try {
     return JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}');
   } catch {
@@ -13,11 +38,8 @@ export function getState(): Record<string, string> {
 export function markComplete(floor: number) {
   const s = getState();
   s[`floor${floor}`] = 'completed';
+  if (!s.startTime) s.startTime = Date.now();
   localStorage.setItem(PROGRESS_KEY, JSON.stringify(s));
-  if (!s.startTime) {
-    s.startTime = Date.now();
-    localStorage.setItem(PROGRESS_KEY, JSON.stringify(s));
-  }
 }
 
 export function isCompleted(floor: number): boolean {
@@ -27,6 +49,15 @@ export function isCompleted(floor: number): boolean {
 export function isFloorUnlocked(floor: number): boolean {
   if (floor === 1) return true;
   return isCompleted(floor - 1);
+}
+
+export function getCompletedCount(): number {
+  const s = getState();
+  return Object.keys(s).filter(k => k.startsWith('floor') && s[k] === 'completed').length;
+}
+
+export function isCurrentFloorFinished(floor: number): boolean {
+  return isCompleted(floor);
 }
 
 export function resetProgress() {
@@ -44,7 +75,7 @@ export const BUG_TYPES: BugType[] = [
   { label: 'ERR_TYPE', icon: '💢', msg: 'TypeError: circular reference' },
 ];
 
-// Floor 5 - Memory sequences (increase difficulty)
+// Floor 5 - Memory sequences
 export function generateSequence(length: number): number[] {
   return Array.from({ length }, () => Math.floor(Math.random() * 4));
 }

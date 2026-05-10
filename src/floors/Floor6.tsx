@@ -27,10 +27,14 @@ export default function Floor6() {
   useEffect(() => {
     const drift = setInterval(() => {
       if (!activeRef.current) return
-      setCircuits(prev => prev.map(c => ({
-        ...c,
-        power: Math.max(0, Math.min(MAX_POWER, c.power + (Math.random() - 0.5) * 6))
-      })))
+      setCircuits(prev => {
+        const allBalanced = prev.every(c => c.power >= TARGET_MIN && c.power <= TARGET_MAX)
+        if (allBalanced) return prev
+        return prev.map(c => ({
+          ...c,
+          power: Math.max(0, Math.min(MAX_POWER, c.power + (Math.random() - 0.5) * 6))
+        }))
+      })
     }, 300)
 
     const sustainCheck = setInterval(() => {
@@ -82,7 +86,8 @@ export default function Floor6() {
 
   return (
     <Layout floorNumber={6} title="Power Plant" subtitle="Circuit Balance">
-      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 bg-[#080b0f] gap-6">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 gap-6">
+        <div className="w-full max-w-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-2xl p-6 md:p-8 shadow-lg flex flex-col items-center gap-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-1">CIRCUIT OVERLOAD</h1>
           <p className="text-slate-500 font-mono text-sm">
@@ -164,6 +169,7 @@ export default function Floor6() {
             ✓ ALL CIRCUITS BALANCED - POWER RESTORED
           </div>
         )}
+        </div>
       </div>
     </Layout>
   )

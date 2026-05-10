@@ -136,7 +136,8 @@ export default function Floor18() {
 
   return (
     <Layout floorNumber={18} title="Zero Point" subtitle="The Final Ascent">
-      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 bg-[#080b0f] gap-6">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 gap-6">
+        <div className="w-full max-w-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-2xl p-6 md:p-8 shadow-lg flex flex-col items-center gap-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white glitch-text" data-text="ZERO POINT">ZERO POINT</h1>
           <p className="text-slate-500 font-mono text-sm">
@@ -260,6 +261,7 @@ export default function Floor18() {
         {completed && (
           <div className="text-green-400 text-xl font-mono animate-pulse">✓ ELEVATOR FULLY RESTORED</div>
         )}
+        </div>
       </div>
     </Layout>
   )

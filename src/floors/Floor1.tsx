@@ -64,7 +64,8 @@ export default function Floor1() {
 
   return (
     <Layout floorNumber={1} title="Main Breaker Panel" subtitle="Fuse Puzzle">
-      <div className="flex-1 flex flex-col items-center justify-center p-6 bg-[#080b0f] gap-6">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 relative">
+        <div className="w-full max-w-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-2xl p-6 md:p-8 shadow-lg flex flex-col items-center gap-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white glitch-text" data-text="MAIN BREAKER PANEL">MAIN BREAKER PANEL</h1>
           <p className="text-slate-400 text-sm">Status: <span className={completed ? 'text-green-500 font-mono font-bold' : 'text-red-500 font-mono font-bold'}>
@@ -107,6 +108,7 @@ export default function Floor1() {
             {inventory.length === 0 && (
               <div className="text-slate-600 text-sm font-mono py-4">ALL FUSES INSERTED</div>
             )}
+          </div>
           </div>
         </div>
 
