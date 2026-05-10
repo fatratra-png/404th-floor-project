@@ -45,7 +45,7 @@ export default function Floor8() {
       setCompleted(true)
       markComplete(8)
       Sounds.play('victory')
-      setTimeout(() => navigate('/victory'), 3000)
+      setTimeout(() => navigate('/floor/9'), 3000)
     } else {
       setCurrentPhase(prev => prev + 1)
     }

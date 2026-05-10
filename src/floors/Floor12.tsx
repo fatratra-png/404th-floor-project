@@ -108,8 +108,8 @@ export default function Floor12() {
 
         <div className="text-xs font-mono text-slate-600">
           {binary.split('').map((b, i) => (
-            <span key={i} className="mx-1">{b === '1' ? 2 ** (binary.length - 1 - i) : 0}</span>
-          )).reduce((acc, el, i, arr) => i < arr.length - 1 ? [acc, <span key={`plus-${i}`} className="text-slate-700 mx-1">+</span>, el] as any : acc, arr[0])}
+            <span key={i} className="mx-1">{b === '1' ? 2 ** (binary.length - 1 - i) : 0}{i < binary.length - 1 && <span className="text-slate-700 mx-0.5">+</span>}</span>
+          ))}
           <span className="text-slate-500 ml-2">= ?</span>
         </div>
 
