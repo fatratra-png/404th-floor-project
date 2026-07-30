@@ -3,6 +3,8 @@ import type { LevelDef, PuzzleConfig } from '../types'
 import { generatePrimeFactors, checkBalanced, isPalindrome, generateSortedArray, generateMaze } from './puzzleEngine'
 
 const ZONES = [
+  { name: 'Knowledge Check', challenge: 'Technical Knowledge', types: [PuzzleType.CODING, PuzzleType.NETWORK, PuzzleType.AI, PuzzleType.DB] as PuzzleType[] },
+  { name: 'Binary Basics', challenge: 'Number Systems', types: [PuzzleType.BINARY, PuzzleType.HEX, PuzzleType.MATH] as PuzzleType[] },
   { name: 'Sorting Core', challenge: 'Sorting Algorithms', types: [PuzzleType.SORT] as PuzzleType[] },
   { name: 'Search Domain', challenge: 'Searching Algorithms', types: [PuzzleType.TWO_SUM, PuzzleType.SORT] as PuzzleType[] },
   { name: 'Sequence Stream', challenge: 'Sequence Analysis', types: [PuzzleType.SEQUENCE, PuzzleType.PATTERN] as PuzzleType[] },
@@ -286,6 +288,60 @@ const MATH_QUESTIONS = [
   { q: 'How many degrees in a circle?', a: 360 },
 ]
 
+const REACT_QUESTIONS = [
+  { q: 'What hook is used for side effects in React?', opts: ['useEffect', 'useState', 'useCallback', 'useMemo'], ans: 0 },
+  { q: 'What does JSX stand for?', opts: ['JavaScript XML', 'Java Syntax Extension', 'JSON XML', 'JavaScript XHR'], ans: 0 },
+  { q: 'What hook stores component state?', opts: ['useEffect', 'useState', 'useReducer', 'useRef'], ans: 1 },
+  { q: 'What is a React component?', opts: ['A function returning JSX', 'A CSS class', 'An HTML tag', 'A JavaScript promise'], ans: 0 },
+  { q: 'What is the virtual DOM?', opts: ['A lightweight copy of the DOM', 'The real browser DOM', 'A database', 'A CSS framework'], ans: 0 },
+  { q: 'What prop is used for inline styles in React?', opts: ['styles', 'style', 'className', 'css'], ans: 1 },
+  { q: 'What hook replaces componentDidMount?', opts: ['useEffect', 'useState', 'useRef', 'useLayoutEffect'], ans: 0 },
+  { q: 'What is a key prop used for?', opts: ['Identifying list items', 'Styling elements', 'API keys', 'Encryption'], ans: 0 },
+  { q: 'What does useRef return?', opts: ['A mutable ref object', 'A state variable', 'A CSS class', 'A DOM event'], ans: 0 },
+  { q: 'What is React context used for?', opts: ['Prop drilling avoidance', 'API calls', 'Routing', 'Form validation'], ans: 0 },
+  { q: 'What hook memoizes a value?', opts: ['useMemo', 'useCallback', 'useEffect', 'useState'], ans: 0 },
+  { q: 'What does createPortal do?', opts: ['Renders outside parent DOM', 'Creates new routes', 'Opens modals', 'Fetches data'], ans: 0 },
+  { q: 'What is a custom hook?', opts: ['A function using other hooks', 'A built-in hook', 'A React component', 'A plugin'], ans: 0 },
+  { q: 'What is the purpose of StrictMode?', opts: ['Highlight potential problems', 'Strict typing', 'Performance optimization', 'Accessibility checks'], ans: 0 },
+  { q: 'What is reconciliation in React?', opts: ['Diffing algorithm for updates', 'Database sync', 'State management', 'API integration'], ans: 0 },
+]
+
+const JAVA_QUESTIONS = [
+  { q: 'What is the JVM?', opts: ['Java Virtual Machine', 'Java Version Manager', 'Java Variable Model', 'Java Visual Machine'], ans: 0 },
+  { q: 'What keyword creates a new object in Java?', opts: ['new', 'create', 'object', 'alloc'], ans: 0 },
+  { q: 'What is inheritance in Java?', opts: ['A class deriving from another', 'Importing libraries', 'Creating instances', 'Method overloading'], ans: 0 },
+  { q: 'What does static mean in Java?', opts: ['Belongs to class not instance', 'Dynamic allocation', 'Thread-safe', 'Immutable'], ans: 0 },
+  { q: 'What is the main method signature?', opts: ['public static void main', 'public void main', 'static void main', 'private static main'], ans: 0 },
+  { q: 'What is an interface in Java?', opts: ['A contract of abstract methods', 'A concrete class', 'A data structure', 'A UI component'], ans: 0 },
+  { q: 'What is polymorphism?', opts: ['Many forms of a method', 'Single form', 'Data hiding', 'Memory management'], ans: 0 },
+  { q: 'What keyword prevents inheritance?', opts: ['final', 'static', 'private', 'abstract'], ans: 0 },
+  { q: 'What is a constructor?', opts: ['Initializes objects', 'Destroys objects', 'Creates threads', 'Manages memory'], ans: 0 },
+  { q: 'What is the super keyword?', opts: ['Refers to parent class', 'Calls static methods', 'Creates instances', 'Defines constants'], ans: 0 },
+  { q: 'What is method overloading?', opts: ['Same name different params', 'Different name same params', 'Hiding methods', 'Overriding methods'], ans: 0 },
+  { q: 'What is an exception?', opts: ['An error event', 'A normal flow', 'A data type', 'A loop construct'], ans: 0 },
+  { q: 'What does ArrayList store?', opts: ['Dynamic arrays', 'Static arrays', 'Linked lists', 'Hash maps'], ans: 0 },
+  { q: 'What is the garbage collector?', opts: ['Frees unused memory', 'Collects data', 'Manages threads', 'Handles I/O'], ans: 0 },
+  { q: 'What is a package in Java?', opts: ['A namespace for classes', 'A compressed file', 'A library', 'A framework'], ans: 0 },
+]
+
+const PYTHON_QUESTIONS = [
+  { q: 'What is PEP 8?', opts: ['Python style guide', 'Python editor', 'Python package', 'Python version'], ans: 0 },
+  { q: 'What is a list comprehension?', opts: ['Concise list creation', 'List sorting', 'List copying', 'List indexing'], ans: 0 },
+  { q: 'What is a decorator in Python?', opts: ['Modifies functions/methods', 'A design pattern', 'A data type', 'A loop construct'], ans: 0 },
+  { q: 'What is __init__?', opts: ['Class constructor', 'Module import', 'Variable initializer', 'Function decorator'], ans: 0 },
+  { q: 'What is a lambda in Python?', opts: ['Anonymous function', 'Named function', 'A class', 'A module'], ans: 0 },
+  { q: 'What does len() return?', opts: ['Length of a sequence', 'Last element', 'Maximum value', 'Minimum value'], ans: 0 },
+  { q: 'What is a tuple?', opts: ['Immutable sequence', 'Mutable list', 'A function', 'A dictionary'], ans: 0 },
+  { q: 'What is slicing in Python?', opts: ['Extracting subsequences', 'Cutting strings', 'Deleting elements', 'Reversing lists'], ans: 0 },
+  { q: 'What is a dictionary?', opts: ['Key-value store', 'Ordered list', 'A set', 'A function'], ans: 0 },
+  { q: 'What does the with statement do?', opts: ['Context management', 'Loops', 'Conditionals', 'Imports'], ans: 0 },
+  { q: 'What is a generator?', opts: ['Yields values lazily', 'Creates lists', 'Generates numbers', 'A data type'], ans: 0 },
+  { q: 'What is pickling?', opts: ['Serializing objects', 'Describing objects', 'Selecting items', 'Sorting data'], ans: 0 },
+  { q: 'What is a class variable?', opts: ['Shared across instances', 'Per-instance data', 'Local variable', 'Global variable'], ans: 0 },
+  { q: 'What is the GIL?', opts: ['Global Interpreter Lock', 'General Import Library', 'Graphics Interface Layer', 'Generated Instruction List'], ans: 0 },
+  { q: 'What is pip?', opts: ['Package installer', 'Python interpreter', 'Code formatter', 'Debugger'], ans: 0 },
+]
+
 function genCodingConfig(id: number): PuzzleConfig {
   const idx = randInt(id, 0, CODING_QUESTIONS.length - 1, 0)
   const q = CODING_QUESTIONS[idx]
@@ -346,10 +402,43 @@ function genDBConfig(id: number): PuzzleConfig {
   }
 }
 
+function genReactConfig(id: number): PuzzleConfig {
+  const idx = randInt(id, 0, REACT_QUESTIONS.length - 1, 0)
+  const q = REACT_QUESTIONS[idx]
+  return {
+    kind: PuzzleType.REACT,
+    question: q.q,
+    options: q.opts,
+    answerIndex: q.ans,
+  }
+}
+
+function genJavaConfig(id: number): PuzzleConfig {
+  const idx = randInt(id, 0, JAVA_QUESTIONS.length - 1, 0)
+  const q = JAVA_QUESTIONS[idx]
+  return {
+    kind: PuzzleType.JAVA,
+    question: q.q,
+    options: q.opts,
+    answerIndex: q.ans,
+  }
+}
+
+function genPythonConfig(id: number): PuzzleConfig {
+  const idx = randInt(id, 0, PYTHON_QUESTIONS.length - 1, 0)
+  const q = PYTHON_QUESTIONS[idx]
+  return {
+    kind: PuzzleType.PYTHON,
+    question: q.q,
+    options: q.opts,
+    answerIndex: q.ans,
+  }
+}
+
 function generateLevel(id: number): LevelDef {
-  const zoneIdx = Math.min(Math.floor(((id - 21) / 25.5)), ZONES.length - 1)
+  const zoneIdx = Math.min(Math.floor(((id - 1) / 23.6)), ZONES.length - 1)
   const zone = ZONES[zoneIdx]
-  const localIdx = id - 21 - zoneIdx * 25
+  const localIdx = id - 1 - zoneIdx * 23
   const type = zone.types[localIdx % zone.types.length]
   const diff = Math.min(1 + Math.floor(((seeded(id * 13 + 5) * 100) % 1) * 10), 10)
 
@@ -371,6 +460,9 @@ function generateLevel(id: number): LevelDef {
     case PuzzleType.MATH: config = genMathConfig(id); break
     case PuzzleType.AI: config = genAIConfig(id); break
     case PuzzleType.DB: config = genDBConfig(id); break
+    case PuzzleType.REACT: config = genReactConfig(id); break
+    case PuzzleType.JAVA: config = genJavaConfig(id); break
+    case PuzzleType.PYTHON: config = genPythonConfig(id); break
   }
 
   return {
@@ -403,16 +495,17 @@ function generateFloor404(): LevelDef {
   }
 }
 
+const GENERATED_COUNT = 403
+
 export const LEVELS: LevelDef[] = [
-  ...Array.from({ length: 383 }, (_, i) => i + 21).map(generateLevel),
+  ...Array.from({ length: GENERATED_COUNT }, (_, i) => i + 1).map(generateLevel),
   generateFloor404(),
 ]
 
 export function getLevel(id: number): LevelDef | undefined {
-  if (id >= 1 && id <= 20) return undefined
   return LEVELS.find(l => l.id === id)
 }
 
 export function isGeneratedLevel(id: number): boolean {
-  return id >= 21 && id <= 404
+  return id >= 1 && id <= 404
 }

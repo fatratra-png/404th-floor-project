@@ -48,6 +48,9 @@ export enum PuzzleType {
   MATH = 'math',
   AI = 'ai',
   DB = 'db',
+  REACT = 'react',
+  JAVA = 'java',
+  PYTHON = 'python',
 }
 
 export interface LevelDef {
@@ -78,6 +81,9 @@ export type PuzzleConfig =
   | MathConfig
   | AIConfig
   | DBConfig
+  | ReactConfig
+  | JavaConfig
+  | PythonConfig
 
 export interface SortConfig {
   kind: PuzzleType.SORT
@@ -183,6 +189,27 @@ export interface AIConfig {
 
 export interface DBConfig {
   kind: PuzzleType.DB
+  question: string
+  options: string[]
+  answerIndex: number
+}
+
+export interface ReactConfig {
+  kind: PuzzleType.REACT
+  question: string
+  options: string[]
+  answerIndex: number
+}
+
+export interface JavaConfig {
+  kind: PuzzleType.JAVA
+  question: string
+  options: string[]
+  answerIndex: number
+}
+
+export interface PythonConfig {
+  kind: PuzzleType.PYTHON
   question: string
   options: string[]
   answerIndex: number
