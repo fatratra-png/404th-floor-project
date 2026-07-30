@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { Sounds } from '../audio/sounds'
 import { markComplete } from '../lib/gameLogic'
+import TechChallenge from '../components/TechChallenge'
 
 const ROUNDS_TO_WIN = 5
 
 export default function Floor9() {
   const navigate = useNavigate()
+  const [showChallenge, setShowChallenge] = useState(false)
   const [round, setRound] = useState(1)
   const [target, setTarget] = useState(30 + Math.random() * 40)
   const [needle, setNeedle] = useState(0)
@@ -64,9 +66,8 @@ export default function Floor9() {
       if (round >= ROUNDS_TO_WIN) {
         setPhase('complete')
         setCompleted(true)
-        markComplete(9)
         Sounds.play('victory')
-        setTimeout(() => navigate('/floor/10'), 2500)
+        setShowChallenge(true)
       } else {
         setPhase('success')
         setTimeout(() => {
@@ -181,11 +182,12 @@ export default function Floor9() {
           ))}
         </div>
 
-        {phase === 'complete' && (
+        {phase === 'complete' && !showChallenge && (
           <div className="text-green-400 text-lg font-mono animate-pulse">✓ SIGNAL ACQUIRED</div>
         )}
         </div>
       </div>
+      {showChallenge && <TechChallenge floor={9} onComplete={() => { markComplete(9); navigate('/floor/10') }} />}
     </Layout>
   )
 }

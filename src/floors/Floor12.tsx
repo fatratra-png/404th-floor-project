@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { Sounds } from '../audio/sounds'
 import { markComplete } from '../lib/gameLogic'
+import TechChallenge from '../components/TechChallenge'
 
 const ROUNDS = 8
 
@@ -12,6 +13,7 @@ function generateBinary(length: number): string {
 
 export default function Floor12() {
   const navigate = useNavigate()
+  const [showChallenge, setShowChallenge] = useState(false)
   const [round, setRound] = useState(1)
   const [binary, setBinary] = useState(generateBinary(4))
   const [answer, setAnswer] = useState('')
@@ -55,9 +57,8 @@ export default function Floor12() {
       if (round >= ROUNDS) {
         setPhase('complete')
         setCompleted(true)
-        markComplete(12)
         Sounds.play('victory')
-        setTimeout(() => navigate('/floor/13'), 2500)
+        setShowChallenge(true)
       } else {
         setPhase('success')
         setTimeout(() => {
@@ -134,11 +135,12 @@ export default function Floor12() {
 
         {phase === 'success' && <div className="text-green-400 text-sm animate-pulse">✓ CORRECT!</div>}
         {phase === 'fail' && <div className="text-red-400 text-sm animate-pulse">✗ WRONG</div>}
-        {phase === 'complete' && (
+        {phase === 'complete' && !showChallenge && (
           <div className="text-green-400 text-lg font-mono animate-pulse">✓ BINARY PROTOCOL DECODED</div>
         )}
         </div>
       </div>
+      {showChallenge && <TechChallenge floor={12} onComplete={() => { markComplete(12); navigate('/floor/13') }} />}
     </Layout>
   )
 }

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { Sounds } from '../audio/sounds'
 import { markComplete } from '../lib/gameLogic'
+import TechChallenge from '../components/TechChallenge'
 
 const ROUNDS = 5
 
@@ -17,6 +18,7 @@ function shuffleArray(arr: number[]): number[] {
 
 export default function Floor16() {
   const navigate = useNavigate()
+  const [showChallenge, setShowChallenge] = useState(false)
   const [round, setRound] = useState(1)
   const [numbers, setNumbers] = useState<number[]>(() => shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9]))
   const [nextToClick, setNextToClick] = useState(1)
@@ -60,9 +62,8 @@ export default function Floor16() {
         if (round >= ROUNDS) {
           setPhase('complete')
           setCompleted(true)
-          markComplete(16)
           Sounds.play('victory')
-          setTimeout(() => navigate('/floor/17'), 2500)
+          setShowChallenge(true)
         } else {
           setPhase('success')
           setTimeout(() => {
@@ -134,11 +135,12 @@ export default function Floor16() {
           </div>
         )}
 
-        {phase === 'complete' && (
+        {phase === 'complete' && !showChallenge && (
           <div className="text-green-400 text-lg font-mono animate-pulse">✓ EM PULSE CALIBRATED</div>
         )}
         </div>
       </div>
+      {showChallenge && <TechChallenge floor={16} onComplete={() => { markComplete(16); navigate('/floor/17') }} />}
     </Layout>
   )
 }

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { Sounds } from '../audio/sounds'
 import { markComplete } from '../lib/gameLogic'
+import TechChallenge from '../components/TechChallenge'
 
 const GAUGE_COUNT = 4
 const TARGET_MIN = 30
@@ -16,6 +17,7 @@ interface Gauge {
 
 export default function Floor17() {
   const navigate = useNavigate()
+  const [showChallenge, setShowChallenge] = useState(false)
   const [gauges, setGauges] = useState<Gauge[]>(() =>
     Array.from({ length: GAUGE_COUNT }, () => ({ value: 50, drift: (Math.random() - 0.5) * 0.5 }))
   )
@@ -49,9 +51,8 @@ export default function Floor17() {
             if (next >= SUSTAIN_TIME) {
               setActive(false)
               setCompleted(true)
-              markComplete(17)
               Sounds.play('victory')
-              setTimeout(() => navigate('/floor/18'), 2500)
+              setShowChallenge(true)
               return SUSTAIN_TIME
             }
             return next
@@ -160,11 +161,12 @@ export default function Floor17() {
           </div>
         </div>
 
-        {completed && (
+        {completed && !showChallenge && (
           <div className="text-green-400 text-lg font-mono animate-pulse">✓ OXYGEN LEVELS STABILIZED</div>
         )}
         </div>
       </div>
+      {showChallenge && <TechChallenge floor={17} onComplete={() => { markComplete(17); navigate('/floor/18') }} />}
     </Layout>
   )
 }

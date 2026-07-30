@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { Sounds } from '../audio/sounds'
 import { markComplete } from '../lib/gameLogic'
+import TechChallenge from '../components/TechChallenge'
 
 type GateType = 'AND' | 'OR' | 'NOT' | 'NAND' | 'NOR' | 'XOR'
 
@@ -42,6 +43,7 @@ function generateRound(round: number) {
 
 export default function Floor11() {
   const navigate = useNavigate()
+  const [showChallenge, setShowChallenge] = useState(false)
   const [round, setRound] = useState(1)
   const [roundData, setRoundData] = useState(() => generateRound(1))
   const [userTypes, setUserTypes] = useState<GateType[]>(roundData.types)
@@ -80,9 +82,8 @@ export default function Floor11() {
       if (round >= ROUNDS) {
         setPhase('complete')
         setCompleted(true)
-        markComplete(11)
         Sounds.play('victory')
-        setTimeout(() => navigate('/floor/12'), 2500)
+        setShowChallenge(true)
       } else {
         setTimeout(() => {
           const nextRound = round + 1
@@ -161,11 +162,12 @@ export default function Floor11() {
 
         {phase === 'success' && <div className="text-green-400 text-sm animate-pulse">✓ CIRCUIT CORRECT!</div>}
         {phase === 'fail' && <div className="text-red-400 text-sm animate-pulse">✗ MISMATCH - RETRY</div>}
-        {phase === 'complete' && (
+        {phase === 'complete' && !showChallenge && (
           <div className="text-green-400 text-lg font-mono animate-pulse">✓ ALL GATES ALIGNED</div>
         )}
         </div>
       </div>
+      {showChallenge && <TechChallenge floor={11} onComplete={() => { markComplete(11); navigate('/floor/12') }} />}
     </Layout>
   )
 }

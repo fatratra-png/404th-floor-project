@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { Sounds } from '../audio/sounds'
 import { markComplete } from '../lib/gameLogic'
+import TechChallenge from '../components/TechChallenge'
 
 const DIALS = 4
 const POSITIONS = 8
@@ -44,6 +45,7 @@ function checkGuess(code: number[], guess: number[]): { correct: number; close: 
 
 export default function Floor15() {
   const navigate = useNavigate()
+  const [showChallenge, setShowChallenge] = useState(false)
   const [code] = useState(generateCode)
   const [guess, setGuess] = useState<number[]>(Array(DIALS).fill(0))
   const [attempts, setAttempts] = useState<{ guess: number[]; correct: number; close: number }[]>([])
@@ -68,17 +70,15 @@ export default function Floor15() {
     if (result.correct === DIALS) {
       setCompleted(true)
       setPhase('complete')
-      markComplete(15)
       Sounds.play('victory')
-      setTimeout(() => navigate('/floor/16'), 2500)
+      setShowChallenge(true)
     } else {
       Sounds.play('mem_fail')
       if (attempts.length + 1 >= MAX_GUESSES) {
         setPhase('complete')
         setCompleted(true)
-        markComplete(15)
         Sounds.play('victory')
-        setTimeout(() => navigate('/floor/16'), 2500)
+        setShowChallenge(true)
       }
     }
   }, [code, guess, completed, attempts.length, navigate])
@@ -145,11 +145,12 @@ export default function Floor15() {
           ))}
         </div>
 
-        {phase === 'complete' && (
+        {phase === 'complete' && !showChallenge && (
           <div className="text-green-400 text-lg font-mono animate-pulse">✓ CIPHER LOCK DISENGAGED</div>
         )}
         </div>
       </div>
+      {showChallenge && <TechChallenge floor={15} onComplete={() => { markComplete(15); navigate('/floor/16') }} />}
     </Layout>
   )
 }

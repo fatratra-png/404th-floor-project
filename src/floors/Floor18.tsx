@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { Sounds } from '../audio/sounds'
 import { markComplete } from '../lib/gameLogic'
+import TechChallenge from '../components/TechChallenge'
 
 const TOTAL_PHASES = 3
 
 export default function Floor18() {
   const navigate = useNavigate()
+  const [showChallenge, setShowChallenge] = useState(false)
   const [phase, setPhase] = useState(0)
   const [completed, setCompleted] = useState(false)
 
@@ -128,9 +130,8 @@ export default function Floor18() {
   useEffect(() => {
     if (clicks >= 25) {
       setCompleted(true)
-      markComplete(18)
       Sounds.play('victory')
-      setTimeout(() => navigate('/floor/19'), 3000)
+      setShowChallenge(true)
     }
   }, [clicks, navigate])
 
@@ -258,11 +259,12 @@ export default function Floor18() {
           </div>
         )}
 
-        {completed && (
+        {completed && !showChallenge && (
           <div className="text-green-400 text-xl font-mono animate-pulse">✓ ELEVATOR FULLY RESTORED</div>
         )}
         </div>
       </div>
+      {showChallenge && <TechChallenge floor={18} onComplete={() => { markComplete(18); navigate('/floor/19') }} />}
     </Layout>
   )
 }

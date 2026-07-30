@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { Sounds } from '../audio/sounds'
 import { markComplete } from '../lib/gameLogic'
+import TechChallenge from '../components/TechChallenge'
 
 interface Phase {
   id: number
@@ -20,6 +21,7 @@ const ALL_PHASES: Phase[] = [
 
 export default function Floor8() {
   const navigate = useNavigate()
+  const [showChallenge, setShowChallenge] = useState(false)
   const [phases, setPhases] = useState<Phase[]>(ALL_PHASES.map(p => ({ ...p })))
   const [currentPhase, setCurrentPhase] = useState(0)
   const [completed, setCompleted] = useState(false)
@@ -43,9 +45,8 @@ export default function Floor8() {
     Sounds.play('core_phase')
     if (currentPhase >= ALL_PHASES.length - 1) {
       setCompleted(true)
-      markComplete(8)
       Sounds.play('victory')
-      setTimeout(() => navigate('/floor/9'), 3000)
+      setShowChallenge(true)
     } else {
       setCurrentPhase(prev => prev + 1)
     }
@@ -207,13 +208,14 @@ export default function Floor8() {
             : completed ? '✓ REBOOT COMPLETE' : 'FINALIZE REBOOT'}
         </button>
 
-        {completed && (
+        {completed && !showChallenge && (
           <div className="text-green-400 text-lg font-mono animate-pulse">
             ✓ CORE REBOOT INITIALIZED - ELEVATOR RESTORED
           </div>
         )}
         </div>
       </div>
+      {showChallenge && <TechChallenge floor={8} onComplete={() => { markComplete(8); navigate('/floor/9') }} />}
     </Layout>
   )
 }

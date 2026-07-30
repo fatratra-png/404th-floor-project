@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { Sounds } from '../audio/sounds'
 import { markComplete } from '../lib/gameLogic'
+import TechChallenge from '../components/TechChallenge'
 
 const GRID = 5
 const PIPE_TYPES = ['─', '│', '┌', '┐', '└', '┘', '┴', '┬', '├', '┤', '┼']
@@ -66,6 +67,7 @@ const ROTATE_MAP: Record<string, string> = {
 
 export default function Floor10() {
   const navigate = useNavigate()
+  const [showChallenge, setShowChallenge] = useState(false)
   const [grid, setGrid] = useState(() => generateGrid())
   const [clicks, setClicks] = useState(0)
   const [completed, setCompleted] = useState(false)
@@ -86,9 +88,8 @@ export default function Floor10() {
     const flow = checkFlow(grid)
     if (flow) {
       setCompleted(true)
-      markComplete(10)
       Sounds.play('victory')
-      setTimeout(() => navigate('/floor/11'), 2500)
+      setShowChallenge(true)
     } else {
       Sounds.play('mem_fail')
     }
@@ -143,11 +144,12 @@ export default function Floor10() {
           {completed ? '✓ FLOW ESTABLISHED' : 'TEST FLOW'}
         </button>
 
-        {completed && (
+        {completed && !showChallenge && (
           <div className="text-green-400 text-lg font-mono animate-pulse">✓ PIPE NETWORK CONNECTED</div>
         )}
         </div>
       </div>
+      {showChallenge && <TechChallenge floor={10} onComplete={() => { markComplete(10); navigate('/floor/11') }} />}
     </Layout>
   )
 }

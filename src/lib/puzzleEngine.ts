@@ -75,6 +75,33 @@ export function checkSolution(config: PuzzleConfig, answer: unknown): boolean {
       }
       return true
     }
+    case PuzzleType.CODING: {
+      const c = config as import('../types').CodingConfig
+      return (answer as string).toLowerCase().trim() === c.answer.toLowerCase().trim()
+    }
+    case PuzzleType.NETWORK: {
+      const c = config as import('../types').NetworkConfig
+      return (answer as number) === c.answerIndex
+    }
+    case PuzzleType.HEX: {
+      const c = config as import('../types').HexConfig
+      if (c.direction === 'to_decimal') {
+        return (answer as number) === c.decimal
+      }
+      return (answer as string).toLowerCase() === c.hex.toLowerCase()
+    }
+    case PuzzleType.MATH: {
+      const c = config as import('../types').MathConfig
+      return (answer as number) === c.answer
+    }
+    case PuzzleType.AI: {
+      const c = config as import('../types').AIConfig
+      return (answer as number) === c.answerIndex
+    }
+    case PuzzleType.DB: {
+      const c = config as import('../types').DBConfig
+      return (answer as number) === c.answerIndex
+    }
   }
 }
 

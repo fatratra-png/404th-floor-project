@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { Sounds } from '../audio/sounds'
 import { markComplete } from '../lib/gameLogic'
+import TechChallenge from '../components/TechChallenge'
 
 const COLOR_POOL = [
   { name: 'red', hex: '#ef4444', label: 'RED' },
@@ -26,6 +27,7 @@ const ROUNDS_TO_WIN = 5
 
 export default function Floor7() {
   const navigate = useNavigate()
+  const [showChallenge, setShowChallenge] = useState(false)
   const [round, setRound] = useState(1)
   const [roundData, setRoundData] = useState(() => generateRound(1))
   const [selected, setSelected] = useState<(typeof COLOR_POOL[number] | null)[]>([])
@@ -61,9 +63,8 @@ export default function Floor7() {
       if (round >= ROUNDS_TO_WIN) {
         setPhase('complete')
         setCompleted(true)
-        markComplete(7)
         Sounds.play('victory')
-        setTimeout(() => navigate('/floor/8'), 2500)
+        setShowChallenge(true)
       } else {
         setTimeout(() => {
           const nextRound = round + 1
@@ -174,11 +175,12 @@ export default function Floor7() {
 
         {phase === 'success' && <div className="text-green-400 text-sm font-mono animate-pulse">✓ CORRECT!</div>}
         {phase === 'fail' && <div className="text-red-400 text-sm font-mono animate-pulse">✗ WRONG! RETRY...</div>}
-        {phase === 'complete' && (
+        {phase === 'complete' && !showChallenge && (
           <div className="text-green-400 text-lg font-mono animate-pulse">✓ COMMS HUB ONLINE - PROCEEDING...</div>
         )}
         </div>
       </div>
+      {showChallenge && <TechChallenge floor={7} onComplete={() => { markComplete(7); navigate('/floor/8') }} />}
     </Layout>
   )
 }

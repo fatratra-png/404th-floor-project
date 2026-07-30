@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { Sounds } from '../audio/sounds'
 import { markComplete } from '../lib/gameLogic'
+import TechChallenge from '../components/TechChallenge'
 
 const BOSS_MAX_HP = 100
 const ERRORS = [
@@ -17,6 +18,7 @@ const FIREWALL_SYMBOLS = ['⬡', '⬢', '⬠', '◆', '◇']
 
 export default function Floor20() {
   const navigate = useNavigate()
+  const [showChallenge, setShowChallenge] = useState(false)
   const [bossHp, setBossHp] = useState(BOSS_MAX_HP)
   const [phase, setPhase] = useState(0)
   const [completed, setCompleted] = useState(false)
@@ -224,9 +226,8 @@ export default function Floor20() {
   useEffect(() => {
     if (bossHp <= 0) {
       setCompleted(true)
-      markComplete(20)
       Sounds.play('victory')
-      setTimeout(() => navigate('/victory'), 3000)
+      setShowChallenge(true)
     }
   }, [bossHp, navigate])
 
@@ -402,15 +403,16 @@ export default function Floor20() {
               </div>
             )}
           </>
-        ) : (
+        ) : !showChallenge ? (
           <div className="relative z-10 flex flex-col items-center gap-4 animate-pulse">
             <div className="text-6xl">🏆</div>
             <div className="text-green-400 text-2xl font-mono font-bold">THE OVERLORD DEFEATED</div>
             <div className="text-slate-500 text-sm font-mono">SYSTEM RESTORED - ACCESSING ROOF...</div>
           </div>
-        )}
+        ) : null}
         </div>
       </div>
+      {showChallenge && <TechChallenge floor={20} onComplete={() => { markComplete(20); navigate('/victory') }} />}
     </Layout>
   )
 }

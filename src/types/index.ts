@@ -42,6 +42,12 @@ export enum PuzzleType {
   BINARY = 'binary',
   PATTERN = 'pattern',
   GRAPH = 'graph',
+  CODING = 'coding',
+  NETWORK = 'network',
+  HEX = 'hex',
+  MATH = 'math',
+  AI = 'ai',
+  DB = 'db',
 }
 
 export interface LevelDef {
@@ -66,6 +72,12 @@ export type PuzzleConfig =
   | BinaryConfig
   | PatternConfig
   | GraphConfig
+  | CodingConfig
+  | NetworkConfig
+  | HexConfig
+  | MathConfig
+  | AIConfig
+  | DBConfig
 
 export interface SortConfig {
   kind: PuzzleType.SORT
@@ -132,4 +144,46 @@ export interface GraphConfig {
   edges: [number, number][]
   start: number
   end: number
+}
+
+export interface CodingConfig {
+  kind: PuzzleType.CODING
+  code: string
+  question: string
+  answer: string
+  hint?: string
+}
+
+export interface NetworkConfig {
+  kind: PuzzleType.NETWORK
+  question: string
+  options: string[]
+  answerIndex: number
+}
+
+export interface HexConfig {
+  kind: PuzzleType.HEX
+  hex: string
+  decimal: number
+  direction: 'to_hex' | 'to_decimal'
+}
+
+export interface MathConfig {
+  kind: PuzzleType.MATH
+  question: string
+  answer: number
+}
+
+export interface AIConfig {
+  kind: PuzzleType.AI
+  question: string
+  options: string[]
+  answerIndex: number
+}
+
+export interface DBConfig {
+  kind: PuzzleType.DB
+  question: string
+  options: string[]
+  answerIndex: number
 }

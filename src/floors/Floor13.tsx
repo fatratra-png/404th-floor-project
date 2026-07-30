@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { Sounds } from '../audio/sounds'
 import { markComplete } from '../lib/gameLogic'
+import TechChallenge from '../components/TechChallenge'
 
 const GRID_SIZE = 3
 const MAX_ROUND = 8
 
 export default function Floor13() {
   const navigate = useNavigate()
+  const [showChallenge, setShowChallenge] = useState(false)
   const [pattern, setPattern] = useState<number[]>([])
   const [playerInput, setPlayerInput] = useState<number[]>([])
   const [round, setRound] = useState(1)
@@ -71,9 +73,8 @@ export default function Floor13() {
       if (round >= MAX_ROUND) {
         setPhase('complete')
         setCompleted(true)
-        markComplete(13)
         Sounds.play('victory')
-        setTimeout(() => navigate('/floor/14'), 2500)
+        setShowChallenge(true)
       } else {
         setTimeout(() => {
           const nr = round + 1
@@ -142,11 +143,12 @@ export default function Floor13() {
 
         {phase === 'success' && <div className="text-green-400 text-sm animate-pulse">✓ PATTERN MATCHED</div>}
         {phase === 'fail' && <div className="text-red-400 text-sm animate-pulse">✗ WRONG - RETRY</div>}
-        {phase === 'complete' && (
+        {phase === 'complete' && !showChallenge && (
           <div className="text-green-400 text-lg font-mono animate-pulse">✓ REACTION MATRIX CALIBRATED</div>
         )}
         </div>
       </div>
+      {showChallenge && <TechChallenge floor={13} onComplete={() => { markComplete(13); navigate('/floor/14') }} />}
     </Layout>
   )
 }

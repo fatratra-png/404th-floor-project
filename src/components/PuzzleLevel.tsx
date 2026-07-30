@@ -1,12 +1,11 @@
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Layout from './Layout'
 import { Sounds } from '../audio/sounds'
 import { markComplete } from '../lib/gameLogic'
-import { checkSolution } from '../lib/puzzleEngine'
 import { getLevel } from '../lib/levels'
 import { PuzzleType } from '../types'
-import type { PuzzleConfig, LevelDef } from '../types'
+import type { LevelDef } from '../types'
 
 export default function PuzzleLevel({ floorNumber }: { floorNumber: number }) {
   const navigate = useNavigate()
@@ -77,6 +76,12 @@ function PuzzleArea({ level, onSolve, onFail, status }: { level: LevelDef; onSol
     case PuzzleType.BINARY: return <BinaryPuzzle config={level.config as any} onSolve={onSolve} onFail={onFail} status={status} />
     case PuzzleType.PATTERN: return <PatternPuzzle config={level.config as any} onSolve={onSolve} onFail={onFail} status={status} />
     case PuzzleType.GRAPH: return <GraphPuzzle config={level.config as any} onSolve={onSolve} onFail={onFail} status={status} />
+    case PuzzleType.CODING: return <CodingPuzzle config={level.config as any} onSolve={onSolve} onFail={onFail} status={status} />
+    case PuzzleType.NETWORK: return <NetworkPuzzle config={level.config as any} onSolve={onSolve} onFail={onFail} status={status} />
+    case PuzzleType.HEX: return <HexPuzzle config={level.config as any} onSolve={onSolve} onFail={onFail} status={status} />
+    case PuzzleType.MATH: return <MathPuzzle config={level.config as any} onSolve={onSolve} onFail={onFail} status={status} />
+    case PuzzleType.AI: return <AIPuzzle config={level.config as any} onSolve={onSolve} onFail={onFail} status={status} />
+    case PuzzleType.DB: return <DBPuzzle config={level.config as any} onSolve={onSolve} onFail={onFail} status={status} />
     default: return <p className="text-red-400 font-mono">UNKNOWN PUZZLE TYPE</p>
   }
 }
@@ -393,6 +398,164 @@ function GraphPuzzle({ config, onSolve, onFail, status }: { config: import('../t
         ))}
       </svg>
       <p className="text-[10px] font-mono text-slate-600">Path: {path.join(' → ')}</p>
+    </div>
+  )
+}
+
+function CodingPuzzle({ config, onSolve, onFail, status }: { config: import('../types').CodingConfig; onSolve: () => void; onFail: () => void; status: string }) {
+  const [answer, setAnswer] = useState('')
+  const [attempts, setAttempts] = useState(0)
+  const handleSubmit = () => {
+    setAttempts(prev => prev + 1)
+    if (answer.toLowerCase().trim() === config.answer.toLowerCase().trim()) onSolve()
+    else onFail()
+  }
+  return (
+    <div className="flex flex-col items-center gap-4 w-full">
+      <p className="text-slate-400 text-xs font-mono">{config.question}</p>
+      {config.code && (
+        <pre className="bg-slate-950 border border-slate-800 rounded-xl p-4 w-full max-w-md overflow-x-auto text-xs font-mono text-emerald-400 leading-relaxed">
+          {config.code}
+        </pre>
+      )}
+      {status === 'playing' && (
+        <div className="flex gap-2 items-center">
+          <input type="text" value={answer} onChange={e => setAnswer(e.target.value)}
+            className="w-48 bg-black/60 border border-slate-700 rounded-lg py-2 px-3 text-center font-mono text-lg text-primary focus:border-primary outline-none" placeholder="type your answer..." />
+          <button onClick={handleSubmit} disabled={!answer.trim()} className="px-4 py-2 bg-primary rounded-lg text-white font-bold text-sm disabled:opacity-30">SUBMIT</button>
+        </div>
+      )}
+      {attempts > 0 && status !== 'solved' && (
+        <p className="text-red-400 text-xs font-mono">WRONG — TRY AGAIN</p>
+      )}
+    </div>
+  )
+}
+
+function NetworkPuzzle({ config, onSolve, onFail, status }: { config: import('../types').NetworkConfig; onSolve: () => void; onFail: () => void; status: string }) {
+  const [selected, setSelected] = useState<number | null>(null)
+  const handleSubmit = () => {
+    if (selected === config.answerIndex) onSolve()
+    else { onFail(); setSelected(null) }
+  }
+  return (
+    <div className="flex flex-col items-center gap-4 w-full">
+      <p className="text-slate-400 text-sm font-mono text-center max-w-md">{config.question}</p>
+      <div className="flex flex-col gap-2 w-full max-w-sm">
+        {config.options.map((opt, i) => (
+          <button key={i} onClick={() => status === 'playing' && setSelected(i)}
+            className={`w-full py-3 px-4 rounded-lg font-mono text-sm border-2 text-left transition-all ${
+              selected === i ? 'border-primary bg-primary/20 text-primary' : 'border-slate-700 bg-slate-900 text-slate-400 hover:border-primary/50'
+            } ${status !== 'playing' ? 'opacity-60' : ''}`}>
+            {String.fromCharCode(65 + i)}. {opt}
+          </button>
+        ))}
+      </div>
+      {selected !== null && status === 'playing' && (
+        <button onClick={handleSubmit} className="px-6 py-2 bg-primary rounded-lg text-white font-bold text-sm">SUBMIT ANSWER</button>
+      )}
+    </div>
+  )
+}
+
+function HexPuzzle({ config, onSolve, onFail, status }: { config: import('../types').HexConfig; onSolve: () => void; onFail: () => void; status: string }) {
+  const [answer, setAnswer] = useState('')
+  const handleSubmit = () => {
+    if (config.direction === 'to_decimal') {
+      if (parseInt(answer, 10) === config.decimal) onSolve()
+      else onFail()
+    } else {
+      if (answer.toLowerCase() === config.hex.toLowerCase()) onSolve()
+      else onFail()
+    }
+  }
+  return (
+    <div className="flex flex-col items-center gap-4 w-full">
+      {config.direction === 'to_decimal' ? (
+        <p className="text-slate-400 text-xs font-mono">Convert <span className="text-xl font-bold text-yellow-400 font-mono">0x{config.hex}</span> to <span className="text-white">decimal</span></p>
+      ) : (
+        <p className="text-slate-400 text-xs font-mono">Convert <span className="text-xl font-bold text-white">{config.decimal}</span> to <span className="text-yellow-400">hexadecimal</span></p>
+      )}
+      {status === 'playing' && (
+        <div className="flex gap-2 items-center">
+          <input type="text" value={answer} onChange={e => setAnswer(e.target.value)}
+            className="w-32 bg-black/60 border border-slate-700 rounded-lg py-2 px-3 text-center font-mono text-lg text-primary focus:border-primary outline-none"
+            placeholder={config.direction === 'to_decimal' ? 'decimal...' : '0x...'} />
+          <button onClick={handleSubmit} disabled={!answer.trim()} className="px-4 py-2 bg-primary rounded-lg text-white font-bold text-sm disabled:opacity-30">CONVERT</button>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function MathPuzzle({ config, onSolve, onFail, status }: { config: import('../types').MathConfig; onSolve: () => void; onFail: () => void; status: string }) {
+  const [answer, setAnswer] = useState('')
+  const handleSubmit = () => {
+    if (parseInt(answer, 10) === config.answer) onSolve()
+    else onFail()
+  }
+  return (
+    <div className="flex flex-col items-center gap-4 w-full">
+      <p className="text-slate-400 text-sm font-mono text-center">{config.question}</p>
+      {status === 'playing' && (
+        <div className="flex gap-2 items-center">
+          <input type="text" value={answer} onChange={e => setAnswer(e.target.value.replace(/\D/g, '').slice(0, 6))}
+            className="w-24 bg-black/60 border border-slate-700 rounded-lg py-2 px-3 text-center font-mono text-lg text-primary focus:border-primary outline-none" placeholder="?" />
+          <button onClick={handleSubmit} disabled={!answer} className="px-4 py-2 bg-primary rounded-lg text-white font-bold text-sm disabled:opacity-30">SUBMIT</button>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function AIPuzzle({ config, onSolve, onFail, status }: { config: import('../types').AIConfig; onSolve: () => void; onFail: () => void; status: string }) {
+  const [selected, setSelected] = useState<number | null>(null)
+  const handleSubmit = () => {
+    if (selected === config.answerIndex) onSolve()
+    else { onFail(); setSelected(null) }
+  }
+  return (
+    <div className="flex flex-col items-center gap-4 w-full">
+      <p className="text-slate-400 text-sm font-mono text-center max-w-md">{config.question}</p>
+      <div className="flex flex-col gap-2 w-full max-w-sm">
+        {config.options.map((opt, i) => (
+          <button key={i} onClick={() => status === 'playing' && setSelected(i)}
+            className={`w-full py-3 px-4 rounded-lg font-mono text-sm border-2 text-left transition-all ${
+              selected === i ? 'border-primary bg-primary/20 text-primary' : 'border-slate-700 bg-slate-900 text-slate-400 hover:border-primary/50'
+            } ${status !== 'playing' ? 'opacity-60' : ''}`}>
+            {String.fromCharCode(65 + i)}. {opt}
+          </button>
+        ))}
+      </div>
+      {selected !== null && status === 'playing' && (
+        <button onClick={handleSubmit} className="px-6 py-2 bg-primary rounded-lg text-white font-bold text-sm">SUBMIT ANSWER</button>
+      )}
+    </div>
+  )
+}
+
+function DBPuzzle({ config, onSolve, onFail, status }: { config: import('../types').DBConfig; onSolve: () => void; onFail: () => void; status: string }) {
+  const [selected, setSelected] = useState<number | null>(null)
+  const handleSubmit = () => {
+    if (selected === config.answerIndex) onSolve()
+    else { onFail(); setSelected(null) }
+  }
+  return (
+    <div className="flex flex-col items-center gap-4 w-full">
+      <p className="text-slate-400 text-sm font-mono text-center max-w-md">{config.question}</p>
+      <div className="flex flex-col gap-2 w-full max-w-sm">
+        {config.options.map((opt, i) => (
+          <button key={i} onClick={() => status === 'playing' && setSelected(i)}
+            className={`w-full py-3 px-4 rounded-lg font-mono text-sm border-2 text-left transition-all ${
+              selected === i ? 'border-primary bg-primary/20 text-primary' : 'border-slate-700 bg-slate-900 text-slate-400 hover:border-primary/50'
+            } ${status !== 'playing' ? 'opacity-60' : ''}`}>
+            {String.fromCharCode(65 + i)}. {opt}
+          </button>
+        ))}
+      </div>
+      {selected !== null && status === 'playing' && (
+        <button onClick={handleSubmit} className="px-6 py-2 bg-primary rounded-lg text-white font-bold text-sm">SUBMIT ANSWER</button>
+      )}
     </div>
   )
 }

@@ -9,10 +9,15 @@ const ZONES = [
   { name: 'Graph Grid', challenge: 'Graph Theory', types: [PuzzleType.GRAPH, PuzzleType.MAZE] as PuzzleType[] },
   { name: 'Logic Core', challenge: 'Logical Deduction', types: [PuzzleType.BALANCE, PuzzleType.PALINDROME] as PuzzleType[] },
   { name: 'Combinatorial Vault', challenge: 'Combinatorics', types: [PuzzleType.FACTOR, PuzzleType.TWO_SUM] as PuzzleType[] },
-  { name: 'Numerical Forge', challenge: 'Number Theory', types: [PuzzleType.BINARY, PuzzleType.FACTOR] as PuzzleType[] },
-  { name: 'Cipher Wing', challenge: 'String Algorithms', types: [PuzzleType.PALINDROME, PuzzleType.BALANCE] as PuzzleType[] },
+  { name: 'Numerical Forge', challenge: 'Number Theory', types: [PuzzleType.BINARY, PuzzleType.HEX] as PuzzleType[] },
+  { name: 'Cipher Wing', challenge: 'String Algorithms', types: [PuzzleType.PALINDROME, PuzzleType.CODING] as PuzzleType[] },
   { name: 'Data Buffer', challenge: 'Data Structures', types: [PuzzleType.SORT, PuzzleType.GRAPH] as PuzzleType[] },
   { name: 'The Overclock', challenge: 'Mixed Algorithms', types: [PuzzleType.SEQUENCE, PuzzleType.MAZE, PuzzleType.BINARY, PuzzleType.PATTERN] as PuzzleType[] },
+  { name: 'Protocol Gate', challenge: 'Networking & Protocols', types: [PuzzleType.NETWORK, PuzzleType.CODING] as PuzzleType[] },
+  { name: 'AI Core', challenge: 'Artificial Intelligence', types: [PuzzleType.AI, PuzzleType.MATH] as PuzzleType[] },
+  { name: 'Data Vault', challenge: 'Database Systems', types: [PuzzleType.DB, PuzzleType.BINARY] as PuzzleType[] },
+  { name: 'Math Forge', challenge: 'Advanced Mathematics', types: [PuzzleType.MATH, PuzzleType.HEX] as PuzzleType[] },
+  { name: 'Polyglot Chamber', challenge: 'Mixed Domains', types: [PuzzleType.CODING, PuzzleType.NETWORK, PuzzleType.AI, PuzzleType.DB] as PuzzleType[] },
 ]
 
 const ADJS = [
@@ -61,14 +66,14 @@ function genDesc(id: number, zone: string, challenge: string, type: string): str
   const n = pick(NAV, id, 0)
   const v = pick(VERBS, id, 3)
   const g = pick(GOALS, id, 7)
-  const subsys = pick(['processing core', 'memory bank', 'data bus', 'power grid', 'logic unit', 'network hub', 'crypto module', 'cache layer', 'routing table', 'pipeline'], id, 11)
-  const problem = pick(['segmentation fault', 'deadlock', 'race condition', 'buffer overflow', 'infinite loop', 'null pointer', 'stack underflow', 'type mismatch', 'checksum error', 'corrupt header', 'parity error', 'alignment fault'], id, 13)
+  const subsys = pick(['processing core', 'memory bank', 'data bus', 'power grid', 'logic unit', 'network hub', 'crypto module', 'cache layer', 'routing table', 'pipeline', 'AI cluster', 'database node', 'protocol stack', 'math co-processor'], id, 11)
+  const problem = pick(['segmentation fault', 'deadlock', 'race condition', 'buffer overflow', 'infinite loop', 'null pointer', 'stack underflow', 'type mismatch', 'checksum error', 'corrupt header', 'parity error', 'alignment fault', 'neural collapse', 'query timeout', 'protocol mismatch', 'overflow error'], id, 13)
   const hex = (id * 73 + 41).toString(16).toUpperCase().padStart(4, '0')
   const ts = Math.floor(seeded(id * 11) * 5)
   if (ts === 0) return `Floor ${id}: ${subsys.toUpperCase()} corrupted by ${problem}. Use ${challenge.toLowerCase()} to ${v} the ${n}.`
   if (ts === 1) return `ERROR 0x${hex} — ${problem.toUpperCase()} at node #${id}. The ${n}'s ${subsys} needs ${challenge.toLowerCase()} to ${g}.`
   if (ts === 2) return `The ${n}'s ${subsys} is glitching (${problem}). Only a ${type.replace('_', ' ')} puzzle stands between you and ${g}.`
-  return `CRITICAL: ${problem. charAt(0). toUpperCase() + problem.slice(1)} in ${subsys}. Solve the ${challenge.toLowerCase()} challenge to ${v} floor ${id}.`
+  return `CRITICAL: ${problem.charAt(0).toUpperCase() + problem.slice(1)} in ${subsys}. Solve the ${challenge.toLowerCase()} challenge to ${v} floor ${id}.`
 }
 
 function genSortConfig(id: number): PuzzleConfig {
@@ -191,10 +196,160 @@ function genGraphConfig(id: number): PuzzleConfig {
   return { kind: PuzzleType.GRAPH, nodes: n, edges, start: 0, end: n - 1 }
 }
 
+const CODING_QUESTIONS = [
+  { q: 'What keyword declares a function in Python?', a: 'def' },
+  { q: 'In JavaScript, what method adds an element to the end of an array?', a: 'push' },
+  { q: 'What operator checks equality in Python?', a: '==' },
+  { q: 'What keyword is used to define a constant in JavaScript (ES6)?', a: 'const' },
+  { q: 'What function prints to console in Python?', a: 'print' },
+  { q: 'In C, what function reads formatted input?', a: 'scanf' },
+  { q: 'What symbol starts a comment in Python?', a: '#' },
+  { q: 'What keyword exits a loop early in Java?', a: 'break' },
+  { q: 'What data structure is LIFO?', a: 'stack' },
+  { q: 'What method joins array elements into a string in JavaScript?', a: 'join' },
+  { q: 'What keyword defines a class in Python?', a: 'class' },
+  { q: 'What does `typeof` return for an array in JavaScript?', a: 'object' },
+  { q: 'In Python, what keyword handles exceptions?', a: 'try' },
+  { q: 'What is the time complexity of binary search?', a: 'O(log n)' },
+  { q: 'What sorting algorithm has O(n log n) average case?', a: 'mergesort' },
+]
+
+const NETWORK_QUESTIONS = [
+  { q: 'What protocol translates domain names to IP addresses?', opts: ['HTTP', 'DNS', 'DHCP', 'FTP'], ans: 1 },
+  { q: 'What port does HTTPS use by default?', opts: ['80', '443', '22', '8080'], ans: 1 },
+  { q: 'What does LAN stand for?', opts: ['Large Area Network', 'Local Area Network', 'Long Access Node', 'Linked Array Network'], ans: 1 },
+  { q: 'Which layer of OSI handles routing?', opts: ['Physical', 'Data Link', 'Network', 'Transport'], ans: 2 },
+  { q: 'What protocol is used for email transmission?', opts: ['FTP', 'SMTP', 'HTTP', 'TCP'], ans: 1 },
+  { q: 'What is a subnet mask used for?', opts: ['Encryption', 'Network partitioning', 'Routing', 'DNS resolution'], ans: 1 },
+  { q: 'What does TCP stand for?', opts: ['Transfer Control Protocol', 'Transmission Control Protocol', 'Terminal Connection Protocol', 'Transport Communication Protocol'], ans: 1 },
+  { q: 'What device connects different networks?', opts: ['Switch', 'Hub', 'Router', 'Modem'], ans: 2 },
+  { q: 'What is the loopback IP address?', opts: ['0.0.0.0', '127.0.0.1', '192.168.0.1', '10.0.0.1'], ans: 1 },
+  { q: 'What protocol provides automatic IP assignment?', opts: ['DNS', 'HTTP', 'DHCP', 'ARP'], ans: 2 },
+  { q: 'What does NAT stand for?', opts: ['Network Access Table', 'Network Address Translation', 'Node Allocation Tree', 'Net Address Transfer'], ans: 1 },
+  { q: 'What is the maximum port number?', opts: ['1024', '65535', '255', '32768'], ans: 1 },
+  { q: 'Which protocol is connectionless?', opts: ['TCP', 'UDP', 'HTTP', 'FTP'], ans: 1 },
+  { q: 'What does ICMP stand for?', opts: ['Internet Control Message Protocol', 'Internal Connection Management Protocol', 'Inter-network Communication Main Protocol', 'Integrated Circuit Message Program'], ans: 0 },
+  { q: 'What is the purpose of a firewall?', opts: ['Speed up connection', 'Filter network traffic', 'Assign IPs', 'Resolve domains'], ans: 1 },
+]
+
+const AI_QUESTIONS = [
+  { q: 'What does "ML" stand for in AI?', opts: ['Machine Logic', 'Machine Learning', 'Memory Load', 'Meta Language'], ans: 1 },
+  { q: 'What is a neural network inspired by?', opts: ['The internet', 'The human brain', 'Quantum physics', 'Evolution'], ans: 1 },
+  { q: 'What is the activation function commonly used in deep learning?', opts: ['Sigmoid', 'ReLU', 'Tanh', 'All of the above'], ans: 3 },
+  { q: 'What is supervised learning?', opts: ['Learning without labels', 'Learning with labeled data', 'Learning by trial and error', 'Learning from rewards'], ans: 1 },
+  { q: 'What is overfitting in ML?', opts: ['Model performs well on training but poorly on test', 'Model fails to converge', 'Model is too simple', 'Dataset is too large'], ans: 0 },
+  { q: 'What is backpropagation used for?', opts: ['Forward pass', 'Gradient computation', 'Data preprocessing', 'Model evaluation'], ans: 1 },
+  { q: 'What is a loss function?', opts: ['A function that measures error', 'A function that saves models', 'A function that loads data', 'A function that plots graphs'], ans: 0 },
+  { q: 'What does CNN stand for?', opts: ['Complex Neural Network', 'Convolutional Neural Network', 'Central Node Network', 'Cascading Neural Net'], ans: 1 },
+  { q: 'What is reinforcement learning?', opts: ['Learning from labeled data', 'Learning from rewards and punishment', 'Learning from static datasets', 'Learning from unsupervised clustering'], ans: 1 },
+  { q: 'What is a "feature" in ML?', opts: ['A model parameter', 'An input variable', 'An output label', 'A training loop'], ans: 1 },
+  { q: 'What is gradient descent?', opts: ['Going up the slope', 'Optimization algorithm to minimize loss', 'Data augmentation method', 'Model architecture'], ans: 1 },
+  { q: 'What is a transformer used for?', opts: ['Image classification', 'Sequence-to-sequence tasks', 'Clustering', 'Dimensionality reduction'], ans: 1 },
+  { q: 'What does RNN stand for?', opts: ['Recurrent Neural Network', 'Random Node Network', 'Recursive Neural Net', 'Regularized Neural Network'], ans: 0 },
+  { q: 'What is transfer learning?', opts: ['Using pre-trained model on new task', 'Copying data between servers', 'Migrating models to production', 'Sharing datasets'], ans: 0 },
+  { q: 'What is a "epoch" in ML training?', opts: ['One full pass through training data', 'A single batch', 'A model layer', 'A learning rate adjustment'], ans: 0 },
+]
+
+const DB_QUESTIONS = [
+  { q: 'What SQL keyword retrieves data?', opts: ['INSERT', 'SELECT', 'UPDATE', 'DELETE'], ans: 1 },
+  { q: 'What does SQL stand for?', opts: ['Simple Query Language', 'Structured Query Language', 'Sequential Query Logic', 'Standard Query Library'], ans: 1 },
+  { q: 'What keyword removes a table in SQL?', opts: ['DELETE', 'DROP', 'REMOVE', 'ERASE'], ans: 1 },
+  { q: 'What is a primary key?', opts: ['A unique identifier for rows', 'A foreign reference', 'An index', 'A data type'], ans: 0 },
+  { q: 'What does JOIN do in SQL?', opts: ['Combines rows from tables', 'Deletes tables', 'Creates indexes', 'Orders results'], ans: 0 },
+  { q: 'What is normalization?', opts: ['Reducing data redundancy', 'Increasing data size', 'Encrypting data', 'Indexing tables'], ans: 0 },
+  { q: 'What is a foreign key?', opts: ['A key that references another table', 'A unique column', 'A primary key', 'An encrypted key'], ans: 0 },
+  { q: 'What does ACID stand for?', opts: ['Atomicity, Consistency, Isolation, Durability', 'Access, Control, Input, Data', 'Add, Commit, Insert, Delete', 'All, Core, Index, Data'], ans: 0 },
+  { q: 'What is an index used for?', opts: ['Faster queries', 'Data encryption', 'Table creation', 'User authentication'], ans: 0 },
+  { q: 'What SQL clause filters rows?', opts: ['WHERE', 'HAVING', 'FILTER', 'MATCH'], ans: 0 },
+  { q: 'What is a transaction in DB?', opts: ['A unit of work', 'A single query', 'A table operation', 'A backup'], ans: 0 },
+  { q: 'What does NoSQL mean?', opts: ['No SQL at all', 'Not Only SQL', 'Non-relational databases', 'Both B and C'], ans: 3 },
+  { q: 'What is a view in SQL?', opts: ['A virtual table', 'A physical table', 'An index', 'A backup'], ans: 0 },
+  { q: 'What is a deadlock in databases?', opts: ['Two transactions waiting on each other', 'A crashed server', 'A corrupt table', 'A slow query'], ans: 0 },
+  { q: 'What does GROUP BY do?', opts: ['Groups rows with same values', 'Orders results', 'Filters rows', 'Joins tables'], ans: 0 },
+]
+
+const MATH_QUESTIONS = [
+  { q: 'What is the square root of 144?', a: 12 },
+  { q: 'What is 15% of 200?', a: 30 },
+  { q: 'What is 2^10?', a: 1024 },
+  { q: 'What is 7! (7 factorial)?', a: 5040 },
+  { q: 'What is the sum of angles in a triangle (degrees)?', a: 180 },
+  { q: 'What is 25 × 16?', a: 400 },
+  { q: 'What is 3^5?', a: 243 },
+  { q: 'How many sides does a dodecagon have?', a: 12 },
+  { q: 'What is log₂(256)?', a: 8 },
+  { q: 'What is 13 × 13?', a: 169 },
+  { q: 'What is 0.5 as a fraction (numerator)?', a: 1 },
+  { q: 'What is the next prime after 17?', a: 19 },
+  { q: 'What is 2^8?', a: 256 },
+  { q: 'What is 1001 in decimal?', a: 9 },
+  { q: 'How many degrees in a circle?', a: 360 },
+]
+
+function genCodingConfig(id: number): PuzzleConfig {
+  const idx = randInt(id, 0, CODING_QUESTIONS.length - 1, 0)
+  const q = CODING_QUESTIONS[idx]
+  return {
+    kind: PuzzleType.CODING,
+    code: `// Programming knowledge check\n// ${q.q}`,
+    question: q.q,
+    answer: q.a,
+  }
+}
+
+function genNetworkConfig(id: number): PuzzleConfig {
+  const idx = randInt(id, 0, NETWORK_QUESTIONS.length - 1, 0)
+  const q = NETWORK_QUESTIONS[idx]
+  return {
+    kind: PuzzleType.NETWORK,
+    question: q.q,
+    options: q.opts,
+    answerIndex: q.ans,
+  }
+}
+
+function genHexConfig(id: number): PuzzleConfig {
+  const d = randInt(id, 16, 255, 0)
+  const h = d.toString(16).toUpperCase()
+  const toHex = seeded(id * 31) > 0.5
+  if (toHex) {
+    return { kind: PuzzleType.HEX, hex: h, decimal: d, direction: 'to_hex' }
+  }
+  return { kind: PuzzleType.HEX, hex: h, decimal: d, direction: 'to_decimal' }
+}
+
+function genMathConfig(id: number): PuzzleConfig {
+  const idx = randInt(id, 0, MATH_QUESTIONS.length - 1, 0)
+  const q = MATH_QUESTIONS[idx]
+  return { kind: PuzzleType.MATH, question: q.q, answer: q.a }
+}
+
+function genAIConfig(id: number): PuzzleConfig {
+  const idx = randInt(id, 0, AI_QUESTIONS.length - 1, 0)
+  const q = AI_QUESTIONS[idx]
+  return {
+    kind: PuzzleType.AI,
+    question: q.q,
+    options: q.opts,
+    answerIndex: q.ans,
+  }
+}
+
+function genDBConfig(id: number): PuzzleConfig {
+  const idx = randInt(id, 0, DB_QUESTIONS.length - 1, 0)
+  const q = DB_QUESTIONS[idx]
+  return {
+    kind: PuzzleType.DB,
+    question: q.q,
+    options: q.opts,
+    answerIndex: q.ans,
+  }
+}
+
 function generateLevel(id: number): LevelDef {
-  const zoneIdx = Math.min(Math.floor(((id - 21) / 38.2)), ZONES.length - 1)
+  const zoneIdx = Math.min(Math.floor(((id - 21) / 25.5)), ZONES.length - 1)
   const zone = ZONES[zoneIdx]
-  const localIdx = id - 21 - zoneIdx * 38
+  const localIdx = id - 21 - zoneIdx * 25
   const type = zone.types[localIdx % zone.types.length]
   const diff = Math.min(1 + Math.floor(((seeded(id * 13 + 5) * 100) % 1) * 10), 10)
 
@@ -210,6 +365,12 @@ function generateLevel(id: number): LevelDef {
     case PuzzleType.BINARY: config = genBinaryConfig(id); break
     case PuzzleType.PATTERN: config = genPatternConfig(id); break
     case PuzzleType.GRAPH: config = genGraphConfig(id); break
+    case PuzzleType.CODING: config = genCodingConfig(id); break
+    case PuzzleType.NETWORK: config = genNetworkConfig(id); break
+    case PuzzleType.HEX: config = genHexConfig(id); break
+    case PuzzleType.MATH: config = genMathConfig(id); break
+    case PuzzleType.AI: config = genAIConfig(id); break
+    case PuzzleType.DB: config = genDBConfig(id); break
   }
 
   return {
@@ -224,7 +385,28 @@ function generateLevel(id: number): LevelDef {
   }
 }
 
-export const LEVELS: LevelDef[] = Array.from({ length: 384 }, (_, i) => i + 21).map(generateLevel)
+function generateFloor404(): LevelDef {
+  return {
+    id: 404,
+    name: 'The Cringe Void',
+    desc: 'FLOOR 404: THE CRINGE VOID. You have reached the most uncomfortable floor in existence. The elevator groans with secondhand embarrassment. Every bad coding pun, every cringey tech meme, every "Hello World" that thought it was profound — they all live here. To escape, you must answer the Ultimate Cringe Question. There is no correct answer. There is only the cringe. Good luck, you absolute legend. You are valid. ✨',
+    zone: 'The Cringe Zone',
+    challenge: 'Cringe Compliance',
+    type: PuzzleType.CODING,
+    diff: 10,
+    config: {
+      kind: PuzzleType.CODING,
+      code: `// "HELLO WORLD" IN EVERY LANGUAGE\n// But like... have you tried turning it off and on again?\n// *holds up spork*`,
+      question: 'Type the ONLY acceptable answer to "Hello World" to ascend. (Hint: it\'s what every programmer writes first)',
+      answer: 'hello world',
+    },
+  }
+}
+
+export const LEVELS: LevelDef[] = [
+  ...Array.from({ length: 383 }, (_, i) => i + 21).map(generateLevel),
+  generateFloor404(),
+]
 
 export function getLevel(id: number): LevelDef | undefined {
   if (id >= 1 && id <= 20) return undefined

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { Sounds } from '../audio/sounds'
 import { markComplete } from '../lib/gameLogic'
+import TechChallenge from '../components/TechChallenge'
 
 const TARGET_MIN = 38
 const TARGET_MAX = 62
@@ -10,6 +11,7 @@ const SUSTAIN_TIME = 5000
 
 export default function Floor14() {
   const navigate = useNavigate()
+  const [showChallenge, setShowChallenge] = useState(false)
   const [temp, setTemp] = useState(50)
   const [sustainTimer, setSustainTimer] = useState(0)
   const [completed, setCompleted] = useState(false)
@@ -39,9 +41,8 @@ export default function Floor14() {
             if (next >= SUSTAIN_TIME) {
               setActive(false)
               setCompleted(true)
-              markComplete(14)
               Sounds.play('victory')
-              setTimeout(() => navigate('/floor/15'), 2500)
+              setShowChallenge(true)
               return SUSTAIN_TIME
             }
             return next
@@ -153,11 +154,12 @@ export default function Floor14() {
           <div className="text-[10px] font-mono text-slate-600">ZONE: {TARGET_MIN}°C - {TARGET_MAX}°C</div>
         </div>
 
-        {completed && (
+        {completed && !showChallenge && (
           <div className="text-green-400 text-lg font-mono animate-pulse">✓ THERMAL STABILITY ACHIEVED</div>
         )}
         </div>
       </div>
+      {showChallenge && <TechChallenge floor={14} onComplete={() => { markComplete(14); navigate('/floor/15') }} />}
     </Layout>
   )
 }

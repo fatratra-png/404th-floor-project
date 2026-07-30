@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { Sounds } from '../audio/sounds'
 import { markComplete } from '../lib/gameLogic'
+import TechChallenge from '../components/TechChallenge'
 
 const CIRCUIT_COUNT = 5
 const MAX_POWER = 100
@@ -17,6 +18,7 @@ interface Circuit {
 
 export default function Floor6() {
   const navigate = useNavigate()
+  const [showChallenge, setShowChallenge] = useState(false)
   const [circuits, setCircuits] = useState<Circuit[]>(
     Array.from({ length: CIRCUIT_COUNT }, (_, i) => ({ id: i, power: 20 + Math.random() * 60 }))
   )
@@ -47,9 +49,8 @@ export default function Floor6() {
             if (next >= SUSTAIN_TIME) {
               activeRef.current = false
               setCompleted(true)
-              markComplete(6)
               Sounds.play('victory')
-              setTimeout(() => navigate('/floor/7'), 2500)
+              setShowChallenge(true)
               return SUSTAIN_TIME
             }
             return next
@@ -164,13 +165,14 @@ export default function Floor6() {
           </div>
         </div>
 
-        {completed && (
+        {completed && !showChallenge && (
           <div className="text-green-400 text-lg font-mono animate-pulse">
             ✓ ALL CIRCUITS BALANCED - POWER RESTORED
           </div>
         )}
         </div>
       </div>
+      {showChallenge && <TechChallenge floor={6} onComplete={() => { markComplete(6); navigate('/floor/7') }} />}
     </Layout>
   )
 }
