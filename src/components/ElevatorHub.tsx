@@ -53,7 +53,7 @@ export default function ElevatorHub() {
   return (
     <div className={`min-h-screen bg-background-dark text-slate-100 font-display overflow-hidden relative ${glitching ? 'glitch-active' : ''}`}>
       {glitching && <GlitchOverlay />}
-
+          
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#1a2233_0%,_#0a0e17_70%)]" />
